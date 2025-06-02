@@ -25,7 +25,7 @@ export default function ScoresPage() {
                 <FontAwesomeIcon icon={faRectangleList} className="text-8xl" />
                 <div className="mt-8 text-3xl font-semibold">Lista de Escores</div>
                 <div className="mt-6 text-lg">
-                    Compilado dos principais escores utilizados pelos farmacêuticos do Rio Grande do Sul para o acompanhamento farmacoterapêutico na prática clínica.
+                    Compilado de alguns escores utilizados pelos farmacêuticos do Rio Grande do Sul para a prática clínica.
                 </div>
             </div>
             <div className="h-full w-full overflow-auto">

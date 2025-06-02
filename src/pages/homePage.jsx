@@ -15,13 +15,13 @@ export default function HomePage() {
         },
         {
             title: 'Lista de Escores',
-            description: 'Escolha entre diversos escores da prática farmacêutica',
+            description: 'Escores para prática clínica',
             icon: faRectangleList,
             url: '/scores',
         },
         {
             title: 'Sobre Nós',
-            description: 'Conheça a equipe por trás do sistema',
+            description: 'Conheça a equipe',
             icon: faAddressCard,
             url: '/about-us',
         },

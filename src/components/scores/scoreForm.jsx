@@ -17,7 +17,7 @@ export default function ScoreForm({ scoreKey }) {
     const [selectedOptions, setSelectedOptions] = useState(new Array(score.questions.length).fill(null));
     const [nomePaciente, setNomePaciente] = useState('');
     const [farmaceutico, setFarmaceutico] = useState('');
-    const [data, setData] = useState('');
+    const [data, setData] = useState('');
 
     const handleScoreSelection = (questionIndex, value) => {
         setSelectedOptions(prev => [
@@ -36,8 +36,8 @@ export default function ScoreForm({ scoreKey }) {
 
     const getEmoji = () => {
         const { icon, color } = score.getEmoji(result.result);
-        return <FontAwesomeIcon icon={icon} className="ml-1" style={{color : color}} />
-    }
+        return <FontAwesomeIcon icon={icon} className="ml-1" style={{ color: color }} />
+    }
 
     const restartScore = () => {
         setSelectedOptions(new Array(score.questions.length).fill(null));
@@ -55,7 +55,7 @@ export default function ScoreForm({ scoreKey }) {
             yOffset += 10;
         })
         doc.save('feedback.pdf');
-    };
+    };
 
     const renderStart = () => (
         <Card
@@ -64,16 +64,19 @@ export default function ScoreForm({ scoreKey }) {
                     <div className="">
                         {score.label}
                     </div>
-                    <div className="mt-2 text-sm font-normal text-[#000a]">
-                        {score.description}
-                    </div>
                 </div>
             )}
         >
             <div>
+                <span className="text-[#000a] mr-2">Objetivo:</span>
+                <span>{score.description}</span>
+            </div>
+
+            <div>
                 <span className="text-[#000a] mr-2">Público-Alvo:</span>
                 <span>{score.targetAudience}</span>
             </div>
+
             <div>
                 <span className="text-[#000a] mr-2">Tempo:</span>
                 <span>{score.durationText}</span>
@@ -103,32 +106,25 @@ export default function ScoreForm({ scoreKey }) {
     );
 
     const renderForm = () => (
-        <Card title={`Assinale cada pergunta com a ${score.optionsType} em que o evento ocorre`}>
+        <Card title={`Faça as perguntas ao paciente, orientando-o a responder com base nas ultimas quatro semanas, utilizando uma escala de ${score.optionsType} de cinco itens`}>
             {score.questions.map((question, index) => (
-                <>
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-
-                        <div className="flex items-center gap-4">
-                            <div className="text-colorPrimary font-semibold">
-                                {index + 1}
-                            </div>
-
-                            <div>
-                                {question.text}
-                            </div>
+                <div key={index}>
+                    <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row">
+                        {/* Pergunta */}
+                        <div className="flex gap-2 items-start">
+                            <div className="text-colorPrimary font-semibold">{index + 1}</div>
+                            <div>{question.text}</div>
                         </div>
 
-                        <div className="shrink-0 lg:ml-auto">
+                        {/* Alternativas */}
+                        <div className="mt-2 lg:mt-0 lg:ml-auto lg:pl-8">
                             <Radio.Group
                                 onChange={e => handleScoreSelection(index, e.target.value)}
                                 value={selectedOptions[index]}
                             >
-                                <div className="flex flex-col md:flex-row">
+                                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
                                     {(question.options || score.options).map(option => (
-                                        <Radio
-                                            key={option.value}
-                                            value={option.value}
-                                        >
+                                        <Radio key={option.value} value={option.value}>
                                             {option.label}
                                         </Radio>
                                     ))}
@@ -136,9 +132,12 @@ export default function ScoreForm({ scoreKey }) {
                             </Radio.Group>
                         </div>
                     </div>
+
+                    {/* Separador */}
                     <div className="my-4 w-full h-[1px] bg-[#ededed]" />
-                </>
+                </div>
             ))}
+
             <div className="mt-6 flex justify-end">
                 <Button type="primary" onClick={handleFinishForm}>
                     Calcular Escore
@@ -147,12 +146,14 @@ export default function ScoreForm({ scoreKey }) {
         </Card>
     );
 
+
     const renderResult = () => (
         <Card title={score.label}>
             <div className="flex flex-col md:flex-row gap-6">
                 <Card>
                     <Statistic title="Resultado" suffix={getEmoji()} value={result.result} />
                 </Card>
+
                 <div>
                     <div className="font-medium">{score.hintText}</div>
                     <div className="mt-4">
@@ -184,7 +185,7 @@ export default function ScoreForm({ scoreKey }) {
                             value={data}
                             onChange={(e) => setData(e.target.value)}
                         />
-                    </div>
+                    </div>
                     <div className="mt-4 flex gap-4">
                         <Button type="primary" onClick={restartScore}>
                             Refazer Escore
@@ -207,6 +208,6 @@ export default function ScoreForm({ scoreKey }) {
     return (
         <div className="w-full h-auto p-6 md:p-8">
             {states[currentState]()}
-        </div>
-    )
+        </div>
+    )
 }
