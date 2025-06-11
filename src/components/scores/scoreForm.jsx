@@ -47,7 +47,7 @@ export default function ScoreForm({ scoreKey }) {
 
     const downloadPDF = () => {
         const doc = new jsPDF();
-        const textoFeedback = `${scores[0].label}\n\nResultado: ${result.result}\n\nPaciente: ${nomePaciente}\nFarmacêutico: ${farmaceutico}\nData: ${data}\n\nRecomendação: ${result.feedback}`;
+        const textoFeedback = `${score.label}\n\nResultado: ${result.result}\n\nPaciente: ${nomePaciente}\nFarmacêutico: ${farmaceutico}\nData: ${data}\n\nRecomendação: ${result.feedback}`;
         const feedback = doc.splitTextToSize(textoFeedback, 180);
         let yOffset = 10;
         feedback.forEach(linha => {
@@ -56,6 +56,32 @@ export default function ScoreForm({ scoreKey }) {
         })
         doc.save('feedback.pdf');
     };
+
+
+    const questions = [
+        { prefix: 'T', text: 'Esquece de tomar seus medicamentos?' },
+        { prefix: 'T', text: 'Decide não tomar seus medicamentos naquele dia?' },
+        { prefix: 'R', text: 'Deixa de tomar seu medicamento porque vai a uma consulta médica?' },
+        { prefix: 'T', text: 'Deixa de tomar seu medicamento quando se sente melhor?' },
+        { prefix: 'T', text: 'Deixa de tomar seu medicamento quando se sente mal ou doente?' },
+        { prefix: 'T', text: 'Deixa de tomar seu medicamento quando está mais descuidado consigo mesmo?' },
+        { prefix: 'T', text: 'Muda a dose do seu medicamento por alguma necessidade?' },
+        { prefix: 'T', text: 'Esquece de tomar o medicamento quando tem que tomar mais de uma vez/dia?' },
+        { prefix: 'R', text: 'Esquece de ir à farmácia pegar seus medicamentos?' },
+        { prefix: 'R', text: 'Deixa acabar seus medicamentos?' },
+        { prefix: 'R', text: 'Deixa de adquirir seu medicamento por causa do preço muito caro?' },
+        { prefix: 'R', text: 'Se antecipa e busca seu medicamento na farmácia antes mesmo de acabar seu medicamento em casa?' }
+    ];
+
+
+    const formatQuestionNumber = (index, score) => {
+        if (score.key === 'arms') {
+            return `${questions[index].prefix}${index + 1}`;
+        }
+
+        return `${index + 1}`;
+    };
+
 
     const renderStart = () => (
         <Card
@@ -112,7 +138,7 @@ export default function ScoreForm({ scoreKey }) {
                     <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row">
                         {/* Pergunta */}
                         <div className="flex gap-2 items-start">
-                            <div className="text-colorPrimary font-semibold">{index + 1}</div>
+                            <div className="text-colorPrimary font-semibold">{formatQuestionNumber(index, score)}</div>
                             <div>{question.text}</div>
                         </div>
 
