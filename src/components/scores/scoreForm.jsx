@@ -87,9 +87,9 @@ export default function ScoreForm({ scoreKey }) {
         <Card
             title={(
                 <div className="py-4">
-                    <div className="">
+                    <p className="whitespace-normal break-words max-w-full">
                         {score.label}
-                    </div>
+                    </p>
                 </div>
             )}
         >
@@ -132,7 +132,12 @@ export default function ScoreForm({ scoreKey }) {
     );
 
     const renderForm = () => (
-        <Card title={`Faça as perguntas ao paciente, orientando-o a responder com base nas ultimas quatro semanas, utilizando uma escala de ${score.optionsType} de cinco itens`}>
+        <Card title={
+            <p className="whitespace-normal break-words max-w-full">
+                Faça as perguntas ao paciente, orientando-o a responder com base nas ultimas quatro semanas, utilizando uma escala de {score.optionsType} de cinco itens
+            </p>
+
+        }>
             {score.questions.map((question, index) => (
                 <div key={index}>
                     <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row">
@@ -143,12 +148,12 @@ export default function ScoreForm({ scoreKey }) {
                         </div>
 
                         {/* Alternativas */}
-                        <div className="mt-2 lg:mt-0 lg:ml-auto lg:pl-8">
+                        <div className="mt-2 lg:mt-0 lg:ml-auto lg:pl-8 overflow-x-auto">
                             <Radio.Group
                                 onChange={e => handleScoreSelection(index, e.target.value)}
                                 value={selectedOptions[index]}
                             >
-                                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                                <div className="flex flex-nowrap sm:flex-row gap-2 min-w-max">
                                     {(question.options || score.options).map(option => (
                                         <Radio key={option.value} value={option.value}>
                                             {option.label}
@@ -174,22 +179,31 @@ export default function ScoreForm({ scoreKey }) {
 
 
     const renderResult = () => (
-        <Card title={score.label}>
+        <Card title={
+            <p className="whitespace-normal break-words max-w-full">
+                {score.label}
+            </p>
+        }>
+
             <div className="flex flex-col md:flex-row gap-6">
                 <Card>
                     <Statistic title="Resultado" suffix={getEmoji()} value={result.result} />
                 </Card>
 
-                <div>
+                <div className="flex-1 min-w-0">
                     <div className="font-medium">{score.hintText}</div>
+
                     <div className="mt-4">
-                        <span className="text-[#000a] mr-2">
+                        <span className="text-[#000a] mr-2 font-semibold">
                             Recomendação:
                         </span>
-                        <span>
-                            {result.feedback}
-                        </span>
+                        <div className="flex flex-col gap-2 mt-2 whitespace-normal break-words">
+                            {result.feedback.split('\n').map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
+                        </div>
                     </div>
+
                     <div className="flex flex-col py-6 md:flex-row gap-6">
                         <label htmlFor="nomePaciente">Nome do Paciente:  </label>
                         <input
