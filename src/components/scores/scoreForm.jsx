@@ -204,28 +204,41 @@ export default function ScoreForm({ scoreKey }) {
                         </div>
                     </div>
 
-                    <div className="flex flex-col py-6 md:flex-row gap-6">
-                        <label htmlFor="nomePaciente">Nome do Paciente:  </label>
-                        <input
-                            type="text"
-                            placeholder="Nome do Paciente"
-                            value={nomePaciente}
-                            onChange={(e) => setNomePaciente(e.target.value)}
-                        />
-                        <label htmlFor="farmaceutico">Nome do Farmacêutico:  </label>
-                        <input
-                            type="text"
-                            placeholder="Farmacêutico"
-                            value={farmaceutico}
-                            onChange={(e) => setFarmaceutico(e.target.value)}
-                        />
-                        <label htmlFor="data">Data:  </label>
-                        <input
-                            type="date"
-                            value={data}
-                            onChange={(e) => setData(e.target.value)}
-                        />
+                    <div className="flex flex-col gap-4 py-6 md:grid md:grid-cols-3 md:gap-4">
+                        <div className="flex flex-col">
+                            <label htmlFor="nomePaciente">Nome do Paciente:</label>
+                            <input
+                                type="text"
+                                placeholder="Nome do Paciente"
+                                value={nomePaciente}
+                                onChange={(e) => setNomePaciente(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label htmlFor="farmaceutico">Nome do Farmacêutico:</label>
+                            <input
+                                type="text"
+                                placeholder="Farmacêutico"
+                                value={farmaceutico}
+                                onChange={(e) => setFarmaceutico(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label htmlFor="data">Data:</label>
+                            <input
+                                type="date"
+                                value={data}
+                                onChange={(e) => setData(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
                     </div>
+
+
                     <div className="mt-4 flex gap-4">
                         <Button type="primary" onClick={restartScore}>
                             Refazer Escore
