@@ -16,7 +16,7 @@ export default function AboutUsPage() {
                 <FontAwesomeIcon icon={faAddressCard} className="text-8xl" />
                 <div className="mt-8 text-3xl font-semibold">Sobre Nós</div>
                 <div className="mt-6 text-lg">
-                    Conheça as pessoas e instiuições por trás do desenvolvimento do nosso sistema de cuidado farmacêutico, nossa missão e valores.
+                    Conheça nosso aplicativo.
                 </div>
             </div>
 

@@ -16,6 +16,7 @@ export default function ScoreForm({ scoreKey }) {
     });
     const [selectedOptions, setSelectedOptions] = useState(new Array(score.questions.length).fill(null));
     const [nomePaciente, setNomePaciente] = useState('');
+    const [crf, setCrf] = useState('');
     const [farmaceutico, setFarmaceutico] = useState('');
     const [data, setData] = useState('');
 
@@ -30,6 +31,7 @@ export default function ScoreForm({ scoreKey }) {
     const handleFinishForm = () => {
         // Lógica para calcular a pontuação
         const finalResult = score.calculateFunction(selectedOptions);
+        finalResult.feedback = finalResult.feedback + ' Lembre-se de registrar o resultado desse escore na aba Cuidar+ do sistema AME, no respectivo serviço clínico realizado'
         setResult(finalResult);
         setCurrentState('result');
     }
@@ -47,7 +49,7 @@ export default function ScoreForm({ scoreKey }) {
 
     const downloadPDF = () => {
         const doc = new jsPDF();
-        const textoFeedback = `${score.label}\n\nResultado: ${result.result}\n\nPaciente: ${nomePaciente}\nFarmacêutico: ${farmaceutico}\nData: ${data}\n\nRecomendação: ${result.feedback}`;
+        const textoFeedback = `${score.label}\n\nResultado: ${result.result}\n\nPaciente: ${nomePaciente} \nCRF: ${crf} \nFarmacêutico: ${farmaceutico}\nData: ${data}\n\nRecomendação: ${result.feedback}`;
         const feedback = doc.splitTextToSize(textoFeedback, 180);
         let yOffset = 10;
         feedback.forEach(linha => {
@@ -204,7 +206,7 @@ export default function ScoreForm({ scoreKey }) {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-4 py-6 md:grid md:grid-cols-3 md:gap-4">
+                    <div className="flex flex-col gap-4 py-6 md:grid md:grid-cols-4 md:gap-4">
                         <div className="flex flex-col">
                             <label htmlFor="nomePaciente">Nome do Paciente:</label>
                             <input
@@ -212,6 +214,17 @@ export default function ScoreForm({ scoreKey }) {
                                 placeholder="Nome do Paciente"
                                 value={nomePaciente}
                                 onChange={(e) => setNomePaciente(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label htmlFor="nomePaciente">Conselho Regional de Farmácia (CRF):</label>
+                            <input
+                                type="text"
+                                placeholder="CRF"
+                                value={crf}
+                                onChange={(e) => setCrf(e.target.value)}
                                 className="w-full"
                             />
                         </div>

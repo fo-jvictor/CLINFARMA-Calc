@@ -13,7 +13,7 @@ export default function Navbar() {
             url: '/',
         },
         {
-            label: 'Como Usar',
+            label: 'Como Utilizar',
             url: '/how-to-use',
         },
         {
