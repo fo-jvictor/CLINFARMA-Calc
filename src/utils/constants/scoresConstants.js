@@ -533,10 +533,10 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                     return { icon: faFaceSmile, color: '#389e0d' }
                 }
                 case (value === 1): {
-                    return { icon: faFaceMeh, color: '#ffd43b' }
+                    return { icon: faFaceSmile, color: '#389e0d' }
                 }
                 case value === 2: {
-                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                    return { icon: faFaceMeh, color: '#ffd43b' }
                 }
                 case value >= 3: {
                     return { icon: faFaceFrown, color: '#ff4d4f' }
