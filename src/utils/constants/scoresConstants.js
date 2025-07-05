@@ -10,21 +10,26 @@ export const scores = [
         durationText: '5 à 10 minutos',
         optionsType: 'frequência',
         options: [
-            {   label: 'Nunca',
+            {
+                label: 'Nunca',
                 value: 1
             },
-            {   label: 'Às vezes',
+            {
+                label: 'Às vezes',
                 value: 2
             },
-            {   label: 'Quase sempre',
+            {
+                label: 'Quase sempre',
                 value: 3
             },
-            {   label: 'Sempre',
+            {
+                label: 'Sempre',
                 value: 4
             },
         ],
         questions: [
-            {   text: 'Esquece de tomar seus medicamentos?',
+            {
+                text: 'Esquece de tomar seus medicamentos?',
                 options: [
                     {
                         label: 'Nunca',
@@ -44,7 +49,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Decide nao tomar seus medicamentos naquele dia?',
+            {
+                text: 'Decide nao tomar seus medicamentos naquele dia?',
                 options: [
                     {
                         label: 'Nunca',
@@ -64,7 +70,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Deixa de tomar seu medicamento porque vai a uma consulta médica?',
+            {
+                text: 'Deixa de tomar seu medicamento porque vai a uma consulta médica?',
                 options: [
                     {
                         label: 'Nunca',
@@ -84,7 +91,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Deixa de tomar seu medicamento quando se sente melhor?',
+            {
+                text: 'Deixa de tomar seu medicamento quando se sente melhor?',
                 options: [
                     {
                         label: 'Nunca',
@@ -104,7 +112,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Deixa de tomar seu medicamento quando se sente mal ou doente?',
+            {
+                text: 'Deixa de tomar seu medicamento quando se sente mal ou doente?',
                 options: [
                     {
                         label: 'Nunca',
@@ -124,7 +133,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Deixa de tomar seu medicamento quando está mais descuidado consigo mesmo?',
+            {
+                text: 'Deixa de tomar seu medicamento quando está mais descuidado consigo mesmo?',
                 options: [
                     {
                         label: 'Nunca',
@@ -144,7 +154,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Muda a dose do seu medicamento por alguma necessidade?',
+            {
+                text: 'Muda a dose do seu medicamento por alguma necessidade?',
                 options: [
                     {
                         label: 'Nunca',
@@ -164,7 +175,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Esquece de tomar o medicamento quando tem que tomar mais de uma vez/dia?',
+            {
+                text: 'Esquece de tomar o medicamento quando tem que tomar mais de uma vez/dia?',
                 options: [
                     {
                         label: 'Nunca',
@@ -184,7 +196,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Esquece de ir à farmácia pegar seus medicamentos?',
+            {
+                text: 'Esquece de ir à farmácia pegar seus medicamentos?',
                 options: [
                     {
                         label: 'Nunca',
@@ -204,7 +217,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Deixa acabar seus medicamentos?',
+            {
+                text: 'Deixa acabar seus medicamentos?',
                 options: [
                     {
                         label: 'Nunca',
@@ -224,7 +238,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Deixa de adquirir seu medicamento por causa do preço muito caro?',
+            {
+                text: 'Deixa de adquirir seu medicamento por causa do preço muito caro?',
                 options: [
                     {
                         label: 'Nunca',
@@ -244,7 +259,8 @@ export const scores = [
                     },
                 ]
             },
-            {   text: 'Se antecipa e busca seu medicamento na farmácia antes mesmo de acabar seu medicamento em casa?',
+            {
+                text: 'Se antecipa e busca seu medicamento na farmácia antes mesmo de acabar seu medicamento em casa?',
                 options: [
                     {
                         label: 'Nunca',
@@ -267,7 +283,7 @@ export const scores = [
         ],
         calculateFunction: (finalValue = []) => {
             //soma das perguntas, varia de 12 a 48
-            const result = finalValue.reduce((acc, value) => acc + value, 0);
+            const result = finalValue.reduce((acc, value) => acc + value, 0);
             let feedback;
             if (result <= 12) {
                 feedback = `Esse paciente demonstra uma BOA adesão ao tratamento farmacológico. 
@@ -292,17 +308,241 @@ export const scores = [
         },
         getEmoji: value => {
             switch (true) {
-            case value <= 12: {
-                return { icon: faFaceSmile, color : '#389e0d'}
+                case value <= 12: {
+                    return { icon: faFaceSmile, color: '#389e0d' }
+                }
+                case (value > 12 && value < 30): {
+                    return { icon: faFaceMeh, color: '#ffd43b' }
+                }
+                case value >= 30: {
+                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                }
             }
-            case (value > 12 && value < 30): {
-                return { icon: faFaceMeh, color : '#ffd43b'}
+        },
+    },
+    {
+        key: 'bmq',
+        label: 'Questionario breve sobre medicação (BMQ)',
+        description: 'Avaliar a adesão aos medicamentos e identificar barreiras relacionadas ao uso relacionadas a crenças, regime e recordação.',
+        targetAudience: 'Pacientes que estão em uso de medicamentos de forma contínua, especialmente para condições crônicas',
+        hintText: 'Quanto maior o escore, mais barreiras relacionadas ao uso de medicamentos.',
+        durationText: '5 à 10 minutos',
+        optionsType: 'sim ou não',
+        //acho que as options estão relacionadas com o bug de marcar varios radio buttons sozinho em outros scores
+        options: [
+            {
+                label: 'Sim',
+                value: 1
+            },
+            {
+                label: 'Não',
+                value: 0
             }
-            case value >= 30: {
-                return { icon: faFaceFrown, color : '#ff4d4f'}
+        ],
+        questions: [
+            {
+                text: 'O R falhou em listar (espontaneamente) os medicamentos prescritos no relato inicial?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R interrompeu a terapia devido ao atraso na dispensaçao da medicação ou outro motivo?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R relatou alguma falha de dias ou de doses?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R reduziu ou omitiu doses de algum medicamento?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R tomou alguma dose extra ou medicação a mais do que o prescrito?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R respondeu que "não sabia" a alguma das perguntas?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            // Perguntas relacionadas a crenças:
+            {
+                text: 'O R relatou "não funciona bem" ou "não sei" na resposta 1g?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R nomeou as medicações que o incomodam?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            // Perguntas relacionadas a recordação:
+            {
+                text: 'O R recebe um esquema de múltiplas doses de medicamentos (2 ou mais vezes/dia)?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R "muita dificuldade" ou "alguma dificuldade" em responder a 3c?',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
             }
-            }
-        },
+        ],
+        calculateFunction: (finalValue = []) => {
+            const regime = finalValue.slice(0, 7);
+            const crencas = finalValue.slice(7, 9);
+            const recordacao = finalValue.slice(9, 11);
+
+            const countSim = (arr) => {
+                return arr.reduce((acc, value) => {
+                    return acc + (value === 1 ? 1 : 0);
+                }, 0);
+            }
+
+            const regimeScore = countSim(regime);
+            const crencasScore = countSim(crencas);
+            const recordacaoScore = countSim(recordacao);
+
+            const result = Math.max(regimeScore, crencasScore, recordacaoScore);
+
+            let feedback;
+            if (result === 0) {
+                feedback = `Alta adesão
+                O resultado indica que o paciente apresenta uma alta adesão ao tratamento. 
+Reforce com o paciente que uma boa adesão  ao tratamento é benéfico para a sua qualidade de vida e discuta os benefícios a longo prazo da continuidade do cuidado;
+Reforce as instruções sobre o uso correto dos medicamentos, mesmo na ausência de sintomas;
+Identifique e antecipe possíveis desafios que possam surgir, garantindo que o paciente tenha suporte para continuar o tratamento específico.
+`;
+            } else if (result === 1) {
+                feedback = `Provável alta adesão
+                O resultado indica uma probabilidade de alta adesão, mas com possibilidade de pequenas dificuldades pontuais.
+Explore com o paciente possíveis dificuldades isoladas, como esquecimento ou dúvidas sobre o uso correto do medicamento;
+Explique a importância de seguir o esquema terapêutico corretamente e como isso impacta nos resultados esperados;
+Sugira estratégias para melhorar a adesão, como uso de lembretes ou organização do horário dos medicamentos
+`;
+            } else if (result === 2) {
+                feedback = `Provável baixa adesão
+                O resultado indica uma probabilidade de baixa adesão, demonstrando que o paciente pode enfrentar dificuldades relevantes no uso do medicamento.
+Investigue os motivos da baixa adesão, como efeitos adversos, complexidade do regime terapêutico, questões financeiras ou falta de compreensão sobre a importância do tratamento;
+Reforce o impacto positivo da adesão ao tratamento na prevenção de complicações e na melhoria da qualidade de vida;
+Caso possível, discuta com o (s) prescritor (es)  alternativas que possam simplificar e facilitar a adesão, como substituição de medicamentos ou redução na frequência de doses, caso seja possível;
+Ofereça suporte adicional, como material educativo e oferta de serviços farmacêuticos clínicos  periódicos para acompanhamento do paciente.
+`;
+            }
+            else {
+                feedback = `Baixa adesão
+                O resultado indica baixa adesão, o que pode comprometer significativamente os resultados terapêuticos e aumentar o risco de complicações oriundas da não administração dos medicamentos;
+Investigue minuciosamente os fatores que afetam a baixa adesão, considerando aspectos sociais, emocionais e econômicos;
+Desenvolva um plano de cuidado individualizado para abordar as dificuldades identificadas, como revisões frequentes do esquema terapêutico e estratégias para fortalecer a motivação do paciente;
+Estabeleça uma comunicação aberta e focada em construir confiança, garantindo que o paciente se sinta apoiado no processo de cuidado;
+Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferecer um cuidado integrado e focado na adesão ao tratamento.
+`;
+            }
+
+            return { result, feedback };
+
+        },
+        getEmoji: value => {
+            switch (true) {
+                case value <= 0: {
+                    return { icon: faFaceSmile, color: '#389e0d' }
+                }
+                case (value === 1): {
+                    return { icon: faFaceMeh, color: '#ffd43b' }
+                }
+                case value === 2: {
+                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                }
+                case value >= 3: {
+                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                }
+            }
+        },
     },
     {
         key: 'act',
@@ -313,19 +553,25 @@ export const scores = [
         durationText: '3 à 7 minutos',
         optionsType: 'frequência',
         options: [
-            {   label: 'De jeito nenhum'
+            {
+                label: 'De jeito nenhum'
             },
-            {   label: 'Apenas algumas vezes'
+            {
+                label: 'Apenas algumas vezes'
             },
-            {   label: 'Algumas vezes'
+            {
+                label: 'Algumas vezes'
             },
-            {   label: 'Muitas vezes'
+            {
+                label: 'Muitas vezes'
             },
-            {   label: 'Mais que uma vez por dia'
+            {
+                label: 'Mais que uma vez por dia'
             },
         ],
         questions: [
-            {   text: 'A asma prejudicou suas atividades no trabalho, na escola ou em casa?',
+            {
+                text: 'A asma prejudicou suas atividades no trabalho, na escola ou em casa?',
                 options: [
                     {
                         label: 'Nenhuma vez',
@@ -333,7 +579,7 @@ export const scores = [
                     },
                     {
                         label: 'Poucas vezes',
-                        value: 2    
+                        value: 2
                     },
                     {
                         label: 'Algumas vezes',
@@ -349,7 +595,8 @@ export const scores = [
                     }
                 ]
             },
-            {  text: 'Como está o controle da sua asma?',
+            {
+                text: 'Como está o controle da sua asma?',
                 options: [
                     {
                         label: 'Totalmente descontrolada',
@@ -357,7 +604,7 @@ export const scores = [
                     },
                     {
                         label: 'Pobremente controlada',
-                        value: 2    
+                        value: 2
                     },
                     {
                         label: 'Um pouco controlada',
@@ -373,7 +620,8 @@ export const scores = [
                     }
                 ]
             },
-            {   text: 'Quantas vezes você teve falta de ar?',
+            {
+                text: 'Quantas vezes você teve falta de ar?',
                 options: [
                     {
                         label: 'De jeito nenhum',
@@ -381,7 +629,7 @@ export const scores = [
                     },
                     {
                         label: 'Uma ou duas vezes por semana',
-                        value: 2    
+                        value: 2
                     },
                     {
                         label: 'Três a seis vezes por semana',
@@ -397,7 +645,8 @@ export const scores = [
                     }
                 ]
             },
-            {   text: 'A asma acordou você à noite ou mais cedo que de costume?',
+            {
+                text: 'A asma acordou você à noite ou mais cedo que de costume?',
                 options: [
                     {
                         label: 'De jeito nenhum',
@@ -405,7 +654,7 @@ export const scores = [
                     },
                     {
                         label: 'Uma ou duas vezes',
-                        value: 2    
+                        value: 2
                     },
                     {
                         label: 'Uma vez por semana',
@@ -421,7 +670,8 @@ export const scores = [
                     }
                 ]
             },
-            {   text: 'Quantas vezes você usou o remédio por inalação para alívio?',
+            {
+                text: 'Quantas vezes você usou o remédio por inalação para alívio?',
                 options: [
                     {
                         label: 'De jeito nenhum',
@@ -429,7 +679,7 @@ export const scores = [
                     },
                     {
                         label: 'Uma vez por semana ou menos',
-                        value: 2    
+                        value: 2
                     },
                     {
                         label: 'Poucas vezes por semana',
@@ -474,17 +724,17 @@ export const scores = [
         },
         getEmoji: value => {
             switch (true) {
-            case value >= 21: {
-                return { icon: faFaceSmile, color : '#389e0d'}
+                case value >= 21: {
+                    return { icon: faFaceSmile, color: '#389e0d' }
+                }
+                case (value > 15 && value < 19): {
+                    return { icon: faFaceMeh, color: '#ffd43b' }
+                }
+                case value < 15: {
+                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                }
             }
-            case (value > 15 && value < 19): {
-                return { icon: faFaceMeh, color : '#ffd43b'}
-            }
-            case value < 15: {
-                return { icon: faFaceFrown, color : '#ff4d4f'}
-            }
-            }
-        },
+        },
     },
     {
         key: 'dpoc',
@@ -495,198 +745,260 @@ export const scores = [
         durationText: '3 à 7 minutos',
         optionsType: 'intensidade',
         options: [
-            {   label: '0',
+            {
+                label: '0',
                 value: 0
             },
-            {   label: '1',
+            {
+                label: '1',
                 value: 1
             },
-            {   label: '2',
+            {
+                label: '2',
                 value: 2
             },
-            {   label: '3',
+            {
+                label: '3',
                 value: 3
             },
-            {   label: '4',
+            {
+                label: '4',
                 value: 4
             },
-            {   label: '5',
+            {
+                label: '5',
                 value: 5
             }
         ],
         questions: [
-            {   text: 'Você tem tosse com frequência?',
+            {
+                text: 'Você tem tosse com frequência?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
             },
-            {   text: 'O seu peito está cheio de catarro (secreção)?',
+            {
+                text: 'O seu peito está cheio de catarro (secreção)?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
             },
-            {   text: 'Você sente uma grande pressão no peito?',
+            {
+                text: 'Você sente uma grande pressão no peito?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
             },
-            {   text: 'Você sente bastante falta de ar quando sobe uma ladeira ou um andar de escadas?',
+            {
+                text: 'Você sente bastante falta de ar quando sobe uma ladeira ou um andar de escadas?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
             },
-            {   text: 'Você se sente limitado nas suas atividades em casa?',
+            {
+                text: 'Você se sente limitado nas suas atividades em casa?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
             },
-            {   text: 'Você NÃO se sente confiante para sair de casa por causa da sua doença pulmonar?',
+            {
+                text: 'Você NÃO se sente confiante para sair de casa por causa da sua doença pulmonar?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
             },
-            {   text: 'Você NÃO dorme profundamente devido à sua doença pulmonar?',
+            {
+                text: 'Você NÃO dorme profundamente devido à sua doença pulmonar?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
             },
-            {   text: 'Você NÃO tem nenhuma energia (disposição)?',
+            {
+                text: 'Você NÃO tem nenhuma energia (disposição)?',
                 options: [
-                    {   label: '0',
+                    {
+                        label: '0',
                         value: 0
                     },
-                    {   label: '1',
+                    {
+                        label: '1',
                         value: 1
                     },
-                    {   label: '2',
+                    {
+                        label: '2',
                         value: 2
                     },
-                    {   label: '3',
+                    {
+                        label: '3',
                         value: 3
                     },
-                    {   label: '4',
+                    {
+                        label: '4',
                         value: 4
                     },
-                    {   label: '5',
+                    {
+                        label: '5',
                         value: 5
                     }
                 ]
@@ -729,17 +1041,17 @@ export const scores = [
         },
         getEmoji: value => {
             switch (true) {
-            case value <= 9: {
-                return { icon: faFaceSmile, color : '#389e0d'}
+                case value <= 9: {
+                    return { icon: faFaceSmile, color: '#389e0d' }
+                }
+                case (value >= 10 && value < 30): {
+                    return { icon: faFaceMeh, color: '#ffd43b' }
+                }
+                case value >= 30: {
+                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                }
             }
-            case (value >= 10 && value < 30): {
-                return { icon: faFaceMeh, color : '#ffd43b'}
-            }
-            case value >= 30: {
-                return { icon: faFaceFrown, color : '#ff4d4f'}
-            }
-            }
-        },
+        },
     },
     {
         key: 'nrnj',
@@ -750,140 +1062,183 @@ export const scores = [
         durationText: '3 à 7 minutos',
         optionsType: 'intensidade',
         options: [
-            {   label: 'Sim',
+            {
+                label: 'Sim',
             },
-            {   label: 'Não',
+            {
+                label: 'Não',
             },
-            {   label: 'Não sei',
+            {
+                label: 'Não sei',
             }
         ],
         questions: [
-            {   text: 'Existem notificações conclusivas sobre esta reação?',
+            {
+                text: 'Existem notificações conclusivas sobre esta reação?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 0
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'A reação apareceu após a administração do fármaco?',
+            {
+                text: 'A reação apareceu após a administração do fármaco?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 2
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: -1
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'A reação melhorou quando o fármaco foi suspenso?',
+            {
+                text: 'A reação melhorou quando o fármaco foi suspenso?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 0
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'A reação reapareceu quando da sua readministração?',
+            {
+                text: 'A reação reapareceu quando da sua readministração?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 2
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: -1
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'Existem causas alterantivas (até mesmo outro fármaco)?',
+            {
+                text: 'Existem causas alterantivas (até mesmo outro fármaco)?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: -1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 2
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'A reação reaparece com a introdução de um placebo?',
+            {
+                text: 'A reação reaparece com a introdução de um placebo?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: -1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 1
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'A concentração plasmática está em nível tóxico?',
+            {
+                text: 'A concentração plasmática está em nível tóxico?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 0
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'A reação aumentou com dose maior ou reduziu com dose menor?',
+            {
+                text: 'A reação aumentou com dose maior ou reduziu com dose menor?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 0
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'O paciente já experimentou semelhante reação anteriormente com medicamentos de mesmo fármaco?',
+            {
+                text: 'O paciente já experimentou semelhante reação anteriormente com medicamentos de mesmo fármaco?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 0
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
             },
-            {   text: 'A reação foi confirmada por qualquer evidência objetiva?',
+            {
+                text: 'A reação foi confirmada por qualquer evidência objetiva?',
                 options: [
-                    {   label: 'Sim',
+                    {
+                        label: 'Sim',
                         value: 1
                     },
-                    {   label: 'Não',
+                    {
+                        label: 'Não',
                         value: 0
                     },
-                    {   label: 'Não sei',
+                    {
+                        label: 'Não sei',
                         value: 0
                     }
                 ]
@@ -929,19 +1284,19 @@ export const scores = [
                     - Mantenha o acompanhamento do paciente e forneça orientações sobre cuidados gerais.`;
             }
             return { result, feedback };
-        },
+        },
         getEmoji: value => {
             switch (true) {
-            case value <= 0: {
-                return { icon: faFaceSmile, color : '#389e0d'}
+                case value <= 0: {
+                    return { icon: faFaceSmile, color: '#389e0d' }
+                }
+                case (value >= 1 && value < 9): {
+                    return { icon: faFaceMeh, color: '#ffd43b' }
+                }
+                case value >= 9: {
+                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                }
             }
-            case (value >= 1 && value < 9): {
-                return { icon: faFaceMeh, color : '#ffd43b'}
-            }
-            case value >= 9: {
-                return { icon: faFaceFrown, color : '#ff4d4f'}
-            }
-            }
-        },
-    }
+        },
+    }
 ];

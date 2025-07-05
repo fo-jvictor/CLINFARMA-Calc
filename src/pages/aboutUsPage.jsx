@@ -25,19 +25,20 @@ export default function AboutUsPage() {
                     title="Nome do Sistema"
                     bordered
                 >
-                    CLINFARMA Calc. é uma abreviação para calculadora de escores voltados ao farmacêutico clínco.
-                </Card>
+                    CLINFARMA Calc é a sigla para "Calculadora de Escores em Cuidado Farmacêutico", uma ferramenta desenvolvida para apoiar farmacêuticos na prática clínica, por meio do uso de escores validados.
+                </Card>
                 <Card
                     title="Missão e Valores"
                     bordered
                 >
-                    Desenvolver um website como ferramenta que disponibilize os principais escores utilizados pelos farmacêuticos do estado do Rio Grande do Sul para o acompanhamento farmacoterapêutico buscando otimizar o processo do cuidado farmacêutico na prática clínica
+                    Disponibilizar ferramentas clínicas digitais baseadas em evidências, por meio de um website acessível, para apoiar a prática do Cuidado Farmacêutico e qualificar a atenção à saúde no estado do Rio Grande do Sul.
                 </Card>
                 <Card
                     title="Equipe"
                     bordered
                 >
-                    A equipe é composta pela comunidade interna da UFCSPA. A mestranda Marina Gassen liderou a criação de conteúdo do aplicativo, enquanto a graduanda Giovanna Mello foi responsável pelo desenvolvimento do sistema web. As professoras Dras. Carine Blatt e Cecília Dias forneceram orientação essencial ao longo do projeto. Este sistema foi criado em parceria com a Secretaria da Saúde do Rio Grande do Sul, para a qual a UFCSPA cedeu o sistema após sua conclusão.
+                    A criação de conteúdo foi realizada pela mestranda Marina Gassen e o desenvolvimento do sistema web pelos graduandos Giovanna Mello e João Victor Fernandes, todos vinculados à Universidade Federal de Ciências da Saúde de Porto Alegre (UFCSPA) e orientados pelas professoras Dra. Carine Raquel Blatt e Dra. Cecília Dias.
+                    Todos os elementos que constituem esse website foram validados pela equipe do Departamento de Assistência Farmacêutica da Secretaria da Saúde do Estado do Rio Grande do Sul.
                 </Card>
             </div>
         </div>

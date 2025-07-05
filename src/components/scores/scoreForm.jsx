@@ -75,10 +75,28 @@ export default function ScoreForm({ scoreKey }) {
         { prefix: 'R', text: 'Se antecipa e busca seu medicamento na farmácia antes mesmo de acabar seu medicamento em casa?' }
     ];
 
+    const bmqQuestions = [
+        { prefix: 'R', text: 'Você se sente confiante de que pode tomar seus medicamentos corretamente?' },
+        { prefix: 'R', text: 'Você acredita que os medicamentos são importantes para sua saúde?' },
+        { prefix: 'R', text: 'Você acha que os medicamentos são perigosos?' },
+        { prefix: 'R', text: 'Você acha que os medicamentos não são necessários?' },
+        { prefix: 'R', text: 'Você acha que os medicamentos causam efeitos colaterais indesejados?' },
+        { prefix: 'R', text: 'Você acha que os medicamentos não são necessários?' },
+        { prefix: 'R', text: 'Você acha que os medicamentos não são necessários?' },
+        { prefix: 'C', text: 'Você acha que os medicamentos não são necessários?' },
+        { prefix: 'C', text: 'Você acha que os medicamentos não são necessários?' },
+        { prefix: 'RE', text: 'Você acha que os medicamentos não são necessários?' },
+        { prefix: 'RE', text: 'Você acha que os medicamentos não são necessários?' },
+    ]
+
 
     const formatQuestionNumber = (index, score) => {
         if (score.key === 'arms') {
             return `${questions[index].prefix}${index + 1}`;
+        }
+
+        if (score.key === 'bmq') {
+            return `${bmqQuestions[index].prefix}${index + 1}.`;
         }
 
         return `${index + 1}`;
