@@ -1,11 +1,16 @@
+import { text } from "@fortawesome/fontawesome-svg-core";
 import { faFaceFrown, faFaceSmile, faFaceMeh } from "@fortawesome/free-regular-svg-icons";
 
 export const scores = [
     {
         key: 'arms',
-        label: 'Escala de Adesão aos Medicamentos e ao Reabastecimento dos Medicamentos (ARMS)',
-        description: 'Escala de avaliação da adesão aos medicamentos que pode ser aplicada em pacientes com qualquer nível de letramento.',
-        targetAudience: 'Pacientes com condições crônicas que exigem uso contínuo de medicamento.',
+        //
+        label: 'Escala de Adesão e reposição dos medicamentos (ARMS)',
+        //vai aparecer como objetivo
+        description: 'Avaliar a adesão aos medicamentos considerando quanto o paciente segue o que foi prescrito e regularidade de obtenção dos medicamentos.',
+        //público alvo
+        targetAudience: 'Pacientes com condições crônicas que exigem uso contínuo de medicamento. A escala pode ser aplicada em pacientes com qualquer nível de letramento.',
+        //Aparece na tela de resultados na primeira frase em negrito no topo
         hintText: 'Pontuação próxima à 48 indica pior adesão aos medicamentos.',
         durationText: '5 à 10 minutos',
         optionsType: 'frequência',
@@ -321,6 +326,194 @@ export const scores = [
         },
     },
     {
+        key: 'lhp',
+        label: 'Método de avaliação da causalidade da Lesão Hepática Induzida por Medicamentos (RUCAM)',
+        description: 'Identificar a relação de causalidade entre o uso de um medicamento e a ocorrência de lesão hepática, classificando a probabilidade de que o medicamento tenha sido a causa da lesão.',
+        targetAudience: 'Pacientes com suspeita de lesão hepática induzida por medicamento, com valores de ALT três vezes superiores ao valor normal do paciente em exames anteriores.',
+        hintText: 'Interpretação: ≥9 altamente provável, 6–8 provável, 3–5 possível, 1–2 improvável, ≤0 excluída.',
+        durationText: '20 à 40 minutos',
+        optionsType: '',
+        options: [
+            {
+                label: 'Redução ≥ 50% da ALP dentro de 180 dias',
+                value: 1
+            },
+            {
+                label: 'Redução < 50% da ALP dentro de 180 dias',
+                value: 0
+            }
+        ],
+        questions: [
+            {
+                text: 'Em quanto tempo após o início ou suspensão do uso do medicamento/erva os sinais de lesão hepática surgiram?',
+                //cada objeto em options possui label e value
+                options: [
+                    {
+                        label: '5 a 90 dias após o início do uso (ou 1 a 90 dias em caso de reexposição)',
+                        value: 2
+                    },
+                    {
+                        label: 'Menos de 5 dias ou mais de 90 dias após o início (ou reexposição após mais de 90 dias)',
+                        value: 'q1_2'
+                    },
+                    {
+                        label: 'Até 30 dias após a interrupção do medicamento (exceto fármacos de metabolismo lento)',
+                        value: 'q1_3'
+                    }
+                ],
+            },
+            {
+                text: 'Após a interrupção do medicamento ou erva suspeita, qual foi a evolução da fosfatase alcalina (ALP) ao longo do tempo?',
+                options: [
+                    { label: 'Redução ≥ 50% da ALP dentro de 180 dias', value: 2 },
+                    { label: 'Redução < 50% da ALP dentro de 180 dias', value: 1 },
+                    { label: 'Sem informação, ALP persistente, aumentou ou uso do medicamento continuou', value: 0 },
+                ],
+            },
+            {
+                text: 'O paciente consome álcool atualmente?',
+                options: [
+                    { label: 'Mais de 2 drinques/dia (mulheres) ou mais de 3 drinques/dia (homens)', value: 1 },
+                    { label: 'Até 2 drinques/dia (mulheres) ou até 3 drinques/dia (homens)', value: 0 }
+                ],
+            },
+            {
+                text: 'A paciente está grávida?',
+                options: [
+                    { label: 'Sim', value: 1 },
+                    { label: 'Não', value: 0 },
+                ],
+            },
+            {
+                text: 'Qual a idade do paciente?',
+                options: [
+                    { label: '55 anos ou mais', value: 1 },
+                    { label: 'Menor que 55 anos', value: 0 },
+                ],
+            },
+            {
+                text: 'Uso concomitante de medicamento(s)/erva(s)',
+                options: [
+                    {label: 'Nenhum ou sem informação', value: 'q6_1' },
+                    {label: 'Medicamento/erva concomitante com tempo de início incompatível', value: 'q6_2' },
+                    {label: 'Medicamento/erva concomitante com tempo de início compatível ou sugestivo', value: -1 },
+                    {label: 'Medicamento/erva concomitante conhecido como hepatotóxico e com tempo de início compatível ou sugestivo', value: -2 },
+                    {label: 'Medicamento/erva concomitante com evidência clara de que foi o causador neste caso (reexposição positiva ou teste validado)', value: -3 }
+                ],
+            },
+            {
+                text: 'Causes alternativas foram consideradas para a lesão hepática?',
+                type: 'rucam-alternative-causes',
+                groupI: [
+                    'HAV: Anti-HAV-IgM',
+                    'HBV: HBsAg, anti-HBc-IgM, HBV-DNA',
+                    'HCV: Anti-HCV, HCV-RNA',
+                    'HEV: Anti-HEV-IgM, anti-HEV-IgG, HEV-RNA',
+                    'Ultrassonografia/TC/RM de vias biliares',
+                    'Alcoolismo (AST / ALT ≥ 2)',
+                    'Hipotensão aguda recente'
+                ],
+                groupII: [
+                    'Doenças subjacentes (sepse, câncer, hepatite autoimune, etc)',
+                    'CMV (anti-CMV-IgM, anti-CMV-IgG)',
+                    'EBV (anti-EBV-IgM, anti-EBV-IgG)',
+                    'HSV (anti-HSV-IgM, anti-HSV-IgG)',
+                    'VZV (anti-VZV-IgM, anti-VZV-IgG)'
+                ],
+                options: [
+                    { label: 'Causa alternativa altamente provavel', value: -3 },
+                ],
+            },
+            {
+                text: 'Há relatos anteriores de que o medicamento/erva suspeito(a) pode causar lesão hepática?',
+                options: [
+                    { label: 'A reação hepática está descrita na bula/ficha técnica do produto', value: 2 },
+                    { label: 'A reação foi publicada em literatura científica, mas não consta na bula', value: 1 },
+                    { label: 'Não há relatos conhecidos', value: 0 },
+                ],
+            },
+            {
+                text: 'O paciente foi reexposto involuntariamente ao medicamento/erva? Se sim, qual foi a resposta da ALP?',
+                options: [
+                    { label: 'Dobro de aumento na ALP com uso exclusivo do medicamento/erva (desde que a ALP antes da reexposição estivesse <2 vezes o limite superior)', value: 3 },
+                    { label: 'Dobro de aumento na ALP, mas com outros fármacos em uso na época da reexposição', value: 1 },
+                    { label: 'Aumento de ALP, mas inferior ao valor da primeira vez ou não alcançou o limite de normalidade', value: -2 },
+                    { label: 'Outras situações (ex: dados insuficientes, reexposição com dose diferente etc.)', value: 0 },
+                ],
+            }
+        ],
+        calculateFunction: (finalValue = []) => {
+            const auxMap = {
+                q1_2: 1, q1_3: 1,
+                q7_1: 0, q7_2: 0,
+                q6_1: 0, q6_2: 0,
+            };
+
+            finalValue = finalValue.map(value => auxMap[value] !== undefined ? auxMap[value] : value);
+
+            const normalValues = finalValue.filter(v => typeof v === 'number');
+            const altCause = finalValue.find(v => v && typeof v === 'object' && v.type === 'rucam-alternative-causes');
+
+            let result = normalValues.reduce((acc, val) => acc + val, 0);
+
+            let altScore = 0;
+
+            if (altCause?.highlyProbable) {
+                altScore = -3;
+            } else {
+                const groupINegatives = altCause?.groupI?.filter(c => c.negative).length || 0;
+                const groupIINegatives = altCause?.groupII?.filter(c => c.negative).length || 0;
+                const totalNegatives = groupINegatives + groupIINegatives;
+
+                if (totalNegatives === 12) {
+                    altScore = 2;
+                } else if (groupINegatives === 7) {
+                    altScore = 1;
+                } else if (groupINegatives >= 5) {
+                    altScore = 0;
+                } else if (groupINegatives < 5) {
+                    altScore = -2;
+                }
+            }
+
+            result += altScore;
+
+            let feedback = '';
+
+            if (result <= 0) {
+                feedback = `Diagnóstico Excluído. 
+                O escore indica que não há evidência de que o medicamento seja a causa da lesão hepática.`;
+            } else if (result >= 1 && result <= 2) {
+                feedback = `Causalidade Improvável. 
+                É pouco provável que o medicamento esteja relacionado à lesão hepática.`;
+            } else if (result >= 3 && result <= 5) {
+                feedback = `Causalidade Possível. 
+                Há uma possibilidade moderada de que o medicamento tenha causado a lesão hepática.`;
+            } else if (result >= 6 && result <= 8) {
+                feedback = `Causalidade Provável. 
+                O medicamento tem alta probabilidade de estar relacionado à lesão hepática.`;
+            } else if (result >= 9) {
+                feedback = `Causalidade Muito Provável. 
+                A relação entre o medicamento e a lesão hepática é praticamente certa.`;
+            }
+
+            return { result, feedback };
+        },
+        getEmoji: value => {
+            switch (true) {
+                case value >= 21: {
+                    return { icon: faFaceSmile, color: '#389e0d' }
+                }
+                case (value > 15 && value < 19): {
+                    return { icon: faFaceMeh, color: '#ffd43b' }
+                }
+                case value < 15: {
+                    return { icon: faFaceFrown, color: '#ff4d4f' }
+                }
+            }
+        },
+    },
+    {
         key: 'bmq',
         label: 'Questionario breve sobre medicação (BMQ)',
         description: 'Avaliar a adesão aos medicamentos e identificar barreiras relacionadas ao uso relacionadas a crenças, regime e recordação.',
@@ -328,7 +521,6 @@ export const scores = [
         hintText: 'Quanto maior o escore, mais barreiras relacionadas ao uso de medicamentos.',
         durationText: '5 à 10 minutos',
         optionsType: 'sim ou não',
-        //acho que as options estão relacionadas com o bug de marcar varios radio buttons sozinho em outros scores
         options: [
             {
                 label: 'Sim',
@@ -554,19 +746,24 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
         optionsType: 'frequência',
         options: [
             {
-                label: 'De jeito nenhum'
+                label: 'De jeito nenhum',
+                value: 0
             },
             {
-                label: 'Apenas algumas vezes'
+                label: 'Apenas algumas vezes',
+                value: 1
             },
             {
-                label: 'Algumas vezes'
+                label: 'Algumas vezes',
+                value: 2
             },
             {
-                label: 'Muitas vezes'
+                label: 'Muitas vezes',
+                value: 3
             },
             {
-                label: 'Mais que uma vez por dia'
+                label: 'Mais que uma vez por dia',
+                value: 4
             },
         ],
         questions: [
@@ -1064,189 +1261,114 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
         options: [
             {
                 label: 'Sim',
+                value: 0
             },
             {
                 label: 'Não',
+                value: 1
             },
             {
                 label: 'Não sei',
+                value: 2
             }
         ],
         questions: [
             {
                 text: 'Existem notificações conclusivas sobre esta reação?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 1
-                    },
-                    {
-                        label: 'Não',
-                        value: 0
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q1_sim' },
+                    { label: 'Não', value: 'q1_nao' },
+                    { label: 'Não sei', value: 'q1_nsei' }
                 ]
             },
             {
                 text: 'A reação apareceu após a administração do fármaco?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 2
-                    },
-                    {
-                        label: 'Não',
-                        value: -1
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q2_sim' },
+                    { label: 'Não', value: 'q2_nao' },
+                    { label: 'Não sei', value: 'q2_nsei' }
                 ]
             },
             {
                 text: 'A reação melhorou quando o fármaco foi suspenso?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 1
-                    },
-                    {
-                        label: 'Não',
-                        value: 0
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q3_sim' },
+                    { label: 'Não', value: 'q3_nao' },
+                    { label: 'Não sei', value: 'q3_nsei' }
                 ]
             },
             {
                 text: 'A reação reapareceu quando da sua readministração?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 2
-                    },
-                    {
-                        label: 'Não',
-                        value: -1
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q4_sim' },
+                    { label: 'Não', value: 'q4_nao' },
+                    { label: 'Não sei', value: 'q4_nsei' }
                 ]
             },
             {
                 text: 'Existem causas alterantivas (até mesmo outro fármaco)?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: -1
-                    },
-                    {
-                        label: 'Não',
-                        value: 2
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q5_sim' },
+                    { label: 'Não', value: 'q5_nao' },
+                    { label: 'Não sei', value: 'q5_nsei' }
                 ]
             },
             {
                 text: 'A reação reaparece com a introdução de um placebo?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: -1
-                    },
-                    {
-                        label: 'Não',
-                        value: 1
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q6_sim' },
+                    { label: 'Não', value: 'q6_nao' },
+                    { label: 'Não sei', value: 'q6_nsei' }
                 ]
             },
             {
                 text: 'A concentração plasmática está em nível tóxico?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 1
-                    },
-                    {
-                        label: 'Não',
-                        value: 0
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q7_sim' },
+                    { label: 'Não', value: 'q7_nao' },
+                    { label: 'Não sei', value: 'q7_nsei' }
                 ]
             },
             {
                 text: 'A reação aumentou com dose maior ou reduziu com dose menor?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 1
-                    },
-                    {
-                        label: 'Não',
-                        value: 0
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q8_sim' },
+                    { label: 'Não', value: 'q8_nao' },
+                    { label: 'Não sei', value: 'q8_nsei' }
                 ]
             },
             {
                 text: 'O paciente já experimentou semelhante reação anteriormente com medicamentos de mesmo fármaco?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 1
-                    },
-                    {
-                        label: 'Não',
-                        value: 0
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q9_sim' },
+                    { label: 'Não', value: 'q9_nao' },
+                    { label: 'Não sei', value: 'q9_nsei' }
                 ]
             },
             {
                 text: 'A reação foi confirmada por qualquer evidência objetiva?',
                 options: [
-                    {
-                        label: 'Sim',
-                        value: 1
-                    },
-                    {
-                        label: 'Não',
-                        value: 0
-                    },
-                    {
-                        label: 'Não sei',
-                        value: 0
-                    }
+                    { label: 'Sim', value: 'q10_sim' },
+                    { label: 'Não', value: 'q10_nao' },
+                    { label: 'Não sei', value: 'q10_nsei' }
                 ]
             }
         ],
         calculateFunction: (finalValue = []) => {
-            //soma da resposta de todas perguntas, pode variar de -4 à 13
-            const result = finalValue.reduce((acc, value) => acc + value, 0);
+            const scoreMap = {
+                q1_sim: 1, q1_nao: 0, q1_nsei: 0,
+                q2_sim: 2, q2_nao: -1, q2_nsei: 0,
+                q3_sim: 1, q3_nao: 0, q3_nsei: 0,
+                q4_sim: 2, q4_nao: -1, q4_nsei: 0,
+                q5_sim: -1, q5_nao: 2, q5_nsei: 0,
+                q6_sim: -1, q6_nao: 1, q6_nsei: 0,
+                q7_sim: 1, q7_nao: 0, q7_nsei: 0,
+                q8_sim: 1, q8_nao: 0, q8_nsei: 0,
+                q9_sim: 1, q9_nao: 0, q9_nsei: 0,
+                q10_sim: 1, q10_nao: 0, q10_nsei: 0
+            };
+
+            const result = finalValue.reduce((acc, value) => acc + (scoreMap[value] ?? 0), 0);
 
             let feedback;
             if (result >= 9) {

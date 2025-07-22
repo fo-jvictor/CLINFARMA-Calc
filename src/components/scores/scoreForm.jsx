@@ -1,14 +1,16 @@
-import { Button, Card, Radio, Statistic, Tooltip } from "antd";
+import { Button, Card, Checkbox, Radio, Statistic, Tooltip } from "antd";
 import { scores } from "../../utils/constants/scoresConstants";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 import jsPDF from 'jspdf';
+import AlternativeCauseCheckboxRow from '../../utils/constants/alternativeCauseCheckboxRow';
+
 
 export default function ScoreForm({ scoreKey }) {
 
     const score = scores.find(score => score.key === scoreKey);
-
     const [selectedRadio, setSelectedRadio] = useState(score.options[0]);
     const [currentState, setCurrentState] = useState('start');
     const [result, setResult] = useState({
@@ -19,6 +21,46 @@ export default function ScoreForm({ scoreKey }) {
     const [crf, setCrf] = useState('');
     const [farmaceutico, setFarmaceutico] = useState('');
     const [data, setData] = useState('');
+    const [rucamState, setRucamState] = useState({
+        highlyProbable: false,
+        groupI: {},
+        groupII: {},
+    });
+
+    useEffect(() => {
+        const rucamQuestion = score.questions.find(q => q.type === 'rucam-alternative-causes');
+        if (rucamQuestion) {
+            const groupI = {};
+            rucamQuestion.groupI.forEach((_, i) => {
+                groupI[i] = { negative: false, notDone: false };
+            });
+            const groupII = {};
+            rucamQuestion.groupII.forEach((_, i) => {
+                groupII[i] = { negative: false, notDone: false };
+            });
+            setRucamState({
+                highlyProbable: false,
+                groupI,
+                groupII,
+            });
+        }
+    }, [score.questions]);
+
+    const handleRucamHighlyProbableChange = (checked) => {
+        setRucamState(state => ({ ...state, highlyProbable: checked }));
+    };
+
+    // Handler para os checkboxes de grupos I e II
+    const handleRucamGroupChange = (group, index, newValue) => {
+        setRucamState(state => ({
+            ...state,
+            [group]: {
+                ...state[group],
+                [index]: newValue,
+            },
+        }));
+    };
+
 
     const handleScoreSelection = (questionIndex, value) => {
         setSelectedOptions(prev => [
@@ -30,7 +72,19 @@ export default function ScoreForm({ scoreKey }) {
 
     const handleFinishForm = () => {
         // Lógica para calcular a pontuação
-        const finalResult = score.calculateFunction(selectedOptions);
+        let finalValue = [...selectedOptions];
+
+        if (score.key === 'lhp') {
+            finalValue.push(
+                {
+                    type: 'rucam-alternative-causes',
+                    groupI: Object.values(rucamState.groupI),
+                    groupII: Object.values(rucamState.groupII),
+                    highlyProbable: rucamState.highlyProbable,
+                }
+            );
+        }
+        const finalResult = score.calculateFunction(finalValue);
         finalResult.feedback = finalResult.feedback + ' Lembre-se de registrar o resultado desse escore na aba Cuidar+ do sistema AME, no respectivo serviço clínico realizado'
         setResult(finalResult);
         setCurrentState('result');
@@ -154,40 +208,84 @@ export default function ScoreForm({ scoreKey }) {
     const renderForm = () => (
         <Card title={
             <p className="whitespace-normal break-words max-w-full">
-                Faça as perguntas ao paciente, orientando-o a responder com base nas ultimas quatro semanas, utilizando uma escala de {score.optionsType} de cinco itens
+                Faça as perguntas ao paciente, orientando-o a responder com base nas últimas quatro semanas, utilizando uma escala de {score.optionsType} de cinco itens
             </p>
-
         }>
-            {score.questions.map((question, index) => (
-                <div key={index}>
-                    <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row">
-                        {/* Pergunta */}
-                        <div className="flex gap-2 items-start">
+            {score.questions.map((question, index) => {
+                // Verifica se é uma questão especial (causas alternativas do algoritmo de rucam)
+                if (question.type === 'rucam-alternative-causes') {
+                    return (
+                        <div key={index} className="mb-6">
+                            <div className="flex items-start gap-2 mb-3">
+                                <div className="text-colorPrimary font-semibold">{formatQuestionNumber(index, score)}</div>
+                                <div className="whitespace-normal break-words max-w-full">{question.text}</div>
+                            </div>
+
+                            <AlternativeCauseCheckboxRow
+                                isHighlyProbableCheckbox
+                                label="Causa alternativa altamente provável"
+                                highlyProbable={rucamState.highlyProbable}
+                                onHighlyProbableChange={handleRucamHighlyProbableChange}
+                            />
+
+                            <div className="ml-6">
+                                <div className="mb-2 font-semibold">Grupo I</div>
+                                {question.groupI.map((label, i) => (
+                                    <AlternativeCauseCheckboxRow
+                                        key={`groupI-${i}`}
+                                        label={label}
+                                        value={rucamState.groupI[i]}
+                                        onChange={newValue => handleRucamGroupChange('groupI', i, newValue)}
+                                        highlyProbable={rucamState.highlyProbable}
+                                    />
+                                ))}
+
+                                <div className="mt-4 mb-2 font-semibold">Grupo II</div>
+                                {question.groupII.map((label, i) => (
+                                    <AlternativeCauseCheckboxRow
+                                        key={`groupII-${i}`}
+                                        label={label}
+                                        value={rucamState.groupII[i]}
+                                        onChange={newValue => handleRucamGroupChange('groupII', i, newValue)}
+                                        highlyProbable={rucamState.highlyProbable}
+                                    />
+                                ))}
+                            </div>
+
+                            <div className="my-4 w-full h-[1px] bg-[#ededed]" />
+                        </div>
+                    );
+                }
+
+                // Questões normais
+                return (
+                    <div key={index} className="mb-6">
+                        <div className="flex items-start gap-2 mb-3">
                             <div className="text-colorPrimary font-semibold">{formatQuestionNumber(index, score)}</div>
-                            <div>{question.text}</div>
+                            <div className="whitespace-normal break-words max-w-full">{question.text}</div>
                         </div>
 
-                        {/* Alternativas */}
-                        <div className="mt-2 lg:mt-0 lg:ml-auto lg:pl-8 overflow-x-auto">
+                        <div className="ml-6">
                             <Radio.Group
                                 onChange={e => handleScoreSelection(index, e.target.value)}
                                 value={selectedOptions[index]}
                             >
-                                <div className="flex flex-nowrap sm:flex-row gap-2 min-w-max">
+                                <div className="flex flex-col gap-2">
                                     {(question.options || score.options).map(option => (
                                         <Radio key={option.value} value={option.value}>
-                                            {option.label}
+                                            <span className="whitespace-normal break-words">{option.label}</span>
                                         </Radio>
                                     ))}
                                 </div>
                             </Radio.Group>
                         </div>
-                    </div>
 
-                    {/* Separador */}
-                    <div className="my-4 w-full h-[1px] bg-[#ededed]" />
-                </div>
-            ))}
+                        {index < score.questions.length - 1 && (
+                            <div className="my-4 w-full h-[1px] bg-[#ededed]" />
+                        )}
+                    </div>
+                );
+            })}
 
             <div className="mt-6 flex justify-end">
                 <Button type="primary" onClick={handleFinishForm}>
