@@ -12,6 +12,9 @@ export const scores = [
         targetAudience: 'Pacientes com condições crônicas que exigem uso contínuo de medicamento. A escala pode ser aplicada em pacientes com qualquer nível de letramento.',
         //Aparece na tela de resultados na primeira frase em negrito no topo
         hintText: 'Pontuação próxima à 48 indica pior adesão aos medicamentos.',
+        generalInformation: `A escala ARMS consiste em 12 itens subdivididos em:
+        Administração dos  Medicamentos (Taken - T)(7 itens): Avalia quanto o paciente segue o regime prescrito de medicação.
+        Reposição dos medicamentos (Recall - R) (5 itens): Avalia a  regularidade com que o paciente obtém os medicamentos prescritos.`,
         durationText: '5 à 10 minutos',
         optionsType: 'frequência',
         options: [
@@ -330,7 +333,7 @@ export const scores = [
         label: 'Método de avaliação da causalidade da Lesão Hepática Induzida por Medicamentos (RUCAM)',
         description: 'Identificar a relação de causalidade entre o uso de um medicamento e a ocorrência de lesão hepática, classificando a probabilidade de que o medicamento tenha sido a causa da lesão.',
         targetAudience: 'Pacientes com suspeita de lesão hepática induzida por medicamento, com valores de ALT três vezes superiores ao valor normal do paciente em exames anteriores.',
-        hintText: 'Interpretação: ≥9 altamente provável, 6–8 provável, 3–5 possível, 1–2 improvável, ≤0 excluída.',
+        hintText: 'Interpretação: ≥9 Relação altamente provável, 6–8 Relação provável, 3–5 Relação possível, 1–2 Relação improvável, ≤0 Relação excluída.',
         durationText: '20 à 40 minutos',
         optionsType: '',
         options: [
@@ -345,100 +348,95 @@ export const scores = [
         ],
         questions: [
             {
-                text: 'Em quanto tempo após o início ou suspensão do uso do medicamento/erva os sinais de lesão hepática surgiram?',
+                text: 'Tempo entre a administração do medicamento ou fitoterápico e o aparecimento dos sinais e sintomas',
                 //cada objeto em options possui label e value
                 options: [
                     {
-                        label: '5 a 90 dias após o início do uso (ou 1 a 90 dias em caso de reexposição)',
+                        label: '5 a 90 dias (reexposição: 1 a 15 dias)',
                         value: 2
                     },
                     {
-                        label: 'Menos de 5 dias ou mais de 90 dias após o início (ou reexposição após mais de 90 dias)',
+                        label: '< 5 ou > 90 dias (reexposição: > 15 dias)',
                         value: 'q1_2'
                     },
                     {
-                        label: 'Até 30 dias após a interrupção do medicamento (exceto fármacos de metabolismo lento)',
+                        label: 'Tempo para início dos sinais e sintomas após a cessação do medicamento ou fitoterápico < 15 dias (exceção: metabolizadores lentos > 15 dias)',
                         value: 'q1_3'
                     }
                 ],
             },
             {
-                text: 'Após a interrupção do medicamento ou erva suspeita, qual foi a evolução da fosfatase alcalina (ALP) ao longo do tempo?',
+                text: 'Curso da ALT (alanina aminotransferase) após a cessação do medicamento ou fitoterápico. Diferença percentual entre o pico de ALT e o limite superior da normalidade (LSN).',
                 options: [
-                    { label: 'Redução ≥ 50% da ALP dentro de 180 dias', value: 2 },
-                    { label: 'Redução < 50% da ALP dentro de 180 dias', value: 1 },
-                    { label: 'Sem informação, ALP persistente, aumentou ou uso do medicamento continuou', value: 0 },
+                    { label: 'Redução > 50% em 8 dias', value: 3 },
+                    { label: 'Redução > 50% em 30 dias', value: 2 },
+                    { label: 'Sem informação ou medicamento ou fitoterápico segue em uso.', value: 0 },
+                    { label: 'Redução > 50% após 30 dias', value: 0 },
+                    { label: 'Redução < 50% após 30 dias ou aumento recorrente da ALT', value: -2 },
                 ],
             },
             {
-                text: 'O paciente consome álcool atualmente?',
+                text: 'Fator de risco: O paciente consome álcool?',
                 options: [
-                    { label: 'Mais de 2 drinques/dia (mulheres) ou mais de 3 drinques/dia (homens)', value: 1 },
-                    { label: 'Até 2 drinques/dia (mulheres) ou até 3 drinques/dia (homens)', value: 0 }
+                    { label: 'Uso de álcool (consumo de doses/dia: >2 para mulheres, >3 para homens)', value: 1 },
+                    { label: 'Uso de álcool (consumo de doses/dia: <2 para mulheres, <3 para homens)', value: 0 }
                 ],
             },
             {
-                text: 'A paciente está grávida?',
+                text: 'Fator de risco: Qual a idade do paciente?',
                 options: [
-                    { label: 'Sim', value: 1 },
-                    { label: 'Não', value: 0 },
+                    { label: 'Idade >= 55 anos', value: 1 },
+                    { label: 'Idade < 55 anos', value: 0 },
                 ],
             },
             {
-                text: 'Qual a idade do paciente?',
+                text: 'Uso concomitante de outros medicamentos ou fitoterápicos',
                 options: [
-                    { label: '55 anos ou mais', value: 1 },
-                    { label: 'Menor que 55 anos', value: 0 },
-                ],
-            },
-            {
-                text: 'Uso concomitante de medicamento(s)/erva(s)',
-                options: [
-                    {label: 'Nenhum ou sem informação', value: 'q6_1' },
-                    {label: 'Medicamento/erva concomitante com tempo de início incompatível', value: 'q6_2' },
-                    {label: 'Medicamento/erva concomitante com tempo de início compatível ou sugestivo', value: -1 },
-                    {label: 'Medicamento/erva concomitante conhecido como hepatotóxico e com tempo de início compatível ou sugestivo', value: -2 },
-                    {label: 'Medicamento/erva concomitante com evidência clara de que foi o causador neste caso (reexposição positiva ou teste validado)', value: -3 }
+                    { label: 'Não utiliza medicamento ou fitoterápico concomitantemente', value: 'q6_1' },
+                    { label: 'Medicamento ou fitoterápico em uso concomitante, porém com tempo para início dos sinais e sintomas incompatível com a lesão hepática apresentada.', value: 'q6_2' },
+                    { label: 'Medicamento ou fitoterápico em uso concomitante, com tempo para início dos sinais e sintomas compatível com a lesão hepática apresentada.', value: -1 },
+                    { label: 'Medicamento ou fitoterápico em uso concomitante, com conhecido efeito hepatotóxico e com tempo para início dos sinais e sintomas compatível com a lesão hepática apresentada (se afirmativo, excluir alternativa anterior);', value: -2 },
+                    { label: 'Medicamento ou fitoterápico em uso concomitante, com evidencia de “causalidade” (reexposição positiva ao medicamento ou fitoterápico neste caso, e alteração das transaminases).', value: -3 }
                 ],
             },
             {
                 text: 'Causes alternativas foram consideradas para a lesão hepática?',
                 type: 'rucam-alternative-causes',
                 groupI: [
-                    'HAV: Anti-HAV-IgM',
-                    'HBV: HBsAg, anti-HBc-IgM, HBV-DNA',
-                    'HCV: Anti-HCV, HCV-RNA',
-                    'HEV: Anti-HEV-IgM, anti-HEV-IgG, HEV-RNA',
-                    'Ultrassonografia/TC/RM de vias biliares',
-                    'Alcoolismo (AST / ALT ≥ 2)',
-                    'Hipotensão aguda recente'
+                    'HAV (Hepatite viral tipo A)',
+                    'HBV (Hepatite viral tipo B)',
+                    'HCV (Hepatite viral tipo C)',
+                    'HEV (Hepatite viral tipo E)',
+                    'Alteração em ultrassonografia das vias hepatobiliares; tomografia computadorizada/ressonância magnética coleangiografia',
+                    'Alcoolismo',
+                    'História recente de hipotensão aguda (principalmente na doença cardíaca subjacente)'
                 ],
                 groupII: [
-                    'Doenças subjacentes (sepse, câncer, hepatite autoimune, etc)',
-                    'CMV (anti-CMV-IgM, anti-CMV-IgG)',
-                    'EBV (anti-EBV-IgM, anti-EBV-IgG)',
-                    'HSV (anti-HSV-IgM, anti-HSV-IgG)',
-                    'VZV (anti-VZV-IgM, anti-VZV-IgG)'
+                    'Complicações de doenças subjacentes como sepse, doença metastática maligna, hepatite autoimune, hepatite crônica pelo vírus C ou B, colangite biliar primária, colangite esclerosante, doenças genéticas do fígado',
+                    'Infecção por CMV (Citomegalovírus)',
+                    'Infecção por EBV (Vírus Epstein-Barr)',
+                    'Infecção por HSV (Vírus Herpes Simples)',
+                    'Infecção por VZV (Varicella Zoster Vírus)'
                 ],
                 options: [
                     { label: 'Causa alternativa altamente provavel', value: -3 },
                 ],
             },
             {
-                text: 'Há relatos anteriores de que o medicamento/erva suspeito(a) pode causar lesão hepática?',
+                text: 'Hepatotoxicidade previamente conhecida para o medicamento ou fitoterápico suspeito',
                 options: [
-                    { label: 'A reação hepática está descrita na bula/ficha técnica do produto', value: 2 },
-                    { label: 'A reação foi publicada em literatura científica, mas não consta na bula', value: 1 },
-                    { label: 'Não há relatos conhecidos', value: 0 },
+                    { label: 'É uma reação prevista em bula/rótulo para este medicamento ou fitoterápico', value: 2 },
+                    { label: 'É uma reação publicada para este medicamento ou fitoterápico, porém não consta na bula/rótulo', value: 1 },
+                    { label: 'É uma reação desconhecida para este medicamento ou fitoterápico.', value: 0 },
                 ],
             },
             {
-                text: 'O paciente foi reexposto involuntariamente ao medicamento/erva? Se sim, qual foi a resposta da ALP?',
+                text: 'Resposta a reexposição ao medicamento ou fitoterápico suspeito',
                 options: [
-                    { label: 'Dobro de aumento na ALP com uso exclusivo do medicamento/erva (desde que a ALP antes da reexposição estivesse <2 vezes o limite superior)', value: 3 },
-                    { label: 'Dobro de aumento na ALP, mas com outros fármacos em uso na época da reexposição', value: 1 },
-                    { label: 'Aumento de ALP, mas inferior ao valor da primeira vez ou não alcançou o limite de normalidade', value: -2 },
-                    { label: 'Outras situações (ex: dados insuficientes, reexposição com dose diferente etc.)', value: 0 },
+                    { label: 'Duplicação de níveis de ALT, com o medicamento ou fitoterápico isolado, posto que, anteriormente à reexposição, os valores de ALT estavam abaixo de 5xLSN.', value: 3 },
+                    { label: 'Duplicação de níveis de ALT, com o medicamento ou fitoterápico administrado nas mesmas condições da primeira reação', value: 1 },
+                    { label: 'Aumento da ALT, porém ainda abaixo do LSN nas mesmas condições da primeira administração', value: -2 },
+                    { label: 'Outras situações', value: 0 },
                 ],
             }
         ],
@@ -533,7 +531,64 @@ export const scores = [
         ],
         questions: [
             {
+                text: 'Quais medicações você usou na ÚLTIMA SEMANA? (Nome e dosagem, se souber)',
+                type: 'text-input'
+            },
+            {
+                text: 'Por quantos dias você tomou cada remédio?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quantas vezes por dia você tomou cada remédio?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quantos comprimidos você tomou em cada vez?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quantas vezes você esqueceu de tomar algum comprimido?',
+                type: 'text-input'
+            },
+            {
+                text: 'Como essa medicação funciona para você? (Ex: funciona bem, regular, não funciona bem)',
+                type: 'text-input'
+            },
+            {
+                text: 'Alguma das suas medicações causa problemas para você? Se sim, quais?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quanto essa medicação incomodou você? (Muito, um pouco, muito pouco, nunca)',
+                type: 'text-input'
+            },
+            {
+                text: 'De que forma você é incomodado por essa medicação?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quanto é difícil para você abrir ou fechar a embalagem?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quanto é difícil para você ler o que está escrito na embalagem?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quanto é difícil para você lembrar de tomar todo o remédio?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quanto é difícil para você conseguir o medicamento?',
+                type: 'text-input'
+            },
+            {
+                text: 'Quanto é difícil para você tomar tantos comprimidos ao mesmo tempo?',
+                type: 'text-input'
+            },
+            {
                 text: 'O R falhou em listar (espontaneamente) os medicamentos prescritos no relato inicial?',
+                prefix: 'R',
                 options: [
                     {
                         label: 'Sim',
@@ -547,6 +602,7 @@ export const scores = [
             },
             {
                 text: 'O R interrompeu a terapia devido ao atraso na dispensaçao da medicação ou outro motivo?',
+                prefix: 'R',
                 options: [
                     {
                         label: 'Sim',
@@ -560,6 +616,7 @@ export const scores = [
             },
             {
                 text: 'O R relatou alguma falha de dias ou de doses?',
+                prefix: 'R',
                 options: [
                     {
                         label: 'Sim',
@@ -573,6 +630,7 @@ export const scores = [
             },
             {
                 text: 'O R reduziu ou omitiu doses de algum medicamento?',
+                prefix: 'R',
                 options: [
                     {
                         label: 'Sim',
@@ -586,6 +644,7 @@ export const scores = [
             },
             {
                 text: 'O R tomou alguma dose extra ou medicação a mais do que o prescrito?',
+                prefix: 'R',
                 options: [
                     {
                         label: 'Sim',
@@ -599,6 +658,21 @@ export const scores = [
             },
             {
                 text: 'O R respondeu que "não sabia" a alguma das perguntas?',
+                prefix: 'R',
+                options: [
+                    {
+                        label: 'Sim',
+                        value: 1
+                    },
+                    {
+                        label: 'Não',
+                        value: 0
+                    }
+                ]
+            },
+            {
+                text: 'O R se recusou a responder alguma das questões?',
+                prefix: 'R',
                 options: [
                     {
                         label: 'Sim',
@@ -613,6 +687,7 @@ export const scores = [
             // Perguntas relacionadas a crenças:
             {
                 text: 'O R relatou "não funciona bem" ou "não sei" na resposta 1g?',
+                prefix: 'C',
                 options: [
                     {
                         label: 'Sim',
@@ -626,6 +701,7 @@ export const scores = [
             },
             {
                 text: 'O R nomeou as medicações que o incomodam?',
+                prefix: 'C',
                 options: [
                     {
                         label: 'Sim',
@@ -640,6 +716,7 @@ export const scores = [
             // Perguntas relacionadas a recordação:
             {
                 text: 'O R recebe um esquema de múltiplas doses de medicamentos (2 ou mais vezes/dia)?',
+                prefix: 'RE',
                 options: [
                     {
                         label: 'Sim',
@@ -653,6 +730,7 @@ export const scores = [
             },
             {
                 text: 'O R "muita dificuldade" ou "alguma dificuldade" em responder a 3c?',
+                prefix: 'RE',
                 options: [
                     {
                         label: 'Sim',
@@ -1254,7 +1332,7 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
         key: 'nrnj',
         label: 'Algoritmo de Naranjo',
         description: 'Determinar a causalidade de uma reação adversa a medicamentos.',
-        targetAudience: 'Profissionais de saúde, incluindo médicos, farmacêuticos e pesquisadores, buscam identificar a relação causal entre um medicamento e uma reação adversa.',
+        targetAudience: 'Pacientes com suspeita de reação adversa ao uso de medicamentos.',
         hintText: 'Quanto maior o escore, mais definida é a relação entre a reação adversa e o medicamento.',
         durationText: '3 à 7 minutos',
         optionsType: 'intensidade',

@@ -6,6 +6,7 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import jsPDF from 'jspdf';
 import AlternativeCauseCheckboxRow from '../../utils/constants/alternativeCauseCheckboxRow';
+import { Input } from 'antd';
 
 
 export default function ScoreForm({ scoreKey }) {
@@ -114,7 +115,7 @@ export default function ScoreForm({ scoreKey }) {
     };
 
 
-    const questions = [
+    const armsQuestions = [
         { prefix: 'T', text: 'Esquece de tomar seus medicamentos?' },
         { prefix: 'T', text: 'Decide não tomar seus medicamentos naquele dia?' },
         { prefix: 'R', text: 'Deixa de tomar seu medicamento porque vai a uma consulta médica?' },
@@ -129,32 +130,32 @@ export default function ScoreForm({ scoreKey }) {
         { prefix: 'R', text: 'Se antecipa e busca seu medicamento na farmácia antes mesmo de acabar seu medicamento em casa?' }
     ];
 
-    const bmqQuestions = [
-        { prefix: 'R', text: 'Você se sente confiante de que pode tomar seus medicamentos corretamente?' },
-        { prefix: 'R', text: 'Você acredita que os medicamentos são importantes para sua saúde?' },
-        { prefix: 'R', text: 'Você acha que os medicamentos são perigosos?' },
-        { prefix: 'R', text: 'Você acha que os medicamentos não são necessários?' },
-        { prefix: 'R', text: 'Você acha que os medicamentos causam efeitos colaterais indesejados?' },
-        { prefix: 'R', text: 'Você acha que os medicamentos não são necessários?' },
-        { prefix: 'R', text: 'Você acha que os medicamentos não são necessários?' },
-        { prefix: 'C', text: 'Você acha que os medicamentos não são necessários?' },
-        { prefix: 'C', text: 'Você acha que os medicamentos não são necessários?' },
-        { prefix: 'RE', text: 'Você acha que os medicamentos não são necessários?' },
-        { prefix: 'RE', text: 'Você acha que os medicamentos não são necessários?' },
-    ]
-
 
     const formatQuestionNumber = (index, score) => {
-        if (score.key === 'arms') {
-            return `${questions[index].prefix}${index + 1}`;
+    const questions = score.questions;
+
+    if (score.key === 'bmq') {
+        const current = questions[index];
+        const hasPrefix = !!current.prefix;
+
+        if (hasPrefix) {
+            const count = questions
+                .slice(0, index + 1)
+                .filter(q => q.prefix === current.prefix).length;
+
+            return `${current.prefix}${count}.`;
         }
 
-        if (score.key === 'bmq') {
-            return `${bmqQuestions[index].prefix}${index + 1}.`;
-        }
+        return `${index + 1}.`;
+    }
 
-        return `${index + 1}`;
-    };
+    if (score.key === 'arms') {
+        return `${armsQuestions[index].prefix}${index + 1}.`;
+    }
+
+    return `${index + 1}`;
+};
+
 
 
     const renderStart = () => (
@@ -180,6 +181,14 @@ export default function ScoreForm({ scoreKey }) {
             <div>
                 <span className="text-[#000a] mr-2">Tempo:</span>
                 <span>{score.durationText}</span>
+            </div>
+
+            <div className="mt-2">
+                {score.generalInformation ? 
+                score.generalInformation.split('\n').map((line, index) => (
+                        <p key={index}>{line}</p>
+                    ))
+                    : ''}
             </div>
 
             <div className="mt-4 font-semibold">
@@ -208,11 +217,39 @@ export default function ScoreForm({ scoreKey }) {
     const renderForm = () => (
         <Card title={
             <p className="whitespace-normal break-words max-w-full">
-                Faça as perguntas ao paciente, orientando-o a responder com base nas últimas quatro semanas, utilizando uma escala de {score.optionsType} de cinco itens
+                Faça as perguntas ao paciente, orientando-o a responder com base nas últimas quatro semanas, utilizando uma escala de {score.optionsType} de pelo menos {score.options.length} itens
             </p>
         }>
             {score.questions.map((question, index) => {
-                // Verifica se é uma questão especial (causas alternativas do algoritmo de rucam)
+                if (question.type === 'text-input') {
+                    return (
+                        <div key={index} className="mb-6">
+                            <div className="flex items-start gap-2 mb-3">
+                                <div className="text-colorPrimary font-semibold">
+                                    {formatQuestionNumber(index, score)}
+                                </div>
+                                <div className="whitespace-normal break-words max-w-full">
+                                    {question.text}
+                                </div>
+                            </div>
+
+                            <div className="ml-6">
+                                <Input.TextArea
+                                    rows={4}
+                                    value={selectedOptions[index] || ''}
+                                    onChange={e => handleScoreSelection(index, e.target.value)}
+                                    placeholder="Digite sua resposta aqui..."
+                                />
+                            </div>
+
+                            {index < score.questions.length - 1 && (
+                                <div className="my-4 w-full h-[1px] bg-[#ededed]" />
+                            )}
+                        </div>
+                    );
+                }
+
+
                 if (question.type === 'rucam-alternative-causes') {
                     return (
                         <div key={index} className="mb-6">
