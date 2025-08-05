@@ -101,16 +101,56 @@ export default function ScoreForm({ scoreKey }) {
         setResult({ result: 0, feedback: '' });
         setCurrentState('start');
     }
-
+    
     const downloadPDF = () => {
         const doc = new jsPDF();
-        const textoFeedback = `${score.label}\n\nResultado: ${result.result}\n\nPaciente: ${nomePaciente} \nCRF: ${crf} \nFarmacêutico: ${farmaceutico}\nData: ${data}\n\nRecomendação: ${result.feedback}`;
-        const feedback = doc.splitTextToSize(textoFeedback, 180);
         let yOffset = 10;
-        feedback.forEach(linha => {
-            doc.text(linha, 5, yOffset);
-            yOffset += 10;
-        })
+
+        const textoCabecalho = `${score.label}\n\nResultado: ${result.result}\n\nPaciente: ${nomePaciente} \nCRF: ${crf} \nFarmacêutico: ${farmaceutico}\nData: ${data}`;
+        const cabecalho = doc.splitTextToSize(textoCabecalho, 180);
+        cabecalho.forEach(linha => {
+            doc.text(linha, 10, yOffset);
+            yOffset += 8;
+        });
+
+        yOffset += 6;
+        doc.text('Respostas do Questionário:', 10, yOffset);
+        yOffset += 10;
+
+        score.questions.forEach((question, index) => {
+            if (yOffset > 270) {
+                doc.addPage();
+                yOffset = 10;
+            }
+
+            const questionNumber = formatQuestionNumber(index, score);
+            const resposta = selectedOptions[index] || 'Não respondida';
+
+            const textoPergunta = `${questionNumber} ${question.text}`;
+            const textoResposta = `Resposta: ${resposta}`;
+
+            const perguntaPartes = doc.splitTextToSize(textoPergunta, 180);
+            perguntaPartes.forEach(linha => {
+                doc.text(linha, 10, yOffset);
+                yOffset += 6;
+            });
+
+            const respostaPartes = doc.splitTextToSize(textoResposta, 180);
+            respostaPartes.forEach(linha => {
+                doc.text(linha, 10, yOffset);
+                yOffset += 6;
+            });
+
+            yOffset += 4;
+        });
+
+        yOffset += 4;
+        const recomendacoes = doc.splitTextToSize(`Recomendação: ${result.feedback}`, 180);
+        recomendacoes.forEach(linha => {
+            doc.text(linha, 10, yOffset);
+            yOffset += 6;
+        });
+
         doc.save('feedback.pdf');
     };
 
@@ -132,29 +172,29 @@ export default function ScoreForm({ scoreKey }) {
 
 
     const formatQuestionNumber = (index, score) => {
-    const questions = score.questions;
+        const questions = score.questions;
 
-    if (score.key === 'bmq') {
-        const current = questions[index];
-        const hasPrefix = !!current.prefix;
+        if (score.key === 'bmq') {
+            const current = questions[index];
+            const hasPrefix = !!current.prefix;
 
-        if (hasPrefix) {
-            const count = questions
-                .slice(0, index + 1)
-                .filter(q => q.prefix === current.prefix).length;
+            if (hasPrefix) {
+                const count = questions
+                    .slice(0, index + 1)
+                    .filter(q => q.prefix === current.prefix).length;
 
-            return `${current.prefix}${count}.`;
+                return `${current.prefix}${count}.`;
+            }
+
+            return `${index + 1}.`;
         }
 
-        return `${index + 1}.`;
-    }
+        if (score.key === 'arms') {
+            return `${armsQuestions[index].prefix}${index + 1}.`;
+        }
 
-    if (score.key === 'arms') {
-        return `${armsQuestions[index].prefix}${index + 1}.`;
-    }
-
-    return `${index + 1}`;
-};
+        return `${index + 1}`;
+    };
 
 
 
@@ -184,8 +224,8 @@ export default function ScoreForm({ scoreKey }) {
             </div>
 
             <div className="mt-2">
-                {score.generalInformation ? 
-                score.generalInformation.split('\n').map((line, index) => (
+                {score.generalInformation ?
+                    score.generalInformation.split('\n').map((line, index) => (
                         <p key={index}>{line}</p>
                     ))
                     : ''}

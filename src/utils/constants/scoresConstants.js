@@ -518,7 +518,7 @@ export const scores = [
         targetAudience: 'Pacientes que estão em uso de medicamentos de forma contínua, especialmente para condições crônicas',
         hintText: 'Quanto maior o escore, mais barreiras relacionadas ao uso de medicamentos.',
         durationText: '5 à 10 minutos',
-        optionsType: 'sim ou não',
+        optionsType: 'sim ou não e dissertativa',
         options: [
             {
                 label: 'Sim',
@@ -531,7 +531,7 @@ export const scores = [
         ],
         questions: [
             {
-                text: 'Quais medicações você usou na ÚLTIMA SEMANA? (Nome e dosagem, se souber)',
+                text: 'Quais medicações você usou na ÚLTIMA SEMANA? (Nome e dosagem)',
                 type: 'text-input'
             },
             {
@@ -551,7 +551,7 @@ export const scores = [
                 type: 'text-input'
             },
             {
-                text: 'Como essa medicação funciona para você? (Ex: funciona bem, regular, não funciona bem)',
+                text: 'Como essa medicação funciona para você? (1 = funciona bem, 2 = regular, 3 = não funciona bem)',
                 type: 'text-input'
             },
             {
@@ -559,7 +559,7 @@ export const scores = [
                 type: 'text-input'
             },
             {
-                text: 'Quanto essa medicação incomodou você? (Muito, um pouco, muito pouco, nunca)',
+                text: 'Quanto essa medicação incomodou você (listar medicações)? (Muito, um pouco, muito pouco, nunca)',
                 type: 'text-input'
             },
             {
@@ -567,23 +567,23 @@ export const scores = [
                 type: 'text-input'
             },
             {
-                text: 'Quanto é difícil para você abrir ou fechar a embalagem?',
+                text: 'Quanto é difícil para você abrir ou fechar a embalagem? (Muito, um pouco, não muito)',
                 type: 'text-input'
             },
             {
-                text: 'Quanto é difícil para você ler o que está escrito na embalagem?',
+                text: 'Quanto é difícil para você ler o que está escrito na embalagem? (Muito, um pouco, não muito)',
                 type: 'text-input'
             },
             {
-                text: 'Quanto é difícil para você lembrar de tomar todo o remédio?',
+                text: 'Quanto é difícil para você lembrar de tomar todo o remédio? (Muito, um pouco, não muito)',
                 type: 'text-input'
             },
             {
-                text: 'Quanto é difícil para você conseguir o medicamento?',
+                text: 'Quanto é difícil para você conseguir o medicamento? (Muito, um pouco, não muito)',
                 type: 'text-input'
             },
             {
-                text: 'Quanto é difícil para você tomar tantos comprimidos ao mesmo tempo?',
+                text: 'Quanto é difícil para você tomar tantos comprimidos ao mesmo tempo? (Muito, um pouco, não muito)',
                 type: 'text-input'
             },
             {
@@ -686,7 +686,7 @@ export const scores = [
             },
             // Perguntas relacionadas a crenças:
             {
-                text: 'O R relatou "não funciona bem" ou "não sei" na resposta 1g?',
+                text: 'O R relatou "não funciona bem" ou "não sei" na resposta 6?',
                 prefix: 'C',
                 options: [
                     {
@@ -729,7 +729,7 @@ export const scores = [
                 ]
             },
             {
-                text: 'O R "muita dificuldade" ou "alguma dificuldade" em responder a 3c?',
+                text: 'O R "muita dificuldade" ou "alguma dificuldade" em responder a 12?',
                 prefix: 'RE',
                 options: [
                     {
