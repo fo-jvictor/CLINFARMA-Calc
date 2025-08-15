@@ -21,6 +21,7 @@ export default function ScoreForm({ scoreKey }) {
     const [nomePaciente, setNomePaciente] = useState('');
     const [crf, setCrf] = useState('');
     const [farmaceutico, setFarmaceutico] = useState('');
+    const [medicamento, setMedicamento] = useState('');
     const [data, setData] = useState('');
     const [rucamState, setRucamState] = useState({
         highlyProbable: false,
@@ -86,7 +87,7 @@ export default function ScoreForm({ scoreKey }) {
             );
         }
         const finalResult = score.calculateFunction(finalValue);
-        finalResult.feedback = finalResult.feedback + ' Lembre-se de registrar o resultado desse escore na aba Cuidar+ do sistema AME, no respectivo serviço clínico realizado'
+        finalResult.feedback = finalResult.feedback + `\nLembre-se de registrar o resultado desse escore na aba Cuidar+ do sistema AME, no respectivo serviço clínico realizado`
         setResult(finalResult);
         setCurrentState('result');
     }
@@ -404,7 +405,7 @@ export default function ScoreForm({ scoreKey }) {
                             <label htmlFor="nomePaciente">Nome do Paciente:</label>
                             <input
                                 type="text"
-                                placeholder="Nome do Paciente"
+                                placeholder="Paciente"
                                 value={nomePaciente}
                                 onChange={(e) => setNomePaciente(e.target.value)}
                                 className="w-full"
@@ -429,6 +430,17 @@ export default function ScoreForm({ scoreKey }) {
                                 placeholder="Farmacêutico"
                                 value={farmaceutico}
                                 onChange={(e) => setFarmaceutico(e.target.value)}
+                                className="w-full"
+                            />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label htmlFor="Medicamento">Nome do medicamento:</label>
+                            <input
+                                type="text"
+                                placeholder="Medicamento"
+                                value={medicamento}
+                                onChange={(e) => setMedicamento(e.target.value)}
                                 className="w-full"
                             />
                         </div>

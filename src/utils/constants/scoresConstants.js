@@ -294,8 +294,9 @@ export const scores = [
             const result = finalValue.reduce((acc, value) => acc + value, 0);
             let feedback;
             if (result <= 12) {
-                feedback = `Esse paciente demonstra uma BOA adesão ao tratamento farmacológico. 
-            É importante fortalecer com ele os resultados positivos dessa prática e incentivá-lo a manter os cuidados relacionados à administração e reposição dos medicamentos.`;
+                feedback = `Esse paciente demonstra uma boa adesão ao tratamento farmacológico. 
+            Fortaleça com ele os resultados positivos de manter uma boa adesão ao tratamento;
+            Incentive o paciente a manter os cuidados relacionados à administração e reposição dos medicamentos.`;
             } else {
                 feedback = `Esse paciente demonstra uma BAIXA adesão ao tratamento farmacológico. 
             A baixa adesão ao tratamento pode estar associada a dificuldades específicas que precisam ser investigadas e abordadas. 
@@ -371,7 +372,7 @@ export const scores = [
                     { label: 'Redução > 50% em 8 dias', value: 3 },
                     { label: 'Redução > 50% em 30 dias', value: 2 },
                     { label: 'Sem informação ou medicamento ou fitoterápico segue em uso.', value: 0 },
-                    { label: 'Redução > 50% após 30 dias', value: 0 },
+                    { label: 'Redução > 50% após 30 dias', value: 'q2_4' },
                     { label: 'Redução < 50% após 30 dias ou aumento recorrente da ALT', value: -2 },
                 ],
             },
@@ -442,8 +443,11 @@ export const scores = [
         ],
         calculateFunction: (finalValue = []) => {
             const auxMap = {
+                q2_4: 0,
+
                 q1_2: 1, q1_3: 1,
                 q7_1: 0, q7_2: 0,
+                
                 q6_1: 0, q6_2: 0,
             };
 
