@@ -298,20 +298,33 @@ export const scores = [
             Fortaleça com ele os resultados positivos de manter uma boa adesão ao tratamento;
             Incentive o paciente a manter os cuidados relacionados à administração e reposição dos medicamentos.`;
             } else {
-                feedback = `Esse paciente demonstra uma BAIXA adesão ao tratamento farmacológico. 
-            A baixa adesão ao tratamento pode estar associada a dificuldades específicas que precisam ser investigadas e abordadas. 
-            Recomendamos avaliar os itens da escala para identificar se o problema está na administração ou reposição do medicamento.
-            
-            Em caso de dificuldades com a administração do medicamento:
-            - Verifique se o paciente compreende os horários e formas de administração;
-            - Avaliar se o esquema terapêutico é compatível com a rotina do paciente e, se possível, simplifique-o;
-            - Oriente o paciente sobre como minimizar e manejar possíveis efeitos colaterais;
-            - Disponibilizar materiais educativos.
-            
-            Em caso de dificuldades com a reposição do medicamento:
-            - Oriente o paciente sobre as melhores formas de adquirir os medicamentos, seja em farmácia comunitária ou comercial;
-            - Explique como organizar a reposição, alterando estratégias como renovação antecipada de receitas ou lembretes para evitar esquecimentos;
-            - Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe como ele pode acessá-los.`;
+                feedback = `Esse paciente demonstra uma baixa adesão ao tratamento
+                            farmacológico. A baixa adesão ao tratamento pode estar
+                            associada a dificuldades específicas que precisam ser
+                            investigadas e abordadas. Recomendamos avaliar os itens da
+                            escala para identificar se o problema está na administração ou
+                            reposição do medicamento.
+                            Em caso de dificuldades com a administração do medicamento.
+                            Verifique se o paciente compreende os horários e formas de
+                            administração;
+                            Avalie se o esquema terapêutico é compatível com a rotina do
+                            paciente e, se possível, modifique o esquema e/ou discuta com
+                            o(a) prescritor(a) para simplificá-lo;
+                            Oriente o paciente sobre como minimizar e manejar possíveis
+                            efeitos adversos, que podem estar prejudicando a adesão
+                            Investigue causas intencionais ou não intencionais que podem
+                            estar prejudicando a adesão;
+                            Elabore e disponibilize materiais educativos.
+                            Em caso de dificuldades com a reposição do medicamento:
+                            Oriente o paciente sobre como acessar os medicamentos;
+                            necessários, seja em comercial ou farmácias do SUS, explicando
+                            os fluxos para solicitação dos medicamentos;
+                            Explique como organizar a reposição, alterando estratégias como
+                            renovação antecipada de receitas ou lembretes para evitar
+                            esquecimentos;
+                            Caso existam programas de apoio ao paciente ou benefícios
+                            disponíveis, informe como ele pode acessá-los.
+`;
             }
             return { result, feedback };
         },
@@ -447,7 +460,7 @@ export const scores = [
 
                 q1_2: 1, q1_3: 1,
                 q7_1: 0, q7_2: 0,
-                
+
                 q6_1: 0, q6_2: 0,
             };
 
@@ -483,20 +496,43 @@ export const scores = [
             let feedback = '';
 
             if (result <= 0) {
-                feedback = `Diagnóstico Excluído. 
-                O escore indica que não há evidência de que o medicamento seja a causa da lesão hepática.`;
+                feedback = `Relação excluída. 
+                A relação entre o medicamento e a lesão hepática é excluída.
+Exclua o medicamento como causa de lesão hepática e foque na investigação de outras etiologias, como infecções, doenças hepáticas prévias ou consumo de substância hepatotóxica;
+Reforce a continuidade do tratamento com o medicamento, caso ele seja essencial para a terapia do paciente;
+Explique ao paciente que, com base nesta avaliação, utilizando este instrumento, o medicamento não está relacionado à lesão hepática;
+Monitore o paciente regularmente para garantir que outras causas sejam especificadas e tratadas.`;
             } else if (result >= 1 && result <= 2) {
-                feedback = `Causalidade Improvável. 
-                É pouco provável que o medicamento esteja relacionado à lesão hepática.`;
+                feedback = `Relação improvável. 
+                A relação entre o medicamento e a lesão hepática é improvável.
+Considere outras causas e investigue outros fatores que possam estar associados à lesão hepática, como doenças subjacentes, infecções ou consumo de substâncias tóxicas;
+Caso não haja contra indicação, o medicamento pode ser mantido, mas com monitoramento regular da função hepática;
+Informe o paciente sobre a baixa probabilidade de relação com o medicamento e reforce a importância de continuar com as consultas e exames periódicos;
+Monitore o paciente regularmente para garantir que outras causas sejam especificadas e tratadas.`;
             } else if (result >= 3 && result <= 5) {
-                feedback = `Causalidade Possível. 
-                Há uma possibilidade moderada de que o medicamento tenha causado a lesão hepática.`;
+                feedback = `Relação possível. 
+                A relação entre o medicamento e a lesão hepática é possível.
+Aprofunde a investigação, avaliando o histórico clínico do paciente, buscando identificar outros fatores possíveis que possam ter contribuído para a lesão hepática;
+Continue monitorando os parâmetros hepáticos, com foco em acompanhar a evolução dos sintomas;
+Caso outros fatores não sejam identificados, discuta com a equipe de saúde a possibilidade de substituir o medicamento suspeito por uma alternativa mais segura;
+Oriente o paciente sobre como identificar e a importância de relatar sintomas novos ou progressivos relacionados à função hepática.
+`;
             } else if (result >= 6 && result <= 8) {
-                feedback = `Causalidade Provável. 
-                O medicamento tem alta probabilidade de estar relacionado à lesão hepática.`;
+                feedback = `Relação provável. 
+                A relação entre o medicamento e a lesão hepática é provável.
+Avalie a necessidade de ajustes no tratamento, como reduzir a dose, alterar o esquema terapêutico ou suspender o medicamento;
+Considere condições subjacentes, interações medicamentosas ou outros medicamentos como possíveis contribuintes para a lesão hepática;
+Realize acompanhamento laboratorial regular para identificar qualquer evolução na função hepática;
+Oriente ao paciente sobre os riscos potenciais do medicamento e os sinais de alerta a serem monitorados, garantindo que ele compreenda a importância do acompanhamento médico e farmacêutico.
+`;
             } else if (result >= 9) {
-                feedback = `Causalidade Muito Provável. 
-                A relação entre o medicamento e a lesão hepática é praticamente certa.`;
+                feedback = `Relação altamente provável. 
+                A relação entre o medicamento e a lesão hepática é altamente provável.
+Registre detalhadamente a ocorrência no prontuário do paciente, bem como o resultado do RUCAM;
+Realize a notificação da suspeita do evento adverso no sistema de farmacovigilância da Anvisa, acessando o link: https://www.gov.br/anvisa/pt-br/assuntos/fiscalizacao-e-monitoramento/notificacoes. Nesse site, você encontrará o tutorial para efetuar a notificação e as orientações para realizar o cadastro;
+Discute junto com a equipe a interrupção ou substituição do medicamento suspeito;
+Reforce a importância de monitorar parâmetros hepáticos (ALT, AST, bilirrubinas) para avaliar a evolução da lesão.
+Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanhamento contínuo.`;
             }
 
             return { result, feedback };
@@ -767,25 +803,24 @@ export const scores = [
             let feedback;
             if (result === 0) {
                 feedback = `Alta adesão
-                O resultado indica que o paciente apresenta uma alta adesão ao tratamento. 
-Reforce com o paciente que uma boa adesão  ao tratamento é benéfico para a sua qualidade de vida e discuta os benefícios a longo prazo da continuidade do cuidado;
-Reforce as instruções sobre o uso correto dos medicamentos, mesmo na ausência de sintomas;
-Identifique e antecipe possíveis desafios que possam surgir, garantindo que o paciente tenha suporte para continuar o tratamento específico.
-`;
+                O resultado indica que o paciente apresenta uma alta adesão ao tratamento.
+                Reforce com o paciente que uma boa adesão ao tratamento é benéfico para a sua qualidade de vida e discuta os benefícios a longo prazo da continuidade do cuidado;
+                Reforce as instruções sobre o uso correto dos medicamentos, mesmo na ausência de sintomas;
+                Identifique e antecipe possíveis desafios que possam surgir, garantindo que o paciente tenha suporte para continuar o tratamento específico.`;
             } else if (result === 1) {
                 feedback = `Provável alta adesão
                 O resultado indica uma probabilidade de alta adesão, mas com possibilidade de pequenas dificuldades pontuais.
-Explore com o paciente possíveis dificuldades isoladas, como esquecimento ou dúvidas sobre o uso correto do medicamento;
-Explique a importância de seguir o esquema terapêutico corretamente e como isso impacta nos resultados esperados;
-Sugira estratégias para melhorar a adesão, como uso de lembretes ou organização do horário dos medicamentos
+                Explore com o paciente possíveis dificuldades isoladas, como esquecimento ou dúvidas sobre o uso correto do medicamento;
+                Explique a importância de seguir o esquema terapêutico corretamente e como isso impacta nos resultados esperados;
+                Sugira estratégias para melhorar a adesão, como uso de lembretes ou organização do horário dos medicamentos.
 `;
             } else if (result === 2) {
                 feedback = `Provável baixa adesão
                 O resultado indica uma probabilidade de baixa adesão, demonstrando que o paciente pode enfrentar dificuldades relevantes no uso do medicamento.
 Investigue os motivos da baixa adesão, como efeitos adversos, complexidade do regime terapêutico, questões financeiras ou falta de compreensão sobre a importância do tratamento;
 Reforce o impacto positivo da adesão ao tratamento na prevenção de complicações e na melhoria da qualidade de vida;
-Caso possível, discuta com o (s) prescritor (es)  alternativas que possam simplificar e facilitar a adesão, como substituição de medicamentos ou redução na frequência de doses, caso seja possível;
-Ofereça suporte adicional, como material educativo e oferta de serviços farmacêuticos clínicos  periódicos para acompanhamento do paciente.
+Caso possível, discuta com o(s) prescritor(es) alternativas que possam simplificar e facilitar a adesão, como substituição de medicamentos ou redução na frequência de doses, caso seja possível;
+Ofereça suporte adicional, como material educativo e oferta de serviços farmacêuticos clínicos periódicos para acompanhamento do paciente.
 `;
             }
             else {
@@ -982,22 +1017,29 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
             let feedback;
             if (result < 15) {
                 feedback = `Asma Não Controlada. 
-            O resultado indica que a doença não está controlada, o que pode aumentar o risco de crises graves e complicações. 
-                - Verificar e orientar a forma de uso dos medicamentos diferenciando os medicamentos de uso contínuo daqueles usados para alívio dos sintomas, garantindo que o paciente compreenda a forma e o momento adequado de utilizá-los;
-                - Avalie se a adesão está sendo realizada corretamente conforme o plano terapêutico, e se necessário, ofereça orientações sobre como melhorar a adesão;
-                - Oriente sobre medidas não farmacológicas, como atividades física;
-                - Conversar sobre a importância do tratamento e resultados terapêuticos esperados.`;
+O resultado indica que a doença não está controlada, o que pode aumentar o risco de crises graves e complicações.
+Verifique se o paciente compreende que a asma é uma doença crônica e exige cuidado contínuo para evitar agravamentos.
+Avalie o uso dos medicamentos prescritos e oriente o paciente quanto ao regime terapêutico, diferenciando os fármacos de uso contínuo (controladores) daqueles indicados para o alívio imediato dos sintomas (broncodilatadores de resgate).
+Certifique-se de que o paciente compreenda corretamente a posologia, a via de administração e o momento apropriado para cada tipo de medicamento;
+Solicite que o paciente demonstre como utiliza os medicamentos inalatórios, a fim de verificar se a técnica está correta;
+Avalie se o paciente está utilizando os medicamentos conforme o que foi prescrito, e se necessário, ofereça orientações sobre como melhorar a adesão;
+Explore, junto ao paciente, os possíveis fatores desencadeantes (gatilhos) das crises asmáticas, como exposição a ácaros, mofo, fumaça, mudanças climáticas e esforço físico, e forneça orientações individualizadas sobre estratégias para minimização ou eliminação desses fatores.
+Oriente o paciente quanto às medidas não farmacológicas de controle da asma, incluindo a prática regular de atividade física adequada à condição clínica, e a higienização ambiental — com ênfase na remoção de cortinas, tapetes, bichos de pelúcia e outros objetos que favoreçam o acúmulo de poeira e alérgenos domiciliares.
+Converse sobre a importância do tratamento, tanto farmacológico quanto não farmacológico, e quais resultados terapêuticos são esperados`;
             } else if (result >= 15 && result <= 19) {
                 feedback = `Asma Parcialmente Controlada. 
-            O resultado indica que a doença não está bem controlada.  
-                - Verificar e orientar a forma de uso dos medicamentos diferenciando os medicamentos de uso contínuo daqueles usados para alívio dos sintomas;
-                - Avalie se a adesão está sendo mantida e ofereça dicas para facilitar a rotina de medicação, como o uso de lembretes ou ajustes na forma de administração;
-                - Verificar e orientar medidas não farmacológicas, como atividades físicas adequadas;
-                - Conversar sobre a importância do tratamento e resultados terapêuticos esperados.`;
+O resultado indica que a doença não está bem controlada.
+Solicite que o paciente demonstre como realiza a administração dos medicamentos inalatórios, para verificar se a técnica utilizada está correta;
+Oriente a forma de uso dos medicamentos, diferenciando os medicamentos de uso contínuo daqueles usados para alívio dos sintomas;
+Avalie se a adesão está sendo mantida e ofereça dicas para facilitar a rotina de uso dos medicamentos, incorporando em sua rotina lembretes ou ajustes na forma de administração;
+Explore, junto ao paciente, os possíveis fatores desencadeantes (gatilhos) das crises asmáticas, como exposição a ácaros, mofo, fumaça, mudanças climáticas e esforço físico, e forneça orientações individualizadas sobre estratégias para minimização ou eliminação desses fatores.
+Oriente sobre intervenções não farmacológicas no manejo da asma, tais como a prática regular de atividade física, remoção de tapetes e objetos que favoreçam o acúmulo de alérgenos, controle da exposição a animais domésticos e outras medidas de controle ambiental, sempre considerando as condições clínicas, sociais e culturais do paciente.
+Converse sobre a importância do tratamento e resultados terapêuticos esperados.`;
             } else {
                 feedback = `Asma Controlada.
-            O resultado indica que a doença está bem controlada. 
-                -Reforçar com o paciente os resultados positivos e estimular a manter os cuidados relacionados às medidas não farmacológicas e a adesão ao tratamento.`;
+            O resultado indica que a doença está bem controlada.
+Reforce com o paciente os resultados positivos e estimule a manter os cuidados relacionados às medidas não farmacológicas e a adesão ao tratamento.
+`;
             }
             return { result, feedback };
         },
@@ -1289,32 +1331,39 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
 
             let feedback;
             if (result <= 9) {
-                feedback = `Sintomas Leves. 
+                feedback = `Impacto Mínimo. 
             Pacientes com pontuação entre 0 e 9 apresentam níveis de sintomas e impacto mínimo na qualidade de vida.
-                - Reforce a importância de manter a adesão ao tratamento prescrito para prevenir a progressão da doença;
-                - Estimule hábitos saudáveis, como a prática de atividades físicas específicas e a cessação do tabagismo, se aplicável;
-                - Incentivo ao acompanhamento periódico com a equipe de saúde.`;
+Reforce a importância de manter a adesão ao tratamento prescrito para prevenir a progressão da doença;
+Oriente sobre medidas não farmacológicas de cuidado, estimulando hábitos saudáveis, como a prática de atividades físicas específicas e a cessação do tabagismo, se aplicável;
+Se o paciente for fumante, preste as orientações sobre os fluxos de acesso ao Programa de Cessação do Tabagismo de seu município, caso ele tenha interesse;
+Incentive o acompanhamento periódico com a equipe de saúde.
+`;
             } else if (result >= 10 && result <= 19) {
-                feedback = `Sintomas Moderados. 
-            Pacientes com essa classificação apresentam sintomas moderados e um impacto moderado na qualidade de vida.
-                - Reforce a importância da adesão ao tratamento, especialmente o uso correto dos dispositivos inalatórios;
-                - Recomendado, se necessário, a participação em programas de reabilitação pulmonar;
-                - Oriente sobre os sinais de alerta que indicam a necessidade de procurar atendimento médico.`;
+                feedback = `Impacto moderado. 
+            Pacientes com pontuação entre 10 e 19 apresentam sintomas moderados e um impacto moderado na qualidade de vida.
+Solicite que o paciente demonstre a forma como utiliza os dispositivos inalatórios e corrija a(s) etapa(s) que forem necessárias;
+Reforce a importância da adesão ao tratamento e do uso correto dos dispositivos inalatórios;
+Recomende, se necessário, a participação em programas de reabilitação pulmonar;
+Oriente sobre os sinais de alerta que indicam a necessidade de procurar atendimento médico.
+`;
             } else if (result >= 20 && result <= 29) {
-                feedback = `Sintomas Graves. 
-            Pacientes com classificação nesta faixa apresentam sintomas graves e significativos na qualidade de vida.
-                - Realize uma revisão detalhada do tratamento para verificar a adequação do plano terapêutico;
-                - Eduque o paciente sobre o manejo de sintomas graves e como utilizar medicamentos de resgate;
-                - Reforce a importância de evitar fatores agravantes e manter um acompanhamento médico frequente;
-                - Verifique quando foi a última consulta e recomende nova avaliação médica.`;
+                feedback = `Impacto significativo. 
+            Pacientes com pontuação entre 20 e 29 apresentam sintomas graves e significativos na qualidade de vida.
+Realize uma revisão detalhada do tratamento para verificar a adequação do plano terapêutico;
+Eduque o paciente sobre o manejo de sintomas graves e como utilizar medicamentos de resgate;
+Reforce a importância da adoção de medidas não farmacológicas para prevenir fatores agravantes;
+Mantenha um acompanhamento médico frequente;
+Verifique quando foi a última consulta e recomende nova avaliação médica.
+`;
             }
             else {
-                feedback = `Sintomas Muito Graves. 
-            Pacientes com pontuação entre 30 e 40 apresentam sintomas muito graves e um impacto muito significativo na qualidade de vida.
-                - Trabalhe em conjunto com uma equipe multidisciplinar para um manejo integral da DPOC;
-                - Oriente o paciente e cuidadores sobre os cuidados do tratamento e como utilizar os medicamentos prescritos;
-                - Oferece suporte psicológico ou emocional, considerando o impacto na qualidade de vida;
-                - Reforce a importância do acompanhamento rigoroso e possível ajuste terapêutico em curto prazo.`;
+                feedback = `Impacto muito significativo. 
+           Pacientes com pontuação entre 30 e 40 apresentam sintomas muito graves e um impacto muito significativo na qualidade de vida.
+Trabalhe em conjunto com uma equipe multidisciplinar para um manejo integral da DPOC;
+Oriente o paciente e cuidadores sobre os cuidados do tratamento e como utilizar os medicamentos prescritos;
+Ofereça suporte psicológico ou emocional, considerando o impacto na qualidade de vida;
+Reforce a importância do acompanhamento rigoroso e possível ajuste terapêutico em curto prazo.
+`;
             }
             return { result, feedback };
         },
@@ -1456,36 +1505,34 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
             if (result >= 9) {
                 feedback = `Reação Definida
                 A relação entre o medicamento e a reação adversa é bem definida e muito provável.
-                Sugestões de intervenção:
-                    - Documente a reação adversa no prontuário do paciente e faça a notificação ao sistema de farmacovigilância;
-                    - Considere descontinuar o medicamento ou substituí-lo por uma alternativa terapêutica, conforme a gravidade da reação e orientação médica;
-                    - Informe ao paciente sobre os riscos relacionados à medicação e os cuidados necessários;
-                    - Acompanhe de perto o paciente para monitorar possíveis recorrências`;
+Realize a notificação da suspeita do evento adverso no sistema de farmacovigilância da Anvisa, acessando o link: https://www.gov.br/anvisa/pt-br/assuntos/fiscalizacao-e-monitoramento/notificacoes Nesse site, você encontrará o tutorial para efetuar a notificação e as orientações para realizar o cadastro;
+Discuta com o (a) prescritor (a) a descontinuação do medicamento ou sua substituição por outra alternativa terapêutica, conforme a gravidade da reação adversa;
+Informe o paciente sobre os riscos relacionados à medicamentos e os cuidados necessários;
+Acompanhe de perto o paciente para monitorar possíveis recorrências da reação adversa, caso o medicamento não seja substituído`;
             } else if (result >= 5 && result <= 8) {
                 feedback = `Reação Provável
                 A relação entre o medicamento e a reação adversa é provável.
-                Sugestões de intervenção:
-                    - Reforce a importância de monitorar os sintomas e reações do paciente;
-                    - Avalie a possibilidade de reduzir a dose, ajustar o regime de administração ou trocar o medicamento, caso necessário;
-                    - Ofereça orientações claras sobre os sinais de recorrência e o que fazer em caso de novos sintomas;
-                    - Considere um acompanhamento mais frequente do paciente para garantir que a reação não se agrave.`;
+Reforce a importância de monitorar os sintomas e reações do paciente;
+Avalie a possibilidade de reduzir a dose, ajustar o regime de administração ou trocar o medicamento, caso necessário;
+Ofereça orientações claras sobre os sinais de recorrência e o que fazer em caso de novos sintomas;
+Considere um acompanhamento mais frequente do paciente para garantir que a reação não se agrave.
+`;
             } else if (result >= 1 && result <= 4) {
                 feedback = `Reação Possível
                 A relação entre o medicamento e a reação adversa é possível, mas outras causas podem estar envolvidas.
-                Sugestões de intervenção:
-                    - Avalie o histórico do paciente e considere outras possíveis causas para a reação observada;
-                    - Monitore de perto a evolução dos sintomas, realizando exames adicionais, se necessário, para investigar outras condições;
-                    - Se a reação persistir ou piorar, considere ajustes no tratamento ou encaminhamento para uma avaliação médica mais aprofundada;
-                    - Explique ao paciente que a relação com o medicamento não é totalmente definida e reforce a importância de continuar o acompanhamento.`;
+Avalie o histórico do paciente e considere outras possíveis causas para a reação observada;
+Monitore de perto a evolução dos sintomas, realizando exames adicionais, se necessário, para investigar outras condições;
+Se a reação persistir ou piorar, considere encaminhamento para uma avaliação médica mais aprofundada;
+Explique ao paciente que a relação com o medicamento não é totalmente definida e reforce a importância de continuar o acompanhamento.`;
             }
             else {
                 feedback = `Reação Duvidosa
                 A relação entre o medicamento e a reação adversa é duvidosa, ou seja, é improvável que o medicamento tenha causado a reação.
-                Sugestões de intervenção:
-                    - A reação provavelmente não está relacionada ao medicamento, então o tratamento pode ser mantido conforme prescrito;
-                    - Explique ao paciente que, com base na avaliação, a medicação não parece ser a causa da reação observada;
-                    - Se os sintomas persistirem, considere outras possíveis causas e realize a investigação necessária;
-                    - Mantenha o acompanhamento do paciente e forneça orientações sobre cuidados gerais.`;
+A reação provavelmente não está relacionada ao medicamento, então o tratamento pode ser mantido conforme prescrito;
+Explique ao paciente que, com base na avaliação utilizando este instrumento, o medicamento não parece ser a causa da reação observada;
+Se os sintomas persistirem, considere outras possíveis causas e realize a investigação necessária;
+Mantenha o acompanhamento do paciente e forneça orientações sobre cuidados gerais.
+`;
             }
             return { result, feedback };
         },
