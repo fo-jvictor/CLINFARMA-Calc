@@ -4,9 +4,9 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
-import jsPDF from 'jspdf';
 import AlternativeCauseCheckboxRow from '../../utils/constants/alternativeCauseCheckboxRow';
 import { Input } from 'antd';
+import { downloadPDF } from "../../utils/constants/pdfGenerator";
 
 
 export default function ScoreForm({ scoreKey }) {
@@ -102,59 +102,6 @@ export default function ScoreForm({ scoreKey }) {
         setResult({ result: 0, feedback: '' });
         setCurrentState('start');
     }
-    
-    const downloadPDF = () => {
-        const doc = new jsPDF();
-        let yOffset = 10;
-
-        const textoCabecalho = `${score.label}\n\nResultado: ${result.result}\n\nPaciente: ${nomePaciente} \nCRF: ${crf} \nFarmacêutico: ${farmaceutico}\nData: ${data}`;
-        const cabecalho = doc.splitTextToSize(textoCabecalho, 180);
-        cabecalho.forEach(linha => {
-            doc.text(linha, 10, yOffset);
-            yOffset += 8;
-        });
-
-        yOffset += 6;
-        doc.text('Respostas do Questionário:', 10, yOffset);
-        yOffset += 10;
-
-        score.questions.forEach((question, index) => {
-            if (yOffset > 270) {
-                doc.addPage();
-                yOffset = 10;
-            }
-
-            const questionNumber = formatQuestionNumber(index, score);
-            const resposta = selectedOptions[index] || 'Não respondida';
-
-            const textoPergunta = `${questionNumber} ${question.text}`;
-            const textoResposta = `Resposta: ${resposta}`;
-
-            const perguntaPartes = doc.splitTextToSize(textoPergunta, 180);
-            perguntaPartes.forEach(linha => {
-                doc.text(linha, 10, yOffset);
-                yOffset += 6;
-            });
-
-            const respostaPartes = doc.splitTextToSize(textoResposta, 180);
-            respostaPartes.forEach(linha => {
-                doc.text(linha, 10, yOffset);
-                yOffset += 6;
-            });
-
-            yOffset += 4;
-        });
-
-        yOffset += 4;
-        const recomendacoes = doc.splitTextToSize(`Recomendação: ${result.feedback}`, 180);
-        recomendacoes.forEach(linha => {
-            doc.text(linha, 10, yOffset);
-            yOffset += 6;
-        });
-
-        doc.save('feedback.pdf');
-    };
-
 
     const armsQuestions = [
         { prefix: 'T', text: 'Esquece de tomar seus medicamentos?' },
@@ -456,13 +403,14 @@ export default function ScoreForm({ scoreKey }) {
                         </div>
                     </div>
 
-
                     <div className="mt-4 flex gap-4">
                         <Button type="primary" onClick={restartScore}>
                             Refazer Escore
                         </Button>
                         <Tooltip title="Baixar Resultado">
-                            <Button icon={<FontAwesomeIcon icon={faDownload} />} onClick={downloadPDF} />
+                            <Button icon={<FontAwesomeIcon icon={faDownload} />} onClick={downloadPDF(
+                                score, result, selectedOptions, nomePaciente, crf, farmaceutico, data
+                            )} />
                         </Tooltip>
                     </div>
                 </div>

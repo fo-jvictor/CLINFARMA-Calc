@@ -298,32 +298,19 @@ export const scores = [
             Fortaleça com ele os resultados positivos de manter uma boa adesão ao tratamento;
             Incentive o paciente a manter os cuidados relacionados à administração e reposição dos medicamentos.`;
             } else {
-                feedback = `Esse paciente demonstra uma baixa adesão ao tratamento
-                            farmacológico. A baixa adesão ao tratamento pode estar
-                            associada a dificuldades específicas que precisam ser
-                            investigadas e abordadas. Recomendamos avaliar os itens da
-                            escala para identificar se o problema está na administração ou
-                            reposição do medicamento.
-                            Em caso de dificuldades com a administração do medicamento.
-                            Verifique se o paciente compreende os horários e formas de
-                            administração;
-                            Avalie se o esquema terapêutico é compatível com a rotina do
-                            paciente e, se possível, modifique o esquema e/ou discuta com
-                            o(a) prescritor(a) para simplificá-lo;
-                            Oriente o paciente sobre como minimizar e manejar possíveis
-                            efeitos adversos, que podem estar prejudicando a adesão
-                            Investigue causas intencionais ou não intencionais que podem
-                            estar prejudicando a adesão;
-                            Elabore e disponibilize materiais educativos.
-                            Em caso de dificuldades com a reposição do medicamento:
-                            Oriente o paciente sobre como acessar os medicamentos;
-                            necessários, seja em comercial ou farmácias do SUS, explicando
-                            os fluxos para solicitação dos medicamentos;
-                            Explique como organizar a reposição, alterando estratégias como
-                            renovação antecipada de receitas ou lembretes para evitar
-                            esquecimentos;
-                            Caso existam programas de apoio ao paciente ou benefícios
-                            disponíveis, informe como ele pode acessá-los.
+                feedback = `Esse paciente demonstra uma baixa adesão ao tratamento farmacológico. 
+                A baixa adesão ao tratamento pode estar associada a dificuldades específicas que precisam ser investigadas e abordadas. 
+                Recomendamos avaliar os itens da  escala para identificar se o problema está na administração ou reposição do medicamento.
+                Em caso de dificuldades com a administração do medicamento.
+                Verifique se o paciente compreende os horários e formas de administração;
+                Avalie se o esquema terapêutico é compatível com a rotina do paciente e, se possível, modifique o esquema e/ou discuta com o(a) prescritor(a) para simplificá-lo;
+                Oriente o paciente sobre como minimizar e manejar possíveis efeitos adversos, que podem estar prejudicando a adesão.
+                Investigue causas intencionais ou não intencionais que podem estar prejudicando a adesão;
+                Elabore e disponibilize materiais educativos.
+                Em caso de dificuldades com a reposição do medicamento:
+                Oriente o paciente sobre como acessar os medicamentos necessários, seja em comercial ou farmácias do SUS, explicando os fluxos para solicitação dos medicamentos;
+                Explique como organizar a reposição, alterando estratégias como renovação antecipada de receitas ou lembretes para evitar esquecimentos;
+                Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe como ele pode acessá-los.
 `;
             }
             return { result, feedback };
@@ -1061,7 +1048,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
         key: 'dpoc',
         label: 'Teste de Avaliação da Doença Pulmonar Obstrutiva Crônica (DPOC)',
         description: 'Avaliar o impacto da DPOC na vida do paciente e monitorar a progressão da doença ao longo do tempo.',
-        targetAudience: 'Pacientes diagnosticados com Doença Pulmonar Obstrutiva Crônica.',
+        targetAudience: 'Pacientes diagnosticados com DPOC.',
         hintText: 'Quanto maior o escore, mais impacto a DPOC causa na qualidade de vida do paciente.',
         durationText: '3 à 7 minutos',
         optionsType: 'intensidade',
