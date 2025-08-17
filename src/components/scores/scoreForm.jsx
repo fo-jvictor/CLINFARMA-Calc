@@ -408,15 +408,17 @@ export default function ScoreForm({ scoreKey }) {
                             Refazer Escore
                         </Button>
                         <Tooltip title="Baixar Resultado">
-                            <Button icon={<FontAwesomeIcon icon={faDownload} />} onClick={downloadPDF(
-                                score, result, selectedOptions, nomePaciente, crf, farmaceutico, data
-                            )} />
+                            <Button icon={<FontAwesomeIcon icon={faDownload} />} onClick={handleDownload} />
                         </Tooltip>
                     </div>
                 </div>
             </div>
         </Card>
     )
+
+    const handleDownload = () => {
+        downloadPDF(score, result, selectedOptions, nomePaciente, crf, farmaceutico, data)
+    };
 
     const states = {
         start: renderStart,

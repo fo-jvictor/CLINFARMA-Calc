@@ -86,16 +86,39 @@ export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, n
 
         // === Recomendação ===
         yOffset += 4;
-        const recomendacoes = doc.splitTextToSize(`Recomendação: ${result.feedback}`, 180);
-        recomendacoes.forEach((linha) => {
-            doc.text(linha, 10, yOffset);
-            yOffset += 6;
+        doc.setTextColor(0, 102, 51);
+        doc.text("Recomendação:", 10, yOffset);
+        yOffset += 8;
+        doc.setTextColor(0, 0, 0);
+
+        const linhasRecomendacao = result.feedback.split("\n");
+        linhasRecomendacao.forEach((linha) => {
+            if (!linha.trim()) {
+                yOffset += 4; // pula linha em branco
+                return;
+            }
+
+            // Remove todos os espaços iniciais e trata cada linha como texto normal
+            const linhaTratada = linha.trimStart();
+
+            // Quebra o texto com a largura total
+            const partes = doc.splitTextToSize(linhaTratada, 180);
+
+            partes.forEach((p) => {
+                doc.text(p, 10, yOffset); // Sempre alinhado à esquerda (x=10)
+                yOffset += 6;
+            });
+
+            yOffset += 2;
         });
 
         doc.save("feedback.pdf");
     });
 
 };
+
+
+
 
 
 const armsQuestions = [
