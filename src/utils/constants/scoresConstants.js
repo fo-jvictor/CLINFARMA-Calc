@@ -784,9 +784,9 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
             }
         ],
         calculateFunction: (finalValue = []) => {
-            const regime = finalValue.slice(0, 7);
-            const crencas = finalValue.slice(7, 9);
-            const recordacao = finalValue.slice(9, 11);
+            const regime = finalValue.slice(14, 21);
+            const crencas = finalValue.slice(21, 23);
+            const recordacao = finalValue.slice(23, 24);
 
             const countSim = (arr) => {
                 return arr.reduce((acc, value) => {
