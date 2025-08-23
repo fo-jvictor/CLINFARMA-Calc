@@ -38,7 +38,7 @@ export default function HomePage() {
                 CLINFARMA Calc.
             </div>
             <div className="mt-8 text-xl font-semibold text-center">
-                Bem-vindo ao Sistema de Suporte ao Cuidado Farmacêutico do Rio Grande do Sul
+                Bem-vindo ao Clinfarma Calc, sistema de apoio ao Cuidado Farmacêutico
             </div>
             <div className="mt-12 mx-auto max-w-7xl flex gap-8 flex-col lg:flex-row">
                 {cards.map(cardData => (
