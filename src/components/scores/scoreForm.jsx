@@ -417,7 +417,7 @@ export default function ScoreForm({ scoreKey }) {
     )
 
     const handleDownload = () => {
-        downloadPDF(score, result, selectedOptions, nomePaciente, crf, farmaceutico, data)
+        downloadPDF(score, result, selectedOptions, nomePaciente, crf, farmaceutico, data, medicamento)
     };
 
     const states = {
