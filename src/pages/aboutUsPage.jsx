@@ -20,7 +20,7 @@ export default function AboutUsPage() {
                 </div>
             </div>
 
-            <div className="w-full h-full flex flex-col gap-6 p-6 md:p-8">
+            <div className="h-full w-full overflow-auto">
                 <Card
                     title="Nome do Sistema"
                     bordered
@@ -31,7 +31,7 @@ export default function AboutUsPage() {
                     title="Missão e Valores"
                     bordered
                 >
-                    Disponibilizar ferramentas clínicas digitais baseadas em evidências, por meio de um website acessível, para apoiar a prática do Cuidado Farmacêutico e qualificar a atenção à saúde no estado do Rio Grande do Sul.
+                    Disponibilizar ferramentas clínicas digitais baseadas em evidências, por meio de um website acessível, para apoiar a prática do Cuidado Farmacêutico e qualificar a atenção à saúde.
                 </Card>
                 <Card
                     title="Equipe"

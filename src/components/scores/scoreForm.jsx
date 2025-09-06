@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import AlternativeCauseCheckboxRow from '../../utils/constants/alternativeCauseCheckboxRow';
 import { Input } from 'antd';
 import { downloadPDF } from "../../utils/constants/pdfGenerator";
+import { message } from "antd";
 
 
 export default function ScoreForm({ scoreKey }) {
@@ -73,7 +74,26 @@ export default function ScoreForm({ scoreKey }) {
     };
 
     const handleFinishForm = () => {
-        // Lógica para calcular a pontuação
+        const allAnswered = score.questions.every((question, index) => {
+            if (question.type === "text-input") {
+                return selectedOptions[index] && selectedOptions[index].trim() !== "";
+            }
+
+            if (question.type === "rucam-alternative-causes") {
+                if (rucamState.highlyProbable) return true;
+                const allGroupIAnswered = Object.values(rucamState.groupI).every(v => v !== undefined && v !== null);
+                const allGroupIIAnswered = Object.values(rucamState.groupII).every(v => v !== undefined && v !== null);
+                return allGroupIAnswered && allGroupIIAnswered;
+            }
+
+            return selectedOptions[index] !== undefined && selectedOptions[index] !== null;
+        });
+
+        if (!allAnswered) {
+            message.error("Por favor, responda todas as perguntas antes de continuar.");
+            return;
+        }
+
         let finalValue = [...selectedOptions];
 
         if (score.key === 'lhp') {

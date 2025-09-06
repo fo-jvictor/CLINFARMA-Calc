@@ -300,7 +300,7 @@ export const scores = [
             } else {
                 feedback = `Esse paciente demonstra uma baixa adesão ao tratamento farmacológico. 
                 A baixa adesão ao tratamento pode estar associada a dificuldades específicas que precisam ser investigadas e abordadas. 
-                Recomendamos avaliar os itens da  escala para identificar se o problema está na administração ou reposição do medicamento.
+                Recomendamos avaliar os itens da escala para identificar se o problema está na administração ou reposição do medicamento.
                 Em caso de dificuldades com a administração do medicamento.
                 Verifique se o paciente compreende os horários e formas de administração;
                 Avalie se o esquema terapêutico é compatível com a rotina do paciente e, se possível, modifique o esquema e/ou discuta com o(a) prescritor(a) para simplificá-lo;
