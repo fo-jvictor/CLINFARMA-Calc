@@ -20,7 +20,8 @@ export default function AboutUsPage() {
                 </div>
             </div>
 
-            <div className="h-full w-full overflow-auto">
+            <div className="w-full h-full overflow-auto">
+                <div className="flex flex-col gap-6 p-6 md:p-8">
                 <Card
                     title="Nome do Sistema"
                     bordered
@@ -40,6 +41,7 @@ export default function AboutUsPage() {
                     A criação de conteúdo foi realizada pela mestranda Marina Gassen e o desenvolvimento do sistema web pelos graduandos Giovanna Mello e João Victor Fernandes, todos vinculados à Universidade Federal de Ciências da Saúde de Porto Alegre (UFCSPA) e orientados pelas professoras Dra. Carine Raquel Blatt e Dra. Cecília Dias.
                     Todos os elementos que constituem esse website foram validados pela equipe do Departamento de Assistência Farmacêutica da Secretaria da Saúde do Estado do Rio Grande do Sul.
                 </Card>
+                </div>
             </div>
         </div>
     );
