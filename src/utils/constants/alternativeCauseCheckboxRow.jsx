@@ -43,19 +43,21 @@ export default function AlternativeCauseCheckboxRow({
 
   if (isHighlyProbableCheckbox) {
     return (
-      <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-2">
-        <span className="text-sm">{label}</span>
-        <Checkbox checked={highlyProbable} onChange={handleHighlyProbableToggle}>
-          {label}
-        </Checkbox>
+      <div className="flex items-start gap-4 mb-2">
+        <span className="text-sm flex-1 min-w-0">{label}</span>
+        <div className="flex-shrink-0">
+          <Checkbox checked={highlyProbable} onChange={handleHighlyProbableToggle}>
+            {label}
+          </Checkbox>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-2">
-      <span className="text-sm">{label}</span>
-      <div className="flex gap-4">
+    <div className="flex items-start gap-4 mb-2">
+      <span className="text-sm flex-1 min-w-0 break-words">{label}</span>
+      <div className="flex gap-4 flex-shrink-0">
         <Checkbox
           checked={state.negative}
           onChange={handleChange('negative')}

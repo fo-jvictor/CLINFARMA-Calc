@@ -145,7 +145,7 @@ function formatQuestionNumber(index, score) {
     return `${index + 1}.`;
 }
 
-export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, nomeFarmaceutico, data, medicamento) {
+export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, nomeFarmaceutico, data, medicamento, medications) {
     // Validação de segurança para os parâmetros
     if (!score || !score.questions || !Array.isArray(score.questions)) {
         console.error('Score inválido ou sem questões definidas');
@@ -290,6 +290,94 @@ export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, n
         console.error('Erro ao processar questões:', error);
         doc.text('Erro ao processar questões do questionário', 10, yOffset);
         yOffset += 20;
+    }
+
+    // === Medicamentos (apenas para BMQ) ===
+    if (score.key === 'bmq' && medications && medications.length > 0) {
+        if (yOffset > pageHeight - 50) {
+            doc.addPage();
+            yOffset = 25;
+        }
+
+        // Adiciona espaço antes da seção de medicamentos
+        yOffset += 8;
+        
+        // Título da seção de medicamentos
+        doc.setFontSize(15);
+        doc.setFont(undefined, 'bold');
+        doc.setTextColor(0, 102, 51);
+        doc.text("Medicamentos Utilizados na Última Semana:", 10, yOffset);
+        yOffset += 8;
+
+        // Linha decorativa abaixo do título
+        doc.setDrawColor(0, 102, 51);
+        doc.setLineWidth(0.3);
+        doc.line(10, yOffset, 60, yOffset);
+        yOffset += 6;
+
+        // Dados dos medicamentos em formato vertical
+        doc.setFont(undefined, 'normal');
+        doc.setFontSize(10);
+        
+        medications.forEach((med, index) => {
+            // Verifica se precisa de nova página
+            if (yOffset > pageHeight - 60) {
+                doc.addPage();
+                yOffset = 25;
+            }
+
+            // Título do medicamento
+            doc.setFont(undefined, 'bold');
+            doc.setFontSize(11);
+            doc.setTextColor(0, 102, 51);
+            doc.text(`Medicamento ${index + 1}:`, 10, yOffset);
+            yOffset += 6;
+
+            // Dados do medicamento em formato de lista
+            doc.setFont(undefined, 'normal');
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            
+            const medData = [
+                { label: 'Nome:', value: med.name || 'Não informado' },
+                { label: 'Dosagem:', value: med.dosage || 'Não informado' },
+                { label: 'Frequência diária:', value: med.timesPerDay || 'Não informado' },
+                { label: 'Comprimidos por uso:', value: med.pills || 'Não informado' },
+                { label: 'Vezes que esqueceu:', value: med.missed || 'Não informado' },
+                { label: 'Eficácia percebida:', value: med.effectiveness || 'Não informado' },
+                { label: 'Causou incômodo:', value: med.botherness || 'Não informado' }
+            ];
+
+            medData.forEach((item, itemIndex) => {
+                // Verifica se precisa de nova página
+                if (yOffset > pageHeight - 20) {
+                    doc.addPage();
+                    yOffset = 25;
+                }
+
+                doc.setFont(undefined, 'bold');
+                doc.text(`${item.label}`, 15, yOffset);
+                doc.setFont(undefined, 'normal');
+                
+                // Quebra texto se necessário para o valor
+                const valueLines = doc.splitTextToSize(item.value, maxWidth - 30);
+                valueLines.forEach((line, lineIndex) => {
+                    doc.text(line, 15, yOffset + 5 + (lineIndex * 5));
+                });
+                
+                yOffset += 5 + (valueLines.length * 5) + 3;
+            });
+            
+            // Linha separadora entre medicamentos (exceto no último)
+            if (index < medications.length - 1) {
+                doc.setDrawColor(200, 200, 200);
+                doc.setLineWidth(0.3);
+                doc.line(10, yOffset, pageWidth - 10, yOffset);
+                yOffset += 8;
+            }
+        });
+        
+        yOffset += 8; // Espaço extra após a tabela de medicamentos
     }
 
     // === Recomendação ===

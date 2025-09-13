@@ -444,10 +444,8 @@ export const scores = [
         calculateFunction: (finalValue = []) => {
             const auxMap = {
                 q2_4: 0,
-
                 q1_2: 1, q1_3: 1,
                 q7_1: 0, q7_2: 0,
-
                 q6_1: 0, q6_2: 0,
             };
 
@@ -558,59 +556,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
         ],
         questions: [
             {
-                text: 'Quais medicações você usou na ÚLTIMA SEMANA? (Nome e dosagem)',
-                type: 'text-input'
-            },
-            {
-                text: 'Por quantos dias você tomou cada remédio?',
-                type: 'text-input'
-            },
-            {
-                text: 'Quantas vezes por dia você tomou cada remédio?',
-                type: 'text-input'
-            },
-            {
-                text: 'Quantos comprimidos você tomou em cada vez?',
-                type: 'text-input'
-            },
-            {
-                text: 'Quantas vezes você esqueceu de tomar algum comprimido?',
-                type: 'text-input'
-            },
-            {
-                text: 'Como essa medicação funciona para você? (1 = funciona bem, 2 = regular, 3 = não funciona bem)',
-                type: 'text-input'
-            },
-            {
-                text: 'Alguma das suas medicações causa problemas para você? Se sim, quais?',
-                type: 'text-input'
-            },
-            {
-                text: 'Quanto essa medicação incomodou você (listar medicações)? (Muito, um pouco, muito pouco, nunca)',
-                type: 'text-input'
-            },
-            {
-                text: 'De que forma você é incomodado por essa medicação?',
-                type: 'text-input'
-            },
-            {
-                text: 'Quanto é difícil para você abrir ou fechar a embalagem? (Muito, um pouco, não muito)',
-                type: 'text-input'
-            },
-            {
-                text: 'Quanto é difícil para você ler o que está escrito na embalagem? (Muito, um pouco, não muito)',
-                type: 'text-input'
-            },
-            {
-                text: 'Quanto é difícil para você lembrar de tomar todo o remédio? (Muito, um pouco, não muito)',
-                type: 'text-input'
-            },
-            {
-                text: 'Quanto é difícil para você conseguir o medicamento? (Muito, um pouco, não muito)',
-                type: 'text-input'
-            },
-            {
-                text: 'Quanto é difícil para você tomar tantos comprimidos ao mesmo tempo? (Muito, um pouco, não muito)',
+                text: 'Adicione e preencha as informações sobre medicações usadas na ULTIMA SEMANA',
                 type: 'text-input'
             },
             {

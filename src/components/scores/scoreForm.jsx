@@ -8,6 +8,7 @@ import AlternativeCauseCheckboxRow from '../../utils/constants/alternativeCauseC
 import { Input } from 'antd';
 import { downloadPDF } from "../../utils/constants/pdfGenerator";
 import { message } from "antd";
+import BmqScore from "./BmqScore";
 
 
 export default function ScoreForm({ scoreKey }) {
@@ -29,6 +30,9 @@ export default function ScoreForm({ scoreKey }) {
         groupI: {},
         groupII: {},
     });
+    const [medications, setMedications] = useState([
+        { name: "", dosage: "", days: "", timesPerDay: "", pills: "", missed: "", effectiveness: "", botherness: "" }
+    ]);
 
     useEffect(() => {
         const rucamQuestion = score.questions.find(q => q.type === 'rucam-alternative-causes');
@@ -73,21 +77,22 @@ export default function ScoreForm({ scoreKey }) {
         ]);
     };
 
-    const handleFinishForm = () => {
-        const allAnswered = score.questions.every((question, index) => {
-            if (question.type === "text-input") {
-                return selectedOptions[index] && selectedOptions[index].trim() !== "";
-            }
-
+    function allQuestionsAreAnswered() {
+        return score.questions.every((question, index) => {
             if (question.type === "rucam-alternative-causes") {
                 if (rucamState.highlyProbable) return true;
                 const allGroupIAnswered = Object.values(rucamState.groupI).every(v => v !== undefined && v !== null);
                 const allGroupIIAnswered = Object.values(rucamState.groupII).every(v => v !== undefined && v !== null);
                 return allGroupIAnswered && allGroupIIAnswered;
             }
-
+            if (question.type === "text-input") return true;
             return selectedOptions[index] !== undefined && selectedOptions[index] !== null;
         });
+    }
+
+
+    const handleFinishForm = () => {
+        const allAnswered = allQuestionsAreAnswered();
 
         if (!allAnswered) {
             message.error("Por favor, responda todas as perguntas antes de continuar.");
@@ -106,6 +111,12 @@ export default function ScoreForm({ scoreKey }) {
                 }
             );
         }
+
+        if (score.key === 'bmq') {
+            finalValue.push(medications)
+        }
+
+        console.log("final value: ", finalValue);
         const finalResult = score.calculateFunction(finalValue);
         finalResult.feedback = finalResult.feedback + `\nLembre-se de registrar o resultado desse escore na aba Cuidar+ do sistema AME, no respectivo serviço clínico realizado`
         setResult(finalResult);
@@ -229,7 +240,7 @@ export default function ScoreForm({ scoreKey }) {
             </p>
         }>
             {score.questions.map((question, index) => {
-                if (question.type === 'text-input') {
+                if (score.key === "bmq" && question.type === "text-input") {
                     return (
                         <div key={index} className="mb-6">
                             <div className="flex items-start gap-2 mb-3">
@@ -242,22 +253,11 @@ export default function ScoreForm({ scoreKey }) {
                             </div>
 
                             <div className="ml-6">
-                                <Input.TextArea
-                                    rows={4}
-                                    value={selectedOptions[index] || ''}
-                                    onChange={e => handleScoreSelection(index, e.target.value)}
-                                    placeholder="Digite sua resposta aqui..."
-                                />
+                                <BmqScore medications={medications} setMedications={setMedications} />
                             </div>
-
-                            {index < score.questions.length - 1 && (
-                                <div className="my-4 w-full h-[1px] bg-[#ededed]" />
-                            )}
                         </div>
                     );
                 }
-
-
                 if (question.type === 'rucam-alternative-causes') {
                     return (
                         <div key={index} className="mb-6">
@@ -437,7 +437,7 @@ export default function ScoreForm({ scoreKey }) {
     )
 
     const handleDownload = () => {
-        downloadPDF(score, result, selectedOptions, nomePaciente, crf, farmaceutico, data, medicamento)
+        downloadPDF(score, result, selectedOptions, nomePaciente, crf, farmaceutico, data, medicamento, medications)
     };
 
     const states = {
