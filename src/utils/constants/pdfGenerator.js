@@ -50,32 +50,39 @@ function formatResponse(question, selectedOption, index, score) {
         if (typeof selectedOption === 'object' && selectedOption && selectedOption.type === 'rucam-alternative-causes') {
             let response = [];
             
+            // Causa alternativa altamente provável
             if (selectedOption.highlyProbable) {
-                response.push("✓ Causa alternativa altamente provável");
+                response.push("☑ Causa alternativa altamente provável");
+            } else {
+                response.push("☐ Causa alternativa altamente provável");
             }
             
+            // Grupo I
             if (selectedOption.groupI && Array.isArray(selectedOption.groupI)) {
-                response.push("Grupo I:");
+                response.push("\nGrupo I:");
                 selectedOption.groupI.forEach((item, i) => {
                     if (item && typeof item === 'object') {
-                        if (item.negative) {
-                            response.push(`  - ${question.groupI[i]}: Negativo`);
-                        } else if (item.notDone) {
-                            response.push(`  - ${question.groupI[i]}: Não realizado`);
-                        }
+                        const itemName = question.groupI[i];
+                        const negativeStatus = item.negative ? "☑" : "☐";
+                        const notDoneStatus = item.notDone ? "☑" : "☐";
+                        response.push(`  ${itemName}:`);
+                        response.push(`    Negativo: ${negativeStatus}`);
+                        response.push(`    Não feito: ${notDoneStatus}`);
                     }
                 });
             }
             
+            // Grupo II
             if (selectedOption.groupII && Array.isArray(selectedOption.groupII)) {
-                response.push("Grupo II:");
+                response.push("\nGrupo II:");
                 selectedOption.groupII.forEach((item, i) => {
                     if (item && typeof item === 'object') {
-                        if (item.negative) {
-                            response.push(`  - ${question.groupII[i]}: Negativo`);
-                        } else if (item.notDone) {
-                            response.push(`  - ${question.groupII[i]}: Não realizado`);
-                        }
+                        const itemName = question.groupII[i];
+                        const negativeStatus = item.negative ? "☑" : "☐";
+                        const notDoneStatus = item.notDone ? "☑" : "☐";
+                        response.push(`  ${itemName}:`);
+                        response.push(`    Negativo: ${negativeStatus}`);
+                        response.push(`    Não feito: ${notDoneStatus}`);
                     }
                 });
             }
@@ -145,15 +152,15 @@ function formatQuestionNumber(index, score) {
     return `${index + 1}.`;
 }
 
-export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, nomeFarmaceutico, data, medicamento, medications) {
+export function downloadPDF(score, result, finalValue, nomePaciente, crf, nomeFarmaceutico, data, medicamento, medications) {
     // Validação de segurança para os parâmetros
     if (!score || !score.questions || !Array.isArray(score.questions)) {
         console.error('Score inválido ou sem questões definidas');
         return;
     }
 
-    if (!Array.isArray(selectedOptions)) {
-        console.error('selectedOptions deve ser um array');
+    if (!Array.isArray(finalValue)) {
+        console.error('finalValue deve ser um array');
         return;
     }
 
@@ -161,6 +168,14 @@ export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, n
         console.error('Resultado inválido');
         return;
     }
+
+    // Extrai selectedOptions do finalValue (remove os objetos especiais como RUCAM e BMQ)
+    const selectedOptions = finalValue.filter(item => 
+        item === null || 
+        typeof item === 'number' || 
+        typeof item === 'string' ||
+        (typeof item === 'object' && item !== null && !item.type)
+    );
 
     // Garante que selectedOptions tenha o tamanho correto
     const safeSelectedOptions = [...selectedOptions];
@@ -250,7 +265,28 @@ export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, n
             }
 
             const questionNumber = formatQuestionNumber(index, score);
-            const resposta = formatResponse(question, safeSelectedOptions[index], index, score);
+            
+            // Para questões RUCAM, mostra apenas um resumo
+            let resposta;
+            if (question.type === 'rucam-alternative-causes') {
+                const rucamData = finalValue.find(option => 
+                    option && typeof option === 'object' && option.type === 'rucam-alternative-causes'
+                );
+                if (rucamData) {
+                    if (rucamData.highlyProbable) {
+                        resposta = "Causa alternativa altamente provável selecionada";
+                    } else {
+                        const groupINegatives = rucamData.groupI?.filter(item => item?.negative).length || 0;
+                        const groupIINegatives = rucamData.groupII?.filter(item => item?.negative).length || 0;
+                        const totalNegatives = groupINegatives + groupIINegatives;
+                        resposta = `Avaliação de causas alternativas: ${totalNegatives} itens marcados como negativos (ver seção detalhada abaixo)`;
+                    }
+                } else {
+                    resposta = "Não respondida";
+                }
+            } else {
+                resposta = formatResponse(question, safeSelectedOptions[index], index, score);
+            }
 
             // Número e texto da pergunta
             doc.setFont(undefined, 'bold');
@@ -290,6 +326,179 @@ export function downloadPDF(score, result, selectedOptions, nomePaciente, crf, n
         console.error('Erro ao processar questões:', error);
         doc.text('Erro ao processar questões do questionário', 10, yOffset);
         yOffset += 20;
+    }
+
+    // === RUCAM Alternative Causes (apenas para LHP) ===
+    if (score.key === 'lhp') {
+        const rucamQuestion = score.questions.find(q => q.type === 'rucam-alternative-causes');
+        const rucamData = finalValue.find(option => 
+            option && typeof option === 'object' && option.type === 'rucam-alternative-causes'
+        );
+        
+        if (rucamQuestion && rucamData) {
+            if (yOffset > pageHeight - 50) {
+                doc.addPage();
+                yOffset = 25;
+            }
+
+            // Adiciona espaço antes da seção RUCAM
+            yOffset += 10;
+            
+            // Título da seção RUCAM
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(0, 102, 51);
+            doc.text("CAUSAS ALTERNATIVAS CONSIDERADAS", 10, yOffset);
+            yOffset += 10;
+
+            // Linha separadora
+            doc.setDrawColor(0, 102, 51);
+            doc.setLineWidth(0.5);
+            doc.line(10, yOffset, pageWidth - 10, yOffset);
+            yOffset += 10;
+
+            // Causa alternativa altamente provável - DESTAQUE ESPECIAL
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(0, 0, 0);
+            
+            if (rucamData.highlyProbable) {
+                doc.setTextColor(220, 20, 20); // Vermelho para destacar
+                doc.text("[X] CAUSA ALTAMENTE PROVAVEL - SELECIONADA", 15, yOffset);
+                doc.setTextColor(0, 0, 0);
+                yOffset += 8;
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'normal');
+                doc.text("(Invalida todas as outras avaliacoes)", 20, yOffset);
+                yOffset += 15;
+            } else {
+                doc.setTextColor(0, 0, 0);
+                doc.text("[ ] Causa altamente provavel - NAO selecionada", 15, yOffset);
+                yOffset += 10;
+            }
+
+            // Só mostra os grupos se a causa altamente provável NÃO foi selecionada
+            if (!rucamData.highlyProbable) {
+                // Grupo I
+                if (rucamData.groupI && Array.isArray(rucamData.groupI)) {
+                    doc.setFontSize(14);
+                    doc.setFont(undefined, 'bold');
+                    doc.setTextColor(0, 102, 51);
+                    doc.text("GRUPO I", 15, yOffset);
+                    yOffset += 8;
+
+                    doc.setFont(undefined, 'normal');
+                    doc.setFontSize(12);
+                    doc.setTextColor(0, 0, 0);
+                    
+                    rucamData.groupI.forEach((item, i) => {
+                        if (item && typeof item === 'object') {
+                            // Verifica se precisa de nova página
+                            if (yOffset > pageHeight - 40) {
+                                doc.addPage();
+                                yOffset = 25;
+                            }
+
+                            const itemName = rucamQuestion.groupI[i];
+                            
+                            // Nome do item
+                            doc.setFont(undefined, 'bold');
+                            doc.setFontSize(12);
+                            const itemLines = doc.splitTextToSize(itemName, maxWidth - 30);
+                            itemLines.forEach(line => {
+                                doc.text(line, 20, yOffset);
+                                yOffset += 5;
+                            });
+                            
+                            // Status dos checkboxes - MUITO CLARO
+                            doc.setFont(undefined, 'normal');
+                            doc.setFontSize(11);
+                            
+                            if (item.negative) {
+                                doc.setTextColor(0, 150, 0); // Verde para negativo
+                                doc.text("  - Negativo: [X]", 25, yOffset);
+                            } else {
+                                doc.setTextColor(100, 100, 100); // Cinza para não marcado
+                                doc.text("  - Negativo: [ ]", 25, yOffset);
+                            }
+                            yOffset += 5;
+                            
+                            if (item.notDone) {
+                                doc.setTextColor(0, 150, 0); // Verde para não feito
+                                doc.text("  - Nao feito: [X]", 25, yOffset);
+                            } else {
+                                doc.setTextColor(100, 100, 100); // Cinza para não marcado
+                                doc.text("  - Nao feito: [ ]", 25, yOffset);
+                            }
+                            
+                            doc.setTextColor(0, 0, 0); // Reset cor
+                            yOffset += 10;
+                        }
+                    });
+                }
+
+                // Grupo II
+                if (rucamData.groupII && Array.isArray(rucamData.groupII)) {
+                    yOffset += 5;
+                    doc.setFontSize(14);
+                    doc.setFont(undefined, 'bold');
+                    doc.setTextColor(0, 102, 51);
+                    doc.text("GRUPO II", 15, yOffset);
+                    yOffset += 8;
+
+                    doc.setFont(undefined, 'normal');
+                    doc.setFontSize(12);
+                    doc.setTextColor(0, 0, 0);
+                    
+                    rucamData.groupII.forEach((item, i) => {
+                        if (item && typeof item === 'object') {
+                            // Verifica se precisa de nova página
+                            if (yOffset > pageHeight - 40) {
+                                doc.addPage();
+                                yOffset = 25;
+                            }
+
+                            const itemName = rucamQuestion.groupII[i];
+                            
+                            // Nome do item
+                            doc.setFont(undefined, 'bold');
+                            doc.setFontSize(12);
+                            const itemLines = doc.splitTextToSize(itemName, maxWidth - 30);
+                            itemLines.forEach(line => {
+                                doc.text(line, 20, yOffset);
+                                yOffset += 5;
+                            });
+                            
+                            // Status dos checkboxes - MUITO CLARO
+                            doc.setFont(undefined, 'normal');
+                            doc.setFontSize(11);
+                            
+                            if (item.negative) {
+                                doc.setTextColor(0, 150, 0); // Verde para negativo
+                                doc.text("  - Negativo: [X]", 25, yOffset);
+                            } else {
+                                doc.setTextColor(100, 100, 100); // Cinza para não marcado
+                                doc.text("  - Negativo: [ ]", 25, yOffset);
+                            }
+                            yOffset += 5;
+                            
+                            if (item.notDone) {
+                                doc.setTextColor(0, 150, 0); // Verde para não feito
+                                doc.text("  - Nao feito: [X]", 25, yOffset);
+                            } else {
+                                doc.setTextColor(100, 100, 100); // Cinza para não marcado
+                                doc.text("  - Nao feito: [ ]", 25, yOffset);
+                            }
+                            
+                            doc.setTextColor(0, 0, 0); // Reset cor
+                            yOffset += 10;
+                        }
+                    });
+                }
+            }
+            
+            yOffset += 10; // Espaço extra após a seção RUCAM
+        }
     }
 
     // === Medicamentos (apenas para BMQ) ===

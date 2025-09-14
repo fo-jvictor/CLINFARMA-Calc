@@ -68,7 +68,6 @@ export default function ScoreForm({ scoreKey }) {
         }));
     };
 
-
     const handleScoreSelection = (questionIndex, value) => {
         setSelectedOptions(prev => [
             ...prev.slice(0, questionIndex),
@@ -116,7 +115,6 @@ export default function ScoreForm({ scoreKey }) {
             finalValue.push(medications)
         }
 
-        console.log("final value: ", finalValue);
         const finalResult = score.calculateFunction(finalValue);
         finalResult.feedback = finalResult.feedback + `\nLembre-se de registrar o resultado desse escore na aba Cuidar+ do sistema AME, no respectivo serviço clínico realizado`
         setResult(finalResult);
@@ -437,7 +435,24 @@ export default function ScoreForm({ scoreKey }) {
     )
 
     const handleDownload = () => {
-        downloadPDF(score, result, selectedOptions, nomePaciente, crf, farmaceutico, data, medicamento, medications)
+        let finalValue = [...selectedOptions];
+
+        if (score.key === 'lhp') {
+            finalValue.push(
+                {
+                    type: 'rucam-alternative-causes',
+                    groupI: Object.values(rucamState.groupI),
+                    groupII: Object.values(rucamState.groupII),
+                    highlyProbable: rucamState.highlyProbable,
+                }
+            );
+        }
+
+        if (score.key === 'bmq') {
+            finalValue.push(medications)
+        }
+
+        downloadPDF(score, result, finalValue, nomePaciente, crf, farmaceutico, data, medicamento, medications)
     };
 
     const states = {

@@ -443,13 +443,14 @@ export const scores = [
         ],
         calculateFunction: (finalValue = []) => {
             const auxMap = {
-                q2_4: 0,
                 q1_2: 1, q1_3: 1,
+                q2_4: 0,
                 q7_1: 0, q7_2: 0,
                 q6_1: 0, q6_2: 0,
             };
 
             finalValue = finalValue.map(value => auxMap[value] !== undefined ? auxMap[value] : value);
+            console.log("final value depois do map: ", finalValue);
 
             const normalValues = finalValue.filter(v => typeof v === 'number');
             const altCause = finalValue.find(v => v && typeof v === 'object' && v.type === 'rucam-alternative-causes');
