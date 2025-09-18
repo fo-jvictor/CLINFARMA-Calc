@@ -1,6 +1,6 @@
 
 import { Link, useResolvedPath } from "react-router-dom";
-import LogoRS from '../../assets/img/logo.png';
+import LogoClinfarmacalc from '../../assets/img/logo-clinfarmacalc.png'
 
 export default function Navbar() {
 
@@ -29,13 +29,12 @@ export default function Navbar() {
     return (
         <div className="fixed top-0 left-0 h-24 w-full bg-white">
             <div className="w-full h-full flex justify-between px-4 md:px-16">
-                <div className="w-full h-auto max-w-56">
+                <div className="w-full h-auto max-w-56 flex items-center">
                     <Link to="/">
-                        <div
-                            className="w-full h-full bg-center bg-no-repeat bg-contain"
-                            style={{
-                                backgroundImage: '',
-                            }}
+                        <img
+                            src={LogoClinfarmacalc}
+                            alt="Clinfarma Calc"
+                            className="h-12 w-auto object-contain"
                         />
                     </Link>
                 </div>
