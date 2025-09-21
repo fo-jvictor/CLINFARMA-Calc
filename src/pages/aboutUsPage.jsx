@@ -29,12 +29,6 @@ export default function AboutUsPage() {
                     CLINFARMA Calc é a sigla para "Calculadora de Escores em Cuidado Farmacêutico", uma ferramenta desenvolvida para apoiar farmacêuticos na prática clínica, por meio do uso de escores validados.
                 </Card>
                 <Card
-                    title="Missão e Valores"
-                    bordered
-                >
-                    Disponibilizar ferramentas clínicas digitais baseadas em evidências, por meio de um website acessível, para apoiar a prática do Cuidado Farmacêutico e qualificar a atenção à saúde.
-                </Card>
-                <Card
                     title="Equipe"
                     bordered
                 >
