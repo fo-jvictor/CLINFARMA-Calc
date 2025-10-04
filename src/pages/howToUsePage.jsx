@@ -18,8 +18,7 @@ export default function HowToUsePage() {
                     Como Utilizar o Sistema
                 </div>
                 <div className="mt-6 text-lg">
-                    Encontre guias sobre navegar pelas funcionalidades do nosso
-                    sistema de forma eficiente.
+                    Encontre guias para navegar pelas funcionalidades do nosso sistema de maneira eficiente
                 </div>
             </div>
 

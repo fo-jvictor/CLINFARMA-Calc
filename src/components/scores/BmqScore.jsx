@@ -33,7 +33,7 @@ const BmqScore = ({ medications, setMedications }) => {
       <div className="min-w-[1000px]">
         {/* Table Header */}
         <div className="grid grid-cols-[200px_120px_120px_120px_120px_150px_180px_100px] gap-2 font-semibold border-b-2 border-gray-300 pb-3 mb-3 text-xs sm:text-sm bg-gray-50 px-2 py-2 rounded-t">
-          <div className="text-center font-bold text-gray-700">Nome da medicação</div>
+          <div className="text-center font-bold text-gray-700">Nome do medicamento</div>
           <div className="text-center font-bold text-gray-700">Dosagem utilizada</div>
           <div className="text-center font-bold text-gray-700">Frequência diária</div>
           <div className="text-center font-bold text-gray-700">Comprimidos por uso</div>
@@ -110,7 +110,7 @@ const BmqScore = ({ medications, setMedications }) => {
 
       <div className="mt-4">
         <Button onClick={addMedication} type="primary" className="bg-blue-600 hover:bg-blue-700">
-          + Adicionar medicação
+          + Adicionar medicamento
         </Button>
       </div>
     </div>

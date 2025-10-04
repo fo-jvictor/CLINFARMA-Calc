@@ -561,7 +561,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 type: 'text-input'
             },
             {
-                text: 'O R falhou em listar (espontaneamente) os medicamentos prescritos no relato inicial?',
+                text: 'O respondente falhou em listar (espontaneamente) os medicamentos prescritos no relato inicial?',
                 prefix: 'R',
                 options: [
                     {
@@ -575,7 +575,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R interrompeu a terapia devido ao atraso na dispensaçao da medicação ou outro motivo?',
+                text: 'O respondente interrompeu a terapia devido ao atraso na dispensaçao da medicação ou outro motivo?',
                 prefix: 'R',
                 options: [
                     {
@@ -589,7 +589,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R relatou alguma falha de dias ou de doses?',
+                text: 'O respondente relatou alguma falha de dias ou de doses?',
                 prefix: 'R',
                 options: [
                     {
@@ -603,7 +603,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R reduziu ou omitiu doses de algum medicamento?',
+                text: 'O respondente reduziu ou omitiu doses de algum medicamento?',
                 prefix: 'R',
                 options: [
                     {
@@ -617,7 +617,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R tomou alguma dose extra ou medicação a mais do que o prescrito?',
+                text: 'O respondente tomou alguma dose extra ou medicação a mais do que o prescrito?',
                 prefix: 'R',
                 options: [
                     {
@@ -631,7 +631,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R respondeu que "não sabia" a alguma das perguntas?',
+                text: 'O respondente respondeu que "não sabia" a alguma das perguntas?',
                 prefix: 'R',
                 options: [
                     {
@@ -645,7 +645,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R se recusou a responder alguma das questões?',
+                text: 'O respondente se recusou a responder alguma das questões?',
                 prefix: 'R',
                 options: [
                     {
@@ -660,7 +660,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
             },
             // Perguntas relacionadas a crenças:
             {
-                text: 'O R relatou "não funciona bem" ou "não sei" na resposta 6?',
+                text: 'O respondente relatou "não funciona bem" ou "não sei" na resposta 6?',
                 prefix: 'C',
                 options: [
                     {
@@ -674,7 +674,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R nomeou as medicações que o incomodam?',
+                text: 'O respondente nomeou as medicações que o incomodam?',
                 prefix: 'C',
                 options: [
                     {
@@ -689,7 +689,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
             },
             // Perguntas relacionadas a recordação:
             {
-                text: 'O R recebe um esquema de múltiplas doses de medicamentos (2 ou mais vezes/dia)?',
+                text: 'O respondente recebe um esquema de múltiplas doses de medicamentos (2 ou mais vezes/dia)?',
                 prefix: 'RE',
                 options: [
                     {
@@ -703,7 +703,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O R "muita dificuldade" ou "alguma dificuldade" em responder a 12?',
+                text: 'O respondente teve "muita dificuldade" ou "alguma dificuldade" em responder a 12?',
                 prefix: 'RE',
                 options: [
                     {
@@ -823,11 +823,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                 options: [
                     {
                         label: 'Nenhuma vez',
-                        value: 1
+                        value: 5
                     },
                     {
                         label: 'Poucas vezes',
-                        value: 2
+                        value: 4
                     },
                     {
                         label: 'Algumas vezes',
@@ -835,11 +835,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                     },
                     {
                         label: 'Maioria das vezes',
-                        value: 4
+                        value: 2
                     },
                     {
                         label: 'Todo o tempo',
-                        value: 5
+                        value: 1
                     }
                 ]
             },
@@ -847,24 +847,24 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                 text: 'Como está o controle da sua asma?',
                 options: [
                     {
-                        label: 'Totalmente descontrolada',
-                        value: 1
-                    },
-                    {
-                        label: 'Pobremente controlada',
-                        value: 2
-                    },
-                    {
-                        label: 'Um pouco controlada',
-                        value: 3
+                        label: 'Muito bem controlada',
+                        value: 5
                     },
                     {
                         label: 'Bem controlada',
                         value: 4
                     },
                     {
-                        label: 'Completamente controlada',
-                        value: 5
+                        label: 'Controlada',
+                        value: 3
+                    },
+                    {
+                        label: 'Descontrolada',
+                        value: 2
+                    },
+                    {
+                        label: 'Muito descontrolada',
+                        value: 1
                     }
                 ]
             },
@@ -873,11 +873,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                 options: [
                     {
                         label: 'De jeito nenhum',
-                        value: 1
+                        value: 5
                     },
                     {
                         label: 'Uma ou duas vezes por semana',
-                        value: 2
+                        value: 4
                     },
                     {
                         label: 'Três a seis vezes por semana',
@@ -885,11 +885,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                     },
                     {
                         label: 'Uma vez ao dia',
-                        value: 4
+                        value: 2
                     },
                     {
                         label: 'Mais que uma vez ao dia',
-                        value: 5
+                        value: 1
                     }
                 ]
             },
@@ -898,11 +898,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                 options: [
                     {
                         label: 'De jeito nenhum',
-                        value: 1
+                        value: 5
                     },
                     {
                         label: 'Uma ou duas vezes',
-                        value: 2
+                        value: 4
                     },
                     {
                         label: 'Uma vez por semana',
@@ -910,11 +910,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                     },
                     {
                         label: 'Duas ou três noites por semana',
-                        value: 4
+                        value: 2
                     },
                     {
                         label: 'Quatro ou mais noites por semana',
-                        value: 5
+                        value: 1
                     }
                 ]
             },
@@ -923,11 +923,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                 options: [
                     {
                         label: 'De jeito nenhum',
-                        value: 1
+                        value: 5
                     },
                     {
                         label: 'Uma vez por semana ou menos',
-                        value: 2
+                        value: 4
                     },
                     {
                         label: 'Poucas vezes por semana',
@@ -935,11 +935,11 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                     },
                     {
                         label: 'Uma ou duas vezes por dia',
-                        value: 4
+                        value: 2
                     },
                     {
                         label: 'Três ou mais vezes por dia',
-                        value: 5
+                        value: 1
                     }
                 ]
             }
@@ -962,13 +962,15 @@ Oriente o paciente quanto às medidas não farmacológicas de controle da asma, 
 Converse sobre a importância do tratamento, tanto farmacológico quanto não farmacológico, e quais resultados terapêuticos são esperados`;
             } else if (result >= 15 && result <= 19) {
                 feedback = `Asma Parcialmente Controlada. 
-O resultado indica que a doença não está bem controlada.
-Solicite que o paciente demonstre como realiza a administração dos medicamentos inalatórios, para verificar se a técnica utilizada está correta;
-Oriente a forma de uso dos medicamentos, diferenciando os medicamentos de uso contínuo daqueles usados para alívio dos sintomas;
-Avalie se a adesão está sendo mantida e ofereça dicas para facilitar a rotina de uso dos medicamentos, incorporando em sua rotina lembretes ou ajustes na forma de administração;
+O resultado indica que a doença não está controlada, o que pode aumentar o risco de crises graves e complicações.
+Verifique se o paciente compreende que a asma é uma doença crônica e exige cuidado contínuo para evitar agravamentos.
+Avalie o uso dos medicamentos prescritos e oriente o paciente quanto ao regime terapêutico, diferenciando os fármacos de uso contínuo (controladores) daqueles indicados para o alívio imediato dos sintomas (broncodilatadores de resgate).
+Certifique-se de que o paciente compreenda corretamente a posologia, a via de administração e o momento apropriado para cada tipo de medicamento;
+Solicite que o paciente demonstre como utiliza os medicamentos inalatórios, a fim de verificar se a técnica está correta;
+Avalie se o paciente está utilizando os medicamentos conforme o que foi prescrito, e se necessário, ofereça orientações sobre como melhorar a adesão;
 Explore, junto ao paciente, os possíveis fatores desencadeantes (gatilhos) das crises asmáticas, como exposição a ácaros, mofo, fumaça, mudanças climáticas e esforço físico, e forneça orientações individualizadas sobre estratégias para minimização ou eliminação desses fatores.
-Oriente sobre intervenções não farmacológicas no manejo da asma, tais como a prática regular de atividade física, remoção de tapetes e objetos que favoreçam o acúmulo de alérgenos, controle da exposição a animais domésticos e outras medidas de controle ambiental, sempre considerando as condições clínicas, sociais e culturais do paciente.
-Converse sobre a importância do tratamento e resultados terapêuticos esperados.`;
+Oriente o paciente quanto às medidas não farmacológicas de controle da asma, incluindo a prática regular de atividade física adequada à condição clínica, e a higienização ambiental — com ênfase na remoção de cortinas, tapetes, bichos de pelúcia e outros objetos que favoreçam o acúmulo de poeira e alérgenos domiciliares.
+Converse sobre a importância do tratamento, tanto farmacológico quanto não farmacológico, e quais resultados terapêuticos são esperados`;
             } else {
                 feedback = `Asma Controlada.
             O resultado indica que a doença está bem controlada.
