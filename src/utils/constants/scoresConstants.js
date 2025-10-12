@@ -452,7 +452,6 @@ export const scores = [
             };
 
             finalValue = finalValue.map(value => auxMap[value] !== undefined ? auxMap[value] : value);
-            console.log("final value depois do map: ", finalValue);
 
             const normalValues = finalValue.filter(v => typeof v === 'number');
             const altCause = finalValue.find(v => v && typeof v === 'object' && v.type === 'rucam-alternative-causes');

@@ -503,7 +503,6 @@ export function downloadPDF(score, result, finalValue, nomePaciente, crf, nomeFa
 
     // === Medicamentos (apenas para BMQ) ===
     if (score.key === 'bmq' && medications && medications.length > 0) {
-        console.log('📄 PDF Generator - Processando medicamentos BMQ:', medications);
         if (yOffset > pageHeight - 50) {
             doc.addPage();
             yOffset = 25;

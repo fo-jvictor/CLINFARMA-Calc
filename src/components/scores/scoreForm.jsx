@@ -448,9 +448,6 @@ export default function ScoreForm({ scoreKey }) {
         }
 
         if (score.key === 'bmq') {
-            console.log('📄 ScoreForm - Processando dados BMQ para download PDF');
-            console.log('📄 ScoreForm - Medicamentos para PDF:', medications);
-            
             finalValue.push(medications)
         }
 
