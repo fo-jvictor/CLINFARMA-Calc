@@ -336,6 +336,8 @@ export const scores = [
         targetAudience: 'Pacientes com suspeita de lesão hepática induzida por medicamento, com valores de ALT três vezes superiores ao valor normal do paciente em exames anteriores.',
         hintText: 'Interpretação: ≥9 Relação altamente provável, 6–8 Relação provável, 3–5 Relação possível, 1–2 Relação improvável, ≤0 Relação excluída.',
         durationText: '20 à 40 minutos',
+        generalInformation: `Importante: Esta escala se refere apenas para lesão hepatocelular, segue definição:
+        Lesão hepatocelular:  É definida por ALT (alanina aminotransferase) maior que 5 vezes o limite superior da normalidade (LSN) ou por uma relação ALT/Fosfatase Alcalina (FA) ≥ 5. Está associada a quadros de lesão aguda.`,
         optionsType: '',
         options: [
             {
