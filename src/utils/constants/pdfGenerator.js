@@ -503,6 +503,7 @@ export function downloadPDF(score, result, finalValue, nomePaciente, crf, nomeFa
 
     // === Medicamentos (apenas para BMQ) ===
     if (score.key === 'bmq' && medications && medications.length > 0) {
+        console.log('📄 PDF Generator - Processando medicamentos BMQ:', medications);
         if (yOffset > pageHeight - 50) {
             doc.addPage();
             yOffset = 25;
@@ -529,6 +530,13 @@ export function downloadPDF(score, result, finalValue, nomePaciente, crf, nomeFa
         doc.setFontSize(10);
         
         medications.forEach((med, index) => {
+            console.log(`📄 PDF Generator - Medicamento ${index + 1}:`, {
+                nome: med.name,
+                bothernessJustification: med.bothernessJustification,
+                difficulties: med.difficulties,
+                todasPropriedades: med
+            });
+
             // Verifica se precisa de nova página
             if (yOffset > pageHeight - 60) {
                 doc.addPage();
@@ -554,7 +562,8 @@ export function downloadPDF(score, result, finalValue, nomePaciente, crf, nomeFa
                 { label: 'Comprimidos por uso:', value: med.pills || 'Não informado' },
                 { label: 'Vezes que esqueceu:', value: med.missed || 'Não informado' },
                 { label: 'Eficácia percebida:', value: med.effectiveness || 'Não informado' },
-                { label: 'Causou incômodo:', value: med.botherness || 'Não informado' }
+                { label: 'Causou incômodo:', value: med.botherness || 'Não informado' },
+                { label: 'Se sim, qual incômodo?:', value: med.bothernessJustification || 'Não informado' }
             ];
 
             medData.forEach((item, itemIndex) => {
@@ -576,6 +585,54 @@ export function downloadPDF(score, result, finalValue, nomePaciente, crf, nomeFa
                 
                 yOffset += 5 + (valueLines.length * 5) + 3;
             });
+
+            // === Seção de Dificuldades ===
+            if (med.difficulties && Array.isArray(med.difficulties)) {
+                // Verifica se precisa de nova página
+                if (yOffset > pageHeight - 40) {
+                    doc.addPage();
+                    yOffset = 25;
+                }
+
+                // Título da seção de dificuldades
+                doc.setFont(undefined, 'bold');
+                doc.setFontSize(10);
+                doc.setTextColor(0, 102, 51);
+                doc.text("Dificuldades encontradas:", 15, yOffset);
+                yOffset += 6;
+
+                // Lista de dificuldades
+                const difficultiesList = [
+                    "Abrir ou fechar a embalagem",
+                    "Ler o que está escrito na embalagem", 
+                    "Lembrar de tomar todo o remédio",
+                    "Conseguir o medicamento",
+                    "Tomar tantos comprimidos ao mesmo tempo"
+                ];
+
+                difficultiesList.forEach((difficulty, diffIndex) => {
+                    // Verifica se precisa de nova página
+                    if (yOffset > pageHeight - 15) {
+                        doc.addPage();
+                        yOffset = 25;
+                    }
+
+                    const difficultyValue = med.difficulties[diffIndex] || 'Não respondido';
+                    
+                    doc.setFont(undefined, 'normal');
+                    doc.setFontSize(9);
+                    doc.setTextColor(0, 0, 0);
+                    doc.text(`• ${difficulty}:`, 20, yOffset);
+                    
+                    doc.setFont(undefined, 'bold');
+                    doc.setTextColor(0, 102, 51);
+                    doc.text(difficultyValue, 20 + doc.getTextWidth(`• ${difficulty}: `), yOffset);
+                    
+                    yOffset += 5;
+                });
+                
+                yOffset += 3; // Espaço extra após as dificuldades
+            }
             
             // Linha separadora entre medicamentos (exceto no último)
             if (index < medications.length - 1) {

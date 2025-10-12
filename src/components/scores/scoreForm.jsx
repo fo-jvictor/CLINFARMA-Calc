@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import AlternativeCauseCheckboxRow from '../../utils/constants/alternativeCauseCheckboxRow';
-import { Input } from 'antd';
 import { downloadPDF } from "../../utils/constants/pdfGenerator";
 import { message } from "antd";
 import BmqScore from "./BmqScore";
@@ -449,6 +448,9 @@ export default function ScoreForm({ scoreKey }) {
         }
 
         if (score.key === 'bmq') {
+            console.log('📄 ScoreForm - Processando dados BMQ para download PDF');
+            console.log('📄 ScoreForm - Medicamentos para PDF:', medications);
+            
             finalValue.push(medications)
         }
 

@@ -662,7 +662,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
             },
             // Perguntas relacionadas a crenças:
             {
-                text: 'O respondente relatou "não funciona bem" ou "não sei" na resposta 6?',
+                text: 'O respondente relatou "não funciona bem" ou "não sei" quanto à eficácia de algum medicamento?',
                 prefix: 'C',
                 options: [
                     {
@@ -705,7 +705,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O respondente teve "muita dificuldade" ou "alguma dificuldade" em responder a 12?',
+                text: 'O respondente teve "muita dificuldade" ou "alguma dificuldade" em responder à questão "Lembrar de tomar todo o remédio"?',
                 prefix: 'RE',
                 options: [
                     {
