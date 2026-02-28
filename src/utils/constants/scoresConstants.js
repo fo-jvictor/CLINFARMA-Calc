@@ -272,19 +272,19 @@ export const scores = [
                 options: [
                     {
                         label: 'Nunca',
-                        value: 4
+                        value: 1
                     },
                     {
                         label: 'Às vezes',
-                        value: 3
-                    },
-                    {
-                        label: 'Quase sempre',
                         value: 2
                     },
                     {
+                        label: 'Quase sempre',
+                        value: 3
+                    },
+                    {
                         label: 'Sempre',
-                        value: 1
+                        value: 4
                     },
                 ]
             },
@@ -295,22 +295,26 @@ export const scores = [
             let feedback;
             if (result <= 12) {
                 feedback = `Esse paciente demonstra uma boa adesão ao tratamento farmacológico. 
-            Fortaleça com ele os resultados positivos de manter uma boa adesão ao tratamento;
-            Incentive o paciente a manter os cuidados relacionados à administração e reposição dos medicamentos.`;
+                Sugere-se, contudo, relacionar esse resultado com outros indicadores de adesão, como a avaliação do controle da doença, a contagem de comprimidos e o registro de retirada de medicamentos, a fim de obter uma análise mais abrangente e confiável.
+                Fortaleça com ele os resultados positivos de manter uma boa adesão ao tratamento; 
+                Incentive o paciente a manter os cuidados relacionados à administração e reposição dos medicamentos. 
+`;
             } else {
                 feedback = `Esse paciente demonstra uma baixa adesão ao tratamento farmacológico. 
                 A baixa adesão ao tratamento pode estar associada a dificuldades específicas que precisam ser investigadas e abordadas. 
                 Recomendamos avaliar os itens da escala para identificar se o problema está na administração ou reposição do medicamento.
-                Em caso de dificuldades com a administração do medicamento.
-                Verifique se o paciente compreende os horários e formas de administração;
-                Avalie se o esquema terapêutico é compatível com a rotina do paciente e, se possível, modifique o esquema e/ou discuta com o(a) prescritor(a) para simplificá-lo;
-                Oriente o paciente sobre como minimizar e manejar possíveis efeitos adversos, que podem estar prejudicando a adesão.
-                Investigue causas intencionais ou não intencionais que podem estar prejudicando a adesão;
-                Elabore e disponibilize materiais educativos.
-                Em caso de dificuldades com a reposição do medicamento:
-                Oriente o paciente sobre como acessar os medicamentos necessários, seja em comercial ou farmácias do SUS, explicando os fluxos para solicitação dos medicamentos;
-                Explique como organizar a reposição, alterando estratégias como renovação antecipada de receitas ou lembretes para evitar esquecimentos;
-                Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe como ele pode acessá-los.
+Em caso de dificuldades com a administração do medicamento:
+Verifique se o paciente compreende os horários e formas de administração;
+Recomenda-se verificar se a forma farmacêutica prescrita está adequada às condições clínicas e ao perfil do paciente, considerando aspectos como capacidade de deglutição e limitações cognitivas ou motoras.
+Avalie se o esquema terapêutico é compatível com a rotina do paciente e, se possível, modifique o esquema e/ou discuta com o(a) prescritor(a) para simplificá-lo;
+Oriente o paciente sobre como minimizar e manejar possíveis efeitos adversos, que podem estar prejudicando a adesão
+Investigue causas intencionais ou não intencionais que podem estar prejudicando a adesão;
+Elabore e disponibilize materiais educativos.
+Em caso de dificuldades com a reposição do medicamento:
+Oriente o paciente sobre como acessar  os medicamentos necessários, seja em comercial ou farmácias do SUS, explicando os fluxos para solicitação dos medicamentos;
+Explique como organizar a reposição, alterando estratégias como renovação antecipada de receitas ou lembretes para evitar esquecimentos;
+Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe como ele pode acessá-los
+´
 `;
             }
             return { result, feedback };
@@ -337,15 +341,16 @@ export const scores = [
         hintText: 'Interpretação: ≥9 Relação altamente provável, 6–8 Relação provável, 3–5 Relação possível, 1–2 Relação improvável, ≤0 Relação excluída.',
         durationText: '20 à 40 minutos',
         generalInformation: `Importante: Esta escala se refere apenas para lesão hepatocelular, segue definição:
-        Lesão hepatocelular:  É definida por ALT (alanina aminotransferase) maior que 5 vezes o limite superior da normalidade (LSN) ou por uma relação ALT/Fosfatase Alcalina (FA) ≥ 5. Está associada a quadros de lesão aguda.`,
+        Lesão hepatocelular:  É definida por ALT (alanina aminotransferase) maior que 5 vezes o limite superior da normalidade (LSN) ou por uma relação ALT/Fosfatase Alcalina (FA) ≥ 5. Está associada a quadros de lesão aguda.
+        Para consultar Hepatotoxicidade, você pode acessar: LIVERTOX -  https://pubmed.ncbi.nlm.nih.gov/31643176/ `,
         optionsType: '',
         options: [
             {
-                label: 'Redução ≥ 50% da ALP dentro de 180 dias',
+                label: 'Redução ≥ 50% da ALT dentro de 180 dias',
                 value: 1
             },
             {
-                label: 'Redução < 50% da ALP dentro de 180 dias',
+                label: 'Redução < 50% da ALT dentro de 180 dias',
                 value: 0
             }
         ],
@@ -558,7 +563,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
         ],
         questions: [
             {
-                text: 'Adicione e preencha as informações sobre medicações usadas na ULTIMA SEMANA',
+                text: 'Adicione e preencha as informações sobre medicamentos usadas na ULTIMA SEMANA',
                 type: 'text-input'
             },
             {
@@ -675,7 +680,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O respondente nomeou as medicações que o incomodam?',
+                text: 'O respondente nomeou os medicamentos que o incomodam?',
                 prefix: 'C',
                 options: [
                     {
@@ -704,7 +709,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O respondente teve "muita dificuldade" ou "alguma dificuldade" em responder à questão "Lembrar de tomar todo o remédio"?',
+                text: 'O respondente teve "muita dificuldade" ou "alguma dificuldade" em responder à questão "Lembrar de tomar todo o medicamento"?',
                 prefix: 'RE',
                 options: [
                     {
@@ -719,15 +724,15 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
             }
         ],
         calculateFunction: (finalValue = []) => {
-            const regime = finalValue.slice(14, 21);
-            const crencas = finalValue.slice(21, 23);
-            const recordacao = finalValue.slice(23, 24);
+            const values = finalValue.slice(1);
+
+            const regime = values.slice(0, 7);
+            const crencas = values.slice(7, 9);
+            const recordacao = values.slice(9, 11);
 
             const countSim = (arr) => {
-                return arr.reduce((acc, value) => {
-                    return acc + (value === 1 ? 1 : 0);
-                }, 0);
-            }
+                return arr.reduce((acc, value) => acc + (value === 1 ? 1 : 0), 0);
+            };
 
             const regimeScore = countSim(regime);
             const crencasScore = countSim(crencas);
@@ -738,16 +743,18 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
             let feedback;
             if (result === 0) {
                 feedback = `Alta adesão
-                O resultado indica que o paciente apresenta uma alta adesão ao tratamento.
-                Reforce com o paciente que uma boa adesão ao tratamento é benéfico para a sua qualidade de vida e discuta os benefícios a longo prazo da continuidade do cuidado;
-                Reforce as instruções sobre o uso correto dos medicamentos, mesmo na ausência de sintomas;
-                Identifique e antecipe possíveis desafios que possam surgir, garantindo que o paciente tenha suporte para continuar o tratamento específico.`;
+                O resultado indica que o paciente apresenta uma alta adesão ao tratamento. 
+                Sugere-se, contudo, relacionar esse resultado com outros indicadores de adesão, como a avaliação do controle da doença, a contagem de comprimidos e o registro de retirada de medicamentos, a fim de obter uma análise mais abrangente e confiável.
+Reforce com o paciente que uma boa adesão  ao tratamento é benéfico para a sua qualidade de vida e discuta os benefícios a longo prazo da continuidade do cuidado;
+Reforce as instruções sobre o uso correto dos medicamentos, mesmo na ausência de sintomas;
+Identifique e antecipe possíveis desafios que possam surgir, garantindo que o paciente tenha suporte para continuar o tratamento específico.`;
             } else if (result === 1) {
                 feedback = `Provável alta adesão
                 O resultado indica uma probabilidade de alta adesão, mas com possibilidade de pequenas dificuldades pontuais.
-                Explore com o paciente possíveis dificuldades isoladas, como esquecimento ou dúvidas sobre o uso correto do medicamento;
-                Explique a importância de seguir o esquema terapêutico corretamente e como isso impacta nos resultados esperados;
-                Sugira estratégias para melhorar a adesão, como uso de lembretes ou organização do horário dos medicamentos.
+Sugere-se, contudo, relacionar esse resultado com outros indicadores de adesão, como a avaliação do controle da doença, a contagem de comprimidos e o registro de retirada de medicamentos, a fim de obter uma análise mais abrangente e confiável.
+Explore com o paciente possíveis dificuldades isoladas, como esquecimento ou dúvidas sobre o uso correto do medicamento;
+Explique a importância de seguir o esquema terapêutico corretamente e como isso impacta nos resultados esperados;
+Sugira estratégias para melhorar a adesão, como uso de lembretes ou organização do horário dos medicamentos.
 `;
             } else if (result === 2) {
                 feedback = `Provável baixa adesão
@@ -761,7 +768,8 @@ Ofereça suporte adicional, como material educativo e oferta de serviços farmac
             else {
                 feedback = `Baixa adesão
                 O resultado indica baixa adesão, o que pode comprometer significativamente os resultados terapêuticos e aumentar o risco de complicações oriundas da não administração dos medicamentos;
-Investigue minuciosamente os fatores que afetam a baixa adesão, considerando aspectos sociais, emocionais e econômicos;
+Investigar minuciosamente os fatores que afetam a baixa adesão (redução da dose por conta própria, quando sente outros sintomas como náusea, tontura, sonolência) considerando aspectos sociais (dificuldade de acesso, baixo nível de escolaridade, falta de apoio familiar) e emocionais (negação da doença, medo, estigma associado à doença), a fim de possibilitar intervenções mais direcionadas e eficazes.
+Investigue os motivos da baixa adesão, como efeitos adversos, complexidade do regime terapêutico, questões financeiras ou falta de compreensão sobre a importância do tratamento;
 Desenvolva um plano de cuidado individualizado para abordar as dificuldades identificadas, como revisões frequentes do esquema terapêutico e estratégias para fortalecer a motivação do paciente;
 Estabeleça uma comunicação aberta e focada em construir confiança, garantindo que o paciente se sinta apoiado no processo de cuidado;
 Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferecer um cuidado integrado e focado na adesão ao tratamento.
@@ -920,7 +928,7 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
                 ]
             },
             {
-                text: 'Quantas vezes você usou o remédio por inalação para alívio?',
+                text: 'Quantas vezes você usou o medicamento por inalação para alívio?',
                 options: [
                     {
                         label: 'De jeito nenhum',
@@ -951,16 +959,16 @@ Trabalhe em conjunto com médicos, enfermeiros e assistentes sociais para oferec
 
             let feedback;
             if (result < 15) {
-                feedback = `Asma Não Controlada. 
-O resultado indica que a doença não está controlada, o que pode aumentar o risco de crises graves e complicações.
+                feedback = `Asma Não Controlada.
+                O resultado indica que a doença não está controlada, o que pode aumentar o risco de crises graves e complicações.
 Verifique se o paciente compreende que a asma é uma doença crônica e exige cuidado contínuo para evitar agravamentos.
-Avalie o uso dos medicamentos prescritos e oriente o paciente quanto ao regime terapêutico, diferenciando os fármacos de uso contínuo (controladores) daqueles indicados para o alívio imediato dos sintomas (broncodilatadores de resgate).
-Certifique-se de que o paciente compreenda corretamente a posologia, a via de administração e o momento apropriado para cada tipo de medicamento;
-Solicite que o paciente demonstre como utiliza os medicamentos inalatórios, a fim de verificar se a técnica está correta;
+Avalie o uso dos medicamentos prescritos e oriente o paciente quanto ao regime terapêutico, diferenciando os fármacos de uso contínuo (controladores) daqueles indicados para o alívio imediato dos sintomas (broncodilatadores de resgate). Certifique-se de que o paciente compreenda corretamente a posologia, a via de administração e o momento apropriado para cada tipo de medicamento;
+Solicite que o paciente demonstre como utiliza  os medicamentos inalatórios, a fim de  verificar se a técnica está correta;
 Avalie se o paciente está utilizando os medicamentos conforme o que foi prescrito, e se necessário, ofereça orientações sobre como melhorar a adesão;
 Explore, junto ao paciente, os possíveis fatores desencadeantes (gatilhos) das crises asmáticas, como exposição a ácaros, mofo, fumaça, mudanças climáticas e esforço físico, e forneça orientações individualizadas sobre estratégias para minimização ou eliminação desses fatores.
-Oriente o paciente quanto às medidas não farmacológicas de controle da asma, incluindo a prática regular de atividade física adequada à condição clínica, e a higienização ambiental — com ênfase na remoção de cortinas, tapetes, bichos de pelúcia e outros objetos que favoreçam o acúmulo de poeira e alérgenos domiciliares.
-Converse sobre a importância do tratamento, tanto farmacológico quanto não farmacológico, e quais resultados terapêuticos são esperados`;
+Oriente o paciente quanto às medidas não farmacológicas de controle da asma, incluindo a prática regular de atividade física adequada à condição clínica, e a higienização ambiental — com ênfase na remoção de cortinas, tapetes, bichos de pelúcia e outros objetos que favoreçam o acúmulo de poeira e alérgenos domiciliares.Converse sobre a importância do tratamento, tanto farmacológico quanto não farmacológico, e quais resultados terapêuticos são esperados.
+Verifique se a farmacoterapia prescrita para asma está de acordo com os protocolos clínicos e diretrizes nacionais e internacionais vigentes, considerando a classificação da gravidade, o nível de controle da doença e o histórico de exacerbações. Caso identifique divergências entre em contato com o prescritor para discussão e possível adequação da conduta terapêutica.
+`;
             } else if (result >= 15 && result <= 19) {
                 feedback = `Asma Parcialmente Controlada. 
 O resultado indica que a doença não está controlada, o que pode aumentar o risco de crises graves e complicações.
@@ -974,7 +982,8 @@ Oriente o paciente quanto às medidas não farmacológicas de controle da asma, 
 Converse sobre a importância do tratamento, tanto farmacológico quanto não farmacológico, e quais resultados terapêuticos são esperados`;
             } else {
                 feedback = `Asma Controlada.
-            O resultado indica que a doença está bem controlada.
+            O resultado indica que a doença está bem controlada. 
+Solicite que o paciente demonstre a técnica de uso do inalatório para verificar se a administração está correta;
 Reforce com o paciente os resultados positivos e estimule a manter os cuidados relacionados às medidas não farmacológicas e a adesão ao tratamento.
 `;
             }
@@ -1276,17 +1285,16 @@ Se o paciente for fumante, preste as orientações sobre os fluxos de acesso ao 
 Incentive o acompanhamento periódico com a equipe de saúde.
 `;
             } else if (result >= 10 && result <= 19) {
-                feedback = `Impacto moderado. 
-            Pacientes com pontuação entre 10 e 19 apresentam sintomas moderados e um impacto moderado na qualidade de vida.
+                feedback = `Impacto moderado.
+                Pacientes com pontuação entre 10 e 19 apresentam sintomas moderados e um impacto moderado na qualidade de vida.
 Solicite que o paciente demonstre a forma como utiliza os dispositivos inalatórios e corrija a(s) etapa(s) que forem necessárias;
 Reforce a importância da adesão ao tratamento e do uso correto dos dispositivos inalatórios;
 Recomende, se necessário, a participação em programas de reabilitação pulmonar;
-Oriente sobre os sinais de alerta que indicam a necessidade de procurar atendimento médico.
-`;
+Oriente sobre os sinais de alerta que indicam a necessidade de procurar atendimento médico, como aumento da falta de ar habitual, piora da tosse, mudança na cor ou aumento da quantidade de escarro, chiado intenso, febre, cansaço acentuado ou dificuldade para realizar atividades habituais.`;
             } else if (result >= 20 && result <= 29) {
                 feedback = `Impacto significativo. 
-            Pacientes com pontuação entre 20 e 29 apresentam sintomas graves e significativos na qualidade de vida.
-Realize uma revisão detalhada do tratamento para verificar a adequação do plano terapêutico;
+                Pacientes com pontuação entre 20 e 29 apresentam sintomas graves e significativos na qualidade de vida.
+Realize uma revisão detalhada do tratamento para verificar a adequação do plano terapêutico. Verifique se a farmacoterapia prescrita para asma está de acordo com os protocolos clínicos e diretrizes nacionais e internacionais vigentes, considerando a classificação da gravidade, o nível de controle da doença e o histórico de exacerbações. Caso identifique divergências entre em contato com o prescritor para discussão e possível adequação da conduta terapêutica.
 Eduque o paciente sobre o manejo de sintomas graves e como utilizar medicamentos de resgate;
 Reforce a importância da adoção de medidas não farmacológicas para prevenir fatores agravantes;
 Mantenha um acompanhamento médico frequente;
@@ -1342,7 +1350,8 @@ Reforce a importância do acompanhamento rigoroso e possível ajuste terapêutic
         ],
         questions: [
             {
-                text: 'Existem notificações conclusivas sobre esta reação?',
+                text: `Existem notificações conclusivas sobre esta reação?`,
+                helperText: 'Se há reação já está descrita na bula do medicamento, relatos publicados em artigos e registros em sistemas de farmacovigilância',
                 options: [
                     { label: 'Sim', value: 'q1_sim' },
                     { label: 'Não', value: 'q1_nao' },
@@ -1442,17 +1451,20 @@ Reforce a importância do acompanhamento rigoroso e possível ajuste terapêutic
             if (result >= 9) {
                 feedback = `Reação Definida
                 A relação entre o medicamento e a reação adversa é bem definida e muito provável.
-Realize a notificação da suspeita do evento adverso no sistema de farmacovigilância da Anvisa, acessando o link: https://www.gov.br/anvisa/pt-br/assuntos/fiscalizacao-e-monitoramento/notificacoes Nesse site, você encontrará o tutorial para efetuar a notificação e as orientações para realizar o cadastro;
-Discuta com o (a) prescritor (a) a descontinuação do medicamento ou sua substituição por outra alternativa terapêutica, conforme a gravidade da reação adversa;
+Realize a notificação da suspeita do evento adverso no sistema de farmacovigilância da Anvisa, acessando o link: https://www.gov.br/anvisa/pt-br/assuntos/fiscalizacao-e-monitoramento/notificacoes. Nesse site, você encontrará o tutorial para efetuar a notificação e as orientações para realizar o cadastro;
+Notifique e discuta com o (a) prescritor (a) a descontinuação do medicamento ou sua substituição por outra alternativa terapêutica, conforme a gravidade da reação adversa;
 Informe o paciente sobre os riscos relacionados à medicamentos e os cuidados necessários;
-Acompanhe de perto o paciente para monitorar possíveis recorrências da reação adversa, caso o medicamento não seja substituído`;
+Considere um acompanhamento mais frequente do paciente (por exemplo, em 48–72 horas para reações agudas ou semanalmente, nos casos não graves e estáveis) a fim de monitorar a evolução do quadro. 
+Deve-se observar a intensidade e progressão dos sinais e sintomas, surgimento de novos eventos adversos, impacto funcional, adesão ao tratamento e necessidade de ajuste de dose, suspensão ou substituição do medicamento.
+`;
             } else if (result >= 5 && result <= 8) {
                 feedback = `Reação Provável
-                A relação entre o medicamento e a reação adversa é provável.
+                A relação entre o medicamento e a reação adversa é provável;
 Reforce a importância de monitorar os sintomas e reações do paciente;
 Avalie a possibilidade de reduzir a dose, ajustar o regime de administração ou trocar o medicamento, caso necessário;
 Ofereça orientações claras sobre os sinais de recorrência e o que fazer em caso de novos sintomas;
-Considere um acompanhamento mais frequente do paciente para garantir que a reação não se agrave.
+Considere um acompanhamento mais frequente do paciente (por exemplo, em 48–72 horas para reações agudas ou semanalmente, nos casos não graves e estáveis) a fim de monitorar a evolução do quadro. 
+Deve-se observar a intensidade e progressão dos sinais e sintomas, surgimento de novos eventos adversos, impacto funcional, adesão ao tratamento e necessidade de ajuste de dose, suspensão ou substituição do medicamento
 `;
             } else if (result >= 1 && result <= 4) {
                 feedback = `Reação Possível

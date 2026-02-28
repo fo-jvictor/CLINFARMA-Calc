@@ -97,6 +97,7 @@ export default function ScoreForm({ scoreKey }) {
             return;
         }
 
+        console.log(selectedOptions);
         let finalValue = [...selectedOptions];
 
         if (score.key === 'lhp') {
@@ -208,7 +209,16 @@ export default function ScoreForm({ scoreKey }) {
             </div>
 
             <div className="mt-4 font-semibold">
-                {score.questions.length} itens em escala de {score.optionsType} <span className="text-[#0007] font-normal">Exemplo:</span>
+                {score.questions.length} itens em escala de {score.optionsType}
+                {score.key === 'dpoc' ? (
+                    <span className="mt-4 font-semibold">
+                        , quanto maior o número, maior a intensidade. Exemplo:
+                    </span>
+                ) : (
+                    <span className="text-[#0007] font-normal">
+                        {" "}Exemplo:
+                    </span>
+                )}
             </div>
             <div className="mt-4">
                 <Radio.Group onChange={e => setSelectedRadio(e.target.value)} value={selectedRadio}>
@@ -304,7 +314,15 @@ export default function ScoreForm({ scoreKey }) {
                     <div key={index} className="mb-6">
                         <div className="flex items-start gap-2 mb-3">
                             <div className="text-colorPrimary font-semibold">{formatQuestionNumber(index, score)}</div>
-                            <div className="whitespace-normal break-words max-w-full">{question.text}</div>
+                            <div className="whitespace-normal break-words max-w-full flex flex-col">
+                                <span>{question.text}</span>
+
+                                {score.key === "nrnj" && question.helperText && (
+                                    <span className="text-sm mt-1">
+                                        {question.helperText}
+                                    </span>
+                                )}
+                            </div>
                         </div>
 
                         <div className="ml-6">
