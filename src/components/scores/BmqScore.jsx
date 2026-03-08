@@ -40,7 +40,7 @@ const BmqScore = ({ medications, setMedications }) => {
           <div className="text-center font-bold text-gray-700">Frequência diária</div>
           <div className="text-center font-bold text-gray-700">Comprimidos por uso</div>
           <div className="text-center font-bold text-gray-700">Vezes que esqueceu</div>
-          <div className="text-center font-bold text-gray-700">Como essa medicação funciona para você?</div>
+          <div className="text-center font-bold text-gray-700">Como esse medicamento funciona para você?</div>
           <div className="text-center font-bold text-gray-700">Causou incômodo?</div>
           <div className="text-center font-bold text-gray-700">Se sim, qual incômodo?</div>
         </div>

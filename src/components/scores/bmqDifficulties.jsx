@@ -3,7 +3,7 @@ import React from "react";
 const difficultiesList = [
   "Abrir ou fechar a embalagem",
   "Ler o que está escrito na embalagem",
-  "Lembrar de tomar todo o remédio",
+  "Lembrar de tomar todo o medicamento",
   "Conseguir o medicamento",
   "Tomar tantos comprimidos ao mesmo tempo",
 ];

@@ -581,7 +581,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O respondente interrompeu a terapia devido ao atraso na dispensaçao da medicação ou outro motivo?',
+                text: 'O respondente interrompeu a terapia devido ao atraso na dispensaçao do medicamento ou outro motivo?',
                 prefix: 'R',
                 options: [
                     {
@@ -623,7 +623,7 @@ Oriente o paciente sobre os sinais de alerta e reforce a necessidade de acompanh
                 ]
             },
             {
-                text: 'O respondente tomou alguma dose extra ou medicação a mais do que o prescrito?',
+                text: 'O respondente tomou alguma dose extra ou medicamento a mais do que o prescrito?',
                 prefix: 'R',
                 options: [
                     {
@@ -1042,7 +1042,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'Você tem tosse com frequência?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Não sinto falta de ar quando subo uma ladeira ou um andar de escada',
                         value: 0
                     },
                     {
@@ -1062,7 +1062,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - Tenho tosse o tempo todo',
                         value: 5
                     }
                 ]
@@ -1071,7 +1071,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'O seu peito está cheio de catarro (secreção)?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Não tenho nenhum catarro (secreção) no peito',
                         value: 0
                     },
                     {
@@ -1091,7 +1091,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - O meu peito está cheio de catarro (secreção)',
                         value: 5
                     }
                 ]
@@ -1100,7 +1100,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'Você sente uma grande pressão no peito?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Nāo sinto nenhuma pressão no peito',
                         value: 0
                     },
                     {
@@ -1120,7 +1120,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - Sinto uma grande pressão no peito',
                         value: 5
                     }
                 ]
@@ -1129,7 +1129,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'Você sente bastante falta de ar quando sobe uma ladeira ou um andar de escadas?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Não sinto falta de ar quando subo uma ladeira ou um andar de escada',
                         value: 0
                     },
                     {
@@ -1149,7 +1149,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - Sinto bastante falta de ar quando subo uma ladeira ou um andar de escada',
                         value: 5
                     }
                 ]
@@ -1158,7 +1158,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'Você se sente limitado nas suas atividades em casa?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Não sinto nenhuma limitação nas minhas atividades em casa',
                         value: 0
                     },
                     {
@@ -1178,7 +1178,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - Sinto-me muito limitado nas minhas atividades em casa',
                         value: 5
                     }
                 ]
@@ -1187,7 +1187,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'Você NÃO se sente confiante para sair de casa por causa da sua doença pulmonar?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Sinto-me confiante para sair de casa, apesar da minha doença pulmonar',
                         value: 0
                     },
                     {
@@ -1207,7 +1207,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - Não me sinto nada confiante para sair de casa, por causa da minha doença pulmonar',
                         value: 5
                     }
                 ]
@@ -1216,7 +1216,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'Você NÃO dorme profundamente devido à sua doença pulmonar?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Durmo profundamente',
                         value: 0
                     },
                     {
@@ -1236,7 +1236,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - Não durmo profundamente devido à minha doença pulmonar',
                         value: 5
                     }
                 ]
@@ -1245,7 +1245,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                 text: 'Você NÃO tem nenhuma energia (disposição)?',
                 options: [
                     {
-                        label: '0',
+                        label: '0 - Tenho muita energia (disposição)',
                         value: 0
                     },
                     {
@@ -1265,7 +1265,7 @@ Reforce com o paciente os resultados positivos e estimule a manter os cuidados r
                         value: 4
                     },
                     {
-                        label: '5',
+                        label: '5 - Não tenho nenhuma energia (disposição)',
                         value: 5
                     }
                 ]
@@ -1296,7 +1296,7 @@ Oriente sobre os sinais de alerta que indicam a necessidade de procurar atendime
                 Pacientes com pontuação entre 20 e 29 apresentam sintomas graves e significativos na qualidade de vida.
 Realize uma revisão detalhada do tratamento para verificar a adequação do plano terapêutico. Verifique se a farmacoterapia prescrita para asma está de acordo com os protocolos clínicos e diretrizes nacionais e internacionais vigentes, considerando a classificação da gravidade, o nível de controle da doença e o histórico de exacerbações. Caso identifique divergências entre em contato com o prescritor para discussão e possível adequação da conduta terapêutica.
 Eduque o paciente sobre o manejo de sintomas graves e como utilizar medicamentos de resgate;
-Reforce a importância da adoção de medidas não farmacológicas para prevenir fatores agravantes;
+Reforce a importância da adoção de medidas não farmacológicas para prevenir fatores agravantes, como estimulando hábitos saudáveis, como a prática de atividades físicas específicas e a cessação do tabagismo, se aplicável;
 Mantenha um acompanhamento médico frequente;
 Verifique quando foi a última consulta e recomende nova avaliação médica.
 `;
