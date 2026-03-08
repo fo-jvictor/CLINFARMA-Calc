@@ -244,6 +244,9 @@ export default function ScoreForm({ scoreKey }) {
         <Card title={
             <p className="whitespace-normal break-words max-w-full">
                 Faça as perguntas ao paciente, orientando-o a responder com base nas últimas quatro semanas, utilizando uma escala de {score.optionsType} de pelo menos {score.options.length} itens
+                <br />
+                <br />
+                Escore: {score.label}
             </p>
         }>
             {score.questions.map((question, index) => {
