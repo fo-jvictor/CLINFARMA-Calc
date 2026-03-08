@@ -341,6 +341,11 @@ export default function ScoreForm({ scoreKey }) {
                                     ))}
                                 </div>
                             </Radio.Group>
+                            {score.key === "lhp" && question.observation && (
+                                <div className="text-sm mt-2 text-gray-600">
+                                    <strong>Observação:</strong> {question.observation}
+                                </div>
+                            )}
                         </div>
 
                         {index < score.questions.length - 1 && (
