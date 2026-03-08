@@ -383,7 +383,6 @@ Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe
                     { label: 'Redução > 50% após 30 dias', value: 'q2_4' },
                     { label: 'Redução < 50% após 30 dias ou aumento recorrente da ALT', value: -2 },
                 ],
-                observation: 'Neste item, avalia-se o intervalo de tempo entre o início do tratamento e o surgimento do evento, bem como a resposta do paciente à reexposição ao medicamento suspeito'
             },
             {
                 text: 'Fator de risco: O paciente consome álcool?',
@@ -391,7 +390,6 @@ Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe
                     { label: 'Uso de álcool (consumo de doses/dia: >2 para mulheres, >3 para homens)', value: 1 },
                     { label: 'Uso de álcool (consumo de doses/dia: <2 para mulheres, <3 para homens)', value: 0 }
                 ],
-                observation: 'Neste item, avalia-se o intervalo de tempo entre o início do tratamento e o surgimento do evento, bem como a resposta do paciente à reexposição ao medicamento suspeito'
             },
             {
                 text: 'Fator de risco: Qual a idade do paciente?',
@@ -399,7 +397,6 @@ Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe
                     { label: 'Idade >= 55 anos', value: 1 },
                     { label: 'Idade < 55 anos', value: 0 },
                 ],
-                observation: 'Neste item, avalia-se o intervalo de tempo entre o início do tratamento e o surgimento do evento, bem como a resposta do paciente à reexposição ao medicamento suspeito'
             },
             {
                 text: 'Uso concomitante de outros medicamentos ou fitoterápicos',
@@ -410,7 +407,6 @@ Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe
                     { label: 'Medicamento ou fitoterápico em uso concomitante, com conhecido efeito hepatotóxico e com tempo para início dos sinais e sintomas compatível com a lesão hepática apresentada (se afirmativo, excluir alternativa anterior);', value: -2 },
                     { label: 'Medicamento ou fitoterápico em uso concomitante, com evidencia de “causalidade” (reexposição positiva ao medicamento ou fitoterápico neste caso, e alteração das transaminases).', value: -3 }
                 ],
-                observation: 'Neste item, avalia-se o intervalo de tempo entre o início do tratamento e o surgimento do evento, bem como a resposta do paciente à reexposição ao medicamento suspeito'
             },
             {
                 text: 'Causes alternativas foram consideradas para a lesão hepática?',
@@ -442,7 +438,6 @@ Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe
                     { label: 'É uma reação publicada para este medicamento ou fitoterápico, porém não consta na bula/rótulo', value: 1 },
                     { label: 'É uma reação desconhecida para este medicamento ou fitoterápico.', value: 0 },
                 ],
-                observation: 'Neste item, avalia-se o intervalo de tempo entre o início do tratamento e o surgimento do evento, bem como a resposta do paciente à reexposição ao medicamento suspeito'
             },
             {
                 text: 'Resposta a reexposição ao medicamento ou fitoterápico suspeito',
@@ -452,7 +447,6 @@ Caso existam programas de apoio ao paciente ou benefícios disponíveis, informe
                     { label: 'Aumento da ALT, porém ainda abaixo do LSN nas mesmas condições da primeira administração', value: -2 },
                     { label: 'Outras situações', value: 0 },
                 ],
-                observation: 'Neste item, avalia-se o intervalo de tempo entre o início do tratamento e o surgimento do evento, bem como a resposta do paciente à reexposição ao medicamento suspeito'
             }
         ],
         calculateFunction: (finalValue = []) => {
